@@ -506,7 +506,7 @@ body {
 }
 .quote-text {
   font-family: 'Noto Serif KR', serif;
-  font-size: clamp(1.3rem, 4vw, 2.2rem);
+  font-size: clamp(1.05rem, 3.2vw, 1.7rem);
   font-weight: 900;
   color: #fff;
   line-height: 1.6;
@@ -515,6 +515,8 @@ body {
   opacity: 0;
   transform: scale(0.92);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  word-break: keep-all;
+  max-width: none;
 }
 .quote-text.visible {
   opacity: 1;
@@ -646,6 +648,7 @@ body {
   font-weight: 900;
   color: #fff;
   line-height: 1.5;
+  text-align: center;
 }
 .math-result-text em {
   font-style: normal;
@@ -885,7 +888,7 @@ body {
 
 .about-top {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: 2rem;
   align-items: start;
   margin: 2rem 0;
@@ -895,8 +898,8 @@ body {
   .photo-wrap { margin: 0 auto; }
 }
 .photo-wrap {
-  width: 160px;
-  height: 200px;
+  width: 220px;
+  height: 275px;
   border-radius: 6px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.1);
@@ -1113,15 +1116,60 @@ footer {
   background: var(--gold);
   transform: scale(1.4);
 }
+
+/* ── DETAIL LINK ── */
+.detail-link {
+  display: block;
+  margin-top: 20px;
+  padding: 12px 4px 4px;
+  border-top: 1px solid rgba(201,168,76,0.2);
+  font-size: 13px;
+  color: #c9a84c;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background .2s ease, padding-left .2s ease, color .2s ease;
+}
+.detail-link:hover, .detail-link:active {
+  background: rgba(201,168,76,0.08);
+  padding-left: 10px;
+  color: #e8c97e;
+}
+
+/* ── FLOATING SHARE BUTTON ── */
+#floatShare {
+  position: fixed;
+  bottom: 28px; right: 24px;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1a0000;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+  z-index: 999;
+  transition: opacity .3s ease, transform .3s ease;
+}
+#floatShare:hover { transform: scale(1.08); }
+#floatShare.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+}
 </style>
 </head>
 <body>
+
+<!-- ── FLOATING SHARE ── -->
+<button id="floatShare" onclick="sharePage()" aria-label="이 내용 공유하기">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+</button>
 
 <!-- ── HEADER ── -->
 <header class="site-header">
   <div class="site-header-sub">성북구 구의원 후보</div>
   <div class="site-header-divider"></div>
-  <div class="site-header-name"><span>이호엽</span></div>
+  <a href="../" style="text-decoration:none;"><div class="site-header-name"><span>이호엽</span></div></a>
 </header>
 
 <!-- ── HERO ── -->
@@ -1164,14 +1212,14 @@ footer {
   </p>
 
   <div class="incident reveal reveal-delay-3">
-    <div class="incident-year">10년</div>
+    <div class="incident-year">12년</div>
     <div class="incident-label">결정적 사례</div>
     <div class="incident-text">
       2013년부터 추진된 개운산 기숙사,<br>지금도 표류 중입니다.
     </div>
     <p class="incident-body">
       고려대는 개운산 부지에 1,100명 규모의 기숙사 신축을 추진했습니다.
-      구의회와 구청의 반대로 10년째 허가가 나지 않았고, 지금도 진행 중인 현재의 문제입니다.
+      <strong><em style="font-size:1.1rem">구의회와 구청의 반대</em></strong>로 12년째 허가가 나지 않았고, 지금도 진행 중인 현재의 문제입니다.
     </p>
   </div>
 </section>
@@ -1183,48 +1231,50 @@ footer {
       <div class="stat-compare-item stat-compare-item--ours">
         <div class="stat-compare-mascot">🐯</div>
         <div class="stat-compare-school">고려대</div>
-        <div class="stat-compare-num">10.8%</div>
-        <div class="stat-compare-label">서울 15개 대학 중 최하위</div>
+        <div class="stat-compare-num">12.4%</div>
+        <div class="stat-compare-label">서울 15개 대학 중 <strong>최하위</strong></div>
       </div>
       <div class="stat-compare-divider">vs</div>
       <div class="stat-compare-item">
         <div class="stat-compare-mascot">🦅</div>
         <div class="stat-compare-school">연세대</div>
-        <div class="stat-compare-num">35.7%</div>
-        <div class="stat-compare-label">고려대의 3배 이상</div>
+        <div class="stat-compare-num">35%</div>
+        <div class="stat-compare-label">고려대의 약 <strong>3배</strong></div>
       </div>
     </div>
+    <p style="font-size:11px; color:#555; margin-top:12px; margin-bottom:48px; text-align:center;">* 대학알리미 2025년 10월 공시자료 기준</p>
 
     <div class="tag-line reveal"><span>기숙사 못 들어가면 현실은</span></div>
     <div class="reality-grid">
       <div class="reality-card reveal reveal-delay-1">
         <span class="reality-icon">💸</span>
-        <div class="reality-title">월 74~75만원<br>실질 주거비</div>
-        <p class="reality-desc">안암동 원룸 평균 월세 66만원에 관리비까지 더하면 매달 75만원이 주거비로 사라집니다. 전년 대비 9.8% 상승, 서울 대학가 3위.</p>
+        <div class="reality-title">월 74~75만원</div>
+        <p class="reality-desc">안암동 원룸 평균 월세 66만원 관리비까지 더하면 매달 75만원 전년 대비 9.8% 상승, 서울 대학가 3위.</p>
       </div>
       <div class="reality-card reveal reveal-delay-2">
         <span class="reality-icon">🎲</span>
         <div class="reality-title">지원해도<br>10명 중 3명은 탈락</div>
-        <p class="reality-desc">2024년 고려대 기숙사 경쟁률 1.42대 1. 지원 자격이 돼도 탈락하면 선택지는 없습니다.</p>
+        <p class="reality-desc">
+          <span style="opacity:.5">2022년 1.25대 1</span><br>
+          <span style="opacity:.75">2023년 1.37대 1</span><br>
+          <strong>2024년 1.42대 1</strong>
+        </p>
       </div>
       <div class="reality-card reveal reveal-delay-3">
         <span class="reality-icon">🚌</span>
         <div class="reality-title">왕복 2~3시간<br>장거리 통학</div>
-        <p class="reality-desc">주거비를 감당 못 하면 수도권 외곽으로 밀려납니다. 하루 두세 시간을 통학에 씁니다.</p>
+        <p class="reality-desc">주거비를 감당 못 하면 우린 하루 두세 시간을 통학에 씁니다.</p>
       </div>
     </div>
 
     <div class="quote-block">
       <div class="quote-text" id="quote-text">
-        "과거 70~80년대 학생들의 민주화 시위로 인해
-        주민들이
-        <em>최루탄 가스를 마시는 피해만 입었다</em>"
+        "과거 70~80년대 학생들의 민주화 시위로 인해 주민들이 <em>최루탄 가스를 마시는 피해만 입었다"</em>
       </div>
-      <div class="quote-source">— 기숙사 신축에 반대하며 총학생회와 마찰을 빚은 성북구의원 발언 · 실제 보도 인용</div>
+      <div class="quote-source">— 성북구의원 발언 · 2016년 연합뉴스 권영전 기자 보도 인용</div>
     </div>
-    <p class="body-text reveal" style="margin-top:1.5rem;">
-      이런 사람들이 지금도 구의회에 있습니다.<br>
-      그래서 우리가 직접 들어가야 합니다.
+    <p class="body-text reveal" style="margin-top:1.5rem; text-align:center; font-size:clamp(1.05rem, 3.5vw, 1.35rem); white-space:nowrap;">
+      우리가 직접 구의회를 바꿔야 합니다.
     </p>
   </div>
 </section>
@@ -1257,10 +1307,11 @@ footer {
             <span class="p-stat-l">기숙사 수용률 서울 최하위</span>
           </div>
           <div class="p-stat-item">
-            <span class="p-stat-n">10년</span>
+            <span class="p-stat-n">12년</span>
             <span class="p-stat-l">부지만 있고 착공 못 한 기간</span>
           </div>
         </div>
+        <a href="./gaewunsan/" class="detail-link">자세히 보기 →</a>
       </div>
 
       <div class="promise-card reveal reveal-delay-2">
@@ -1305,7 +1356,7 @@ footer {
 <hr class="section-divider">
 <section class="about-section" id="about">
   <div class="about-inner">
-    <div class="tag-line reveal"><span>이호엽은 누구인가</span></div>
+    <div class="tag-line reveal" style="font-size:clamp(16px,3vw,24px);"><span style="font-size:inherit; letter-spacing:-.01em; text-transform:none;">이호엽은 누구인가</span></div>
     <h2 class="big-heading reveal reveal-delay-1">
       성북구에서 살고,<br>성북구를 바꾸려 합니다
     </h2>
@@ -1313,9 +1364,7 @@ footer {
     <div class="about-top reveal reveal-delay-2">
       <!-- 사진: 아래 img 태그 주석 해제 후 src에 사진 경로 입력 -->
       <div class="photo-wrap">
-        <!-- <img src="photo.jpg" alt="이호엽"> -->
-        <div class="photo-placeholder-icon">👤</div>
-        <span>사진 준비 중</span>
+        <img src="photo.jpg" alt="이호엽">
       </div>
 
       <div class="about-info">
@@ -1396,7 +1445,7 @@ footer {
 <!-- ── MATH ── -->
 <section class="math-section">
   <div class="math-inner">
-    <div class="tag-line reveal"><span>당선에 필요한 계산</span></div>
+    <div class="tag-line reveal" style="font-size:clamp(16px,3vw,24px);"><span style="font-size:inherit; letter-spacing:-.01em; text-transform:none;">기호4번으로 어떻게 당선되냐고 ??</span></div>
     <h2 class="big-heading reveal reveal-delay-1">
       숫자로 보면<br>이미 답이 나옵니다
     </h2>
@@ -1412,7 +1461,7 @@ footer {
       <div class="math-row">
         <div class="math-op">vs</div>
         <div class="math-content">
-          <div class="math-num">7,000+</div>
+          <div class="math-num">14,000+</div>
           <div class="math-label">안암·보문·동선동 일대에 거주하는<br><strong>고려대 재학생 추산 인원</strong></div>
         </div>
       </div>
@@ -1420,10 +1469,10 @@ footer {
 
     <div class="math-result">
       <div class="math-result-inner">
-        <div class="math-result-label">결론</div>
+        <div class="math-result-label">당선 가능성</div>
         <div class="math-result-text">
-          우리가 조용히 있는 동안, 구의회는 우리 없이 돌아갔습니다.<br>
-          이제 <em>우리가 직접 들어가면</em> 됩니다.
+          3인 선거구는 3등,<br>5인선거구는 5등만 하면 됩니다.<br>
+          이제 <em>우리가 직접 들어갈 차례</em>입니다.
         </div>
       </div>
     </div>
@@ -1437,13 +1486,24 @@ footer {
       여러분이 저를 찍어야<br>
       <span class="gold">제가 일할 수 있습니다</span>
     </h2>
-    <p class="closing-body reveal reveal-delay-1">
-      구의회 안에 20대가 없으면, 20대를 위한 정책도 없습니다.<br>
+
+    <div class="reveal reveal-delay-1" style="display:inline-block; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:24px 48px; text-align:center; margin:24px 0;">
+      <span style="font-size:14px; color:#888; letter-spacing:.2em; display:block; margin-bottom:6px;">기호</span>
+      <span style="font-size:clamp(48px,12vw,96px); font-weight:900; color:#FF5200; line-height:1; display:block;">4번</span>
+      <span style="font-size:clamp(32px,8vw,64px); font-weight:900; color:#fff; line-height:1.1; display:block;">이호엽</span>
+    </div>
+
+    <p class="closing-body reveal reveal-delay-2">
+      구의회 안에 20대가 없으면,<br>20대를 위한 정책도 없습니다.<br>
       한 표가 구의회를 바꿉니다.
     </p>
-    <div class="reveal reveal-delay-2">
-      <a href="#" class="btn-primary" style="font-size:1.05rem; padding:18px 52px;">
-        성북구 구의원 후보 지지하기
+
+    <div class="reveal reveal-delay-3" id="inlineShareWrap" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+      <button id="shareBtn" onclick="copyAndShare()" style="font-size:1.1rem; font-weight:700; padding:18px 52px; cursor:pointer; border:none; border-radius:100px; background:#FF5200; color:#fff; letter-spacing:.02em;">
+        이 페이지 공유하기
+      </button>
+<a href="../" style="font-size:0.95rem; font-weight:600; padding:13px 36px; border-radius:100px; border:1px solid rgba(255,255,255,0.3); color:#fff; text-decoration:none; letter-spacing:.02em;">
+        ← 메인으로
       </a>
     </div>
   </div>
@@ -1571,6 +1631,41 @@ if (slider) {
     });
     dots.forEach((d, i) => d.classList.toggle('active', i === closest));
   }, { passive: true });
+}
+
+const floatBtn = document.getElementById('floatShare');
+const inlineWrap = document.getElementById('inlineShareWrap');
+const floatObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      floatBtn.classList.add('hidden');
+    } else {
+      floatBtn.classList.remove('hidden');
+    }
+  });
+}, { threshold: 0.3 });
+floatObs.observe(inlineWrap);
+
+function copyAndShare() {
+  const btn = document.getElementById('shareBtn');
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    btn.textContent = '링크 복사됨!';
+    setTimeout(() => { btn.textContent = '이 페이지 공유하기'; }, 1500);
+  });
+}
+
+function sharePage() {
+  if (navigator.share) {
+    navigator.share({
+      title: '고려대 기숙사, 12년째 표류 중 — 이호엽',
+      text: '구의회가 12년간 막아온 고려대 기숙사. 우리가 직접 구의회를 바꿔야 합니다.',
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('링크가 복사되었습니다.');
+    });
+  }
 }
 </script>
 </body>

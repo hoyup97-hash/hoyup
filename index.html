@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>이호엽 — 성북의 내일을 바꾼다</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   :root {
-    --bg: #F5F2EC;
-    --bg2: #EDEAE2;
+    --bg: #F8F8F8;
+    --bg2: #F0F0F0;
     --black: #1C1C1C;
     --orange: #FF5200;
     --orange-pale: #FFF0E8;
@@ -20,12 +21,14 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+  html, body { overflow-x: hidden; max-width: 100%; }
 
   body {
     background: var(--bg);
     color: var(--black);
     font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
     overflow-x: hidden;
     cursor: none;
   }
@@ -61,11 +64,12 @@
   .ticker-track {
     display: flex;
     gap: 56px;
+    max-width: none;
     animation: ticker 20s linear infinite;
     white-space: nowrap;
     flex-shrink: 0;
   }
-  .ticker-track span { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #555; flex-shrink: 0; }
+  .ticker-track span { font-size: 14px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #555; flex-shrink: 0; }
   .ticker-track span.hi { color: var(--orange); }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
@@ -79,11 +83,13 @@
   }
   @media (min-width: 861px) {
     .hero { min-height: unset; grid-template-rows: auto auto auto; }
-    .hero-body { padding: 48px 0; }
+    .hero-body { padding: 62px 0; }
   }
   .hero-inner {
     max-width: 1280px;
     margin: 0 auto;
+    width: 100%;
+    overflow: hidden;
     width: 100%;
   }
 
@@ -108,21 +114,40 @@
   }
 
   .hero-body {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 48px;
-    align-items: center;
-    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    padding: 73px 0 78px;
   }
   @media (max-width: 860px) {
-    .hero-body { grid-template-columns: 1fr; text-align: center; }
-    .hero-photo { order: -1; margin: 0 auto; }
+    .hero-body { padding: 42px 0 78px; width: 100%; }
+    .hero-right { margin: 0 auto; max-width: calc(100vw - 40px); }
+    .hero-bio .tl-txt { font-size: 13px; }
     .hero-label::before { display: none; }
     .hero-label { justify-content: center; }
-    .hero-cta-row { justify-content: center; }
   }
 
-  .hero-left { display: flex; flex-direction: column; }
+  /* 모바일 전용 이름 블록 (hero-right 안 photo 위에 위치) */
+  .hero-name-mobile {
+    display: none;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 860px) {
+    .hero-name-mobile { display: block; }
+  }
+
+  /* 사진 오버레이 */
+  .hero-photo-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 56px 22px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,.62) 0%, transparent 100%);
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+  .hero-photo-role {
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(255,255,255,.8); font-weight: 600;
+  }
 
   .hero-label {
     display: inline-flex;
@@ -141,6 +166,7 @@
   .hero-name {
     font-family: 'Pretendard', sans-serif;
     font-weight: 900;
+    font-weight: 900;
     font-size: clamp(56px, 10vw, 120px);
     line-height: 1;
     letter-spacing: -.04em;
@@ -150,11 +176,11 @@
   }
 
   .hero-name-sub {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: clamp(18px, 2.8vw, 30px);
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 800;
+    font-size: clamp(20px, 2.8vw, 32px);
     color: var(--orange);
-    letter-spacing: -.01em;
+    letter-spacing: -.02em;
     margin-bottom: 28px;
     opacity: 0;
     animation: fadeUp .7s .35s forwards;
@@ -199,20 +225,38 @@
   }
   .btn-ghost:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
 
+  /* Hero right column */
+  .hero-right {
+    display: flex; flex-direction: column; gap: 14px;
+    width: 420px; max-width: 100%;
+    opacity: 0; animation: fadeUp .7s .3s forwards;
+    overflow: hidden;
+  }
+
   /* Photo placeholder */
   .hero-photo {
-    width: 340px; max-width: 100%; aspect-ratio: 3/4;
+    width: 100%; aspect-ratio: 3/4;
     background: #D4D0C8;
     border-radius: var(--radius);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     gap: 10px;
-    opacity: 0; animation: fadeUp .7s .3s forwards;
     position: relative; overflow: hidden;
     box-shadow: 0 8px 40px rgba(0,0,0,0.13);
   }
   .hero-photo svg { opacity: .35; }
   .photo-label { font-size: 11px; letter-spacing: .1em; color: #999; }
+
+  /* Hero bio card below photo */
+  .hero-bio {
+    background: white;
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: var(--card-shadow);
+  }
+  .hero-bio .timeline { border-left-color: #EDEAE2; }
+  .hero-bio .tl-item::before { background: var(--orange); }
+  .hero-bio .tl-txt { font-size: 16px; font-weight: 600; line-height: 1.5; letter-spacing: -.03em; word-break: keep-all; }
 
 
   /* hero foot */
@@ -232,8 +276,9 @@
 
   /* ── CARDS WRAP ── */
   .cards-wrap {
-    padding: clamp(40px,8vw,100px) clamp(16px,5vw,64px);
+    padding: clamp(52px,8vw,130px) clamp(16px,5vw,64px);
     display: flex; flex-direction: column; gap: 14px;
+    width: 100%;
     max-width: 1280px;
     margin: 0 auto;
     width: 100%;
@@ -244,8 +289,14 @@
     display: flex; align-items: baseline;
     justify-content: space-between; margin-bottom: 2px;
   }
-  .sec-title { font-size: clamp(18px,2.5vw,26px); font-weight: 900; letter-spacing: -.02em; }
+  .sec-title { font-size: clamp(22px,3vw,32px); font-weight: 800; letter-spacing: -.02em; }
   .sec-tag { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); }
+
+  @media (max-width: 480px) {
+    .hero { padding-left: 20px; padding-right: 20px; }
+    .cards-wrap { padding-left: 20px; padding-right: 20px; }
+    .problem-section { padding-left: 20px; padding-right: 20px; }
+  }
 
   /* About */
   .card { background: white; border-radius: var(--radius); box-shadow: var(--card-shadow); overflow: hidden; }
@@ -272,7 +323,7 @@
     padding: 16px;
   }
   .yt-label { font-size: 15px; font-weight: 700; color: var(--black); }
-  .yt-sub { font-size: 12px; color: var(--gray); line-height: 1.6; }
+  .yt-sub { font-size: 12px; color: var(--gray); line-height: 1.8; }
   .yt-input-row { display: flex; gap: 8px; width: 100%; margin-top: 4px; }
   .yt-input {
     flex: 1; background: white; border: 1px solid rgba(0,0,0,.1);
@@ -323,27 +374,74 @@
   .tl-txt { font-size: 13px; font-weight: 500; }
 
   /* Pledge cards */
-  .pledge-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+  /* Problem Section */
+  .problem-section {
+    background: #000000; color: white;
+    padding: 0 24px;
+    min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    text-align: center;
+  }
+  .problem-inner { max-width: 900px; margin: 0 auto; width: 100%; }
+  .problem-eyebrow-label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: clamp(22px, 5vw, 40px); font-weight: 700; letter-spacing: -.01em;
+    color: #666; margin-bottom: 16px;
+  }
+  .problem-stat {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(36px, 9vw, 80px); font-weight: 900;
+    line-height: 1; letter-spacing: -.02em; color: white;
+    overflow: hidden;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .problem-stat.animate {
+    animation: slideUp .8s cubic-bezier(.22,1,.36,1) both;
+  }
+  .problem-source {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 12px; font-weight: 400;
+    color: #555; margin-top: 12px;
+  }
+  .problem-caption {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px; font-weight: 400;
+    color: #888; margin-top: 16px;
+  }
+  .problem-caption.big {
+    font-size: clamp(22px, 5vw, 40px); font-weight: 700; letter-spacing: -.01em;
+    color: #666; margin-bottom: 16px; margin-top: 0;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .problem-stat.fadein { opacity: 0; }
+  .problem-stat.fadein.animate { animation: fadeIn .9s ease both; }
+  .problem-divider {
+    width: 40px; height: 1px; background: #222;
+    margin: 40px auto;
+  }
+
+  .pledge-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
   @media (max-width: 900px) { .pledge-row { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 500px) { .pledge-row { grid-template-columns: 1fr; } }
 
   .pledge-card {
-    background: white; border-radius: var(--radius);
-    padding: 28px 24px; box-shadow: var(--card-shadow);
-    cursor: none; position: relative; overflow: hidden;
-    transition: transform .3s ease, box-shadow .3s ease;
+    background: white;
+    padding: 28px 24px;
+    border-left: 2px solid #FF5200;
+    border-bottom: 1px solid #EEEBE4;
+    cursor: none; position: relative;
+    transition: transform .3s ease;
   }
-  .pledge-card::after {
-    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
-    background: var(--orange); transform: scaleX(0); transform-origin: left;
-    transition: transform .35s cubic-bezier(.76,0,.24,1);
-  }
-  .pledge-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.11); }
-  .pledge-card:hover::after { transform: scaleX(1); }
+  .pledge-card:hover { transform: translateY(-5px); }
 
-  .pledge-num { font-size: 34px; font-weight: 900; color: rgba(0,0,0,.05); line-height: 1; margin-bottom: 14px; letter-spacing: -.02em; }
-  .pledge-icon { font-size: 26px; margin-bottom: 12px; }
-  .pledge-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.01em; }
+  .pledge-num { font-size: 17px; font-weight: 900; color: #E0DDD6; line-height: 1; margin-bottom: 14px; letter-spacing: -.02em; }
+  .pledge-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; letter-spacing: -.01em; }
   .pledge-desc { font-size: 12px; color: rgba(28,28,28,.5); line-height: 1.75; }
 
   /* Connect card */
@@ -433,6 +531,32 @@
   }
   .gallery-slot.empty img { display: none; }
   .gallery-slot.empty .gallery-empty-msg { display: flex; }
+  .gallery-slot { cursor: pointer; }
+
+  /* Coming Soon Modal */
+  .csm-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .csm-overlay.open { display: flex; }
+  .csm-box {
+    background: white; border-radius: 20px;
+    padding: 40px 36px; text-align: center;
+    max-width: 320px; width: 90%;
+    box-shadow: 0 24px 64px rgba(0,0,0,.2);
+    animation: csmIn .25s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes csmIn { from { transform: scale(.88); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .csm-icon { font-size: 40px; margin-bottom: 16px; }
+  .csm-title { font-size: 18px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; }
+  .csm-desc { font-size: 14px; color: #888; line-height: 1.7; margin-bottom: 24px; }
+  .csm-close {
+    background: var(--black); color: white;
+    border: none; border-radius: 100px;
+    padding: 10px 28px; font-size: 13px; font-weight: 700;
+    cursor: pointer; font-family: 'Pretendard', sans-serif;
+  }
 
   /* Carousel arrows */
   .gallery-btn {
@@ -569,25 +693,25 @@
   .social-card-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
-  @media (max-width: 700px) { .social-card-grid { grid-template-columns: repeat(2, 1fr); } }
 
   .social-card-item {
     background: white;
     border-radius: var(--radius);
     box-shadow: var(--card-shadow);
-    padding: 22px 18px;
+    padding: 16px 14px;
     text-decoration: none;
     color: var(--black);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    gap: 6px;
     cursor: none;
     transition: transform .25s ease, box-shadow .25s ease;
     position: relative;
     overflow: hidden;
+    text-align: center;
   }
   .social-card-item::after {
     content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
@@ -643,6 +767,118 @@
   .foot-logo span { color: var(--orange); }
   .foot-copy { font-size: 11px; text-align: right; line-height: 1.7; }
 
+  /* University pledge cards */
+  .univ-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  @media (max-width: 700px) { .univ-row { grid-template-columns: repeat(3,1fr); gap: 8px; } }
+
+  .univ-card {
+    background: white; border-radius: var(--radius);
+    padding: 22px 20px; box-shadow: var(--card-shadow);
+    text-decoration: none; color: var(--black);
+    cursor: none; position: relative; overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+    display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center;
+  }
+  .univ-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background: var(--orange); transform: scaleX(0); transform-origin: left;
+    transition: transform .35s cubic-bezier(.76,0,.24,1);
+  }
+  .univ-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.11); }
+  .univ-card:hover::after { transform: scaleX(1); }
+  .univ-card:hover .univ-arrow { color: var(--orange); }
+
+  .univ-logo { width: 56px; height: 56px; object-fit: contain; }
+  .univ-name { font-size: 14px; font-weight: 800; letter-spacing: -.02em; margin-top: 4px; }
+  .univ-arrow {
+    margin-top: auto; padding-top: 12px;
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    color: #ccc; text-transform: uppercase;
+    display: flex; align-items: center; gap: 4px;
+    transition: color .2s;
+  }
+
+  /* Apartment search */
+  .apt-search-wrap {
+    position: relative;
+  }
+  .apt-search {
+    width: 100%;
+    background: white;
+    border: 1.5px solid rgba(0,0,0,.1);
+    border-radius: 14px;
+    padding: 14px 20px 14px 46px;
+    font-size: 14px;
+    font-family: 'Pretendard', sans-serif;
+    color: var(--black);
+    outline: none;
+    box-shadow: var(--card-shadow);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .apt-search:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(255,82,0,.08);
+  }
+  .apt-search::placeholder { color: #bbb; }
+  .apt-search-icon {
+    position: absolute;
+    left: 16px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 17px;
+    pointer-events: none;
+    opacity: .4;
+  }
+  .apt-search-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin: 8px 2px 10px;
+    font-size: 11px; color: var(--gray); letter-spacing: .04em;
+  }
+  .apt-search-meta span { color: var(--orange); font-weight: 700; }
+
+  /* Apartment pledge grid */
+  .apt-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 1000px) { .apt-grid { grid-template-columns: repeat(4,1fr); } }
+  @media (max-width: 700px)  { .apt-grid { grid-template-columns: repeat(3,1fr); } }
+  @media (max-width: 420px)  { .apt-grid { grid-template-columns: repeat(2,1fr); } }
+
+  .apt-card {
+    background: white; border-radius: 12px;
+    padding: 14px 12px; box-shadow: var(--card-shadow);
+    text-decoration: none; color: var(--black);
+    cursor: none;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+    border: 1.5px solid transparent;
+    transition: border-color .22s, background .22s, transform .22s, box-shadow .22s;
+  }
+  .apt-card:hover {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255,82,0,.12);
+  }
+  .apt-card:hover .apt-arrow { color: var(--orange); }
+  .apt-card[style*="display: none"] { display: none !important; }
+
+  .apt-name { font-size: 12px; font-weight: 700; letter-spacing: -.01em; line-height: 1.35; }
+  .apt-arrow { font-size: 11px; color: #ccc; transition: color .2s; margin-top: 2px; }
+
+  .apt-no-result {
+    display: none;
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 24px;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    color: #bbb;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
   /* Animations */
   @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
   .reveal { opacity:0; transform:translateY(32px); transition: opacity .75s ease, transform .75s ease; }
@@ -678,30 +914,63 @@
   </div>
 </div>
 
+<!-- Problem Section -->
+<section class="problem-section">
+  <div class="problem-inner reveal">
+    <div class="problem-eyebrow-label">2026 지방선거 예비후보자 중 전과자</div>
+    <div class="problem-stat">3명 중 <span style="color:#FF5200">1</span>명</div>
+    <div class="problem-source">*(구의회 예비후보자 기준)</div>
+    <div class="problem-divider"></div>
+    <div class="problem-eyebrow-label">성북구 구의원 중 20대 의원</div>
+    <div class="problem-stat">0명</div>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<!-- BRIDGE -->
+<section style="background: linear-gradient(to bottom, #000000 0%, #F8F8F8 100%); text-align:center; padding: 80px 24px 100px; overflow:hidden; width:100%;">
+  <div class="reveal">
+    <div style="font-size:clamp(13px,2vw,16px); color:#555; letter-spacing:.18em; text-transform:uppercase; margin-bottom:20px;">The Choice</div>
+    <div style="font-family:'Noto Serif KR',serif; font-size:clamp(28px,6vw,56px); font-weight:900; line-height:1.2; color:#fff; letter-spacing:-.02em;">
+      후회하지 않을<br>새로운 선택
+    </div>
+    <div style="width:1px; height:60px; background:linear-gradient(to bottom, rgba(255,255,255,.4), rgba(28,28,28,.2)); margin:36px auto 0;"></div>
+  </div>
+</section>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-  <nav class="hero-nav">
-    <div class="nav-logo">이호엽</div>
-    <div class="nav-tag">성북구 지방의원 후보</div>
-  </nav>
-
   <div class="hero-body">
-    <div class="hero-left">
-      <div class="hero-label">개혁신당 · 성북구</div>
-      <h1 class="hero-name">이호엽</h1>
-      <div class="hero-name-sub">더 젊게, 더 기민하게</div>
-      <p class="hero-desc">
-        성북구 이호선·삼선·동선·돈암2·안암·보문.<br>
-        현장을 직접 뛰며 주민의 목소리를 듣고<br>
-        데이터와 실행력으로 성북의 내일을 바꿉니다.
-      </p>
-
-    </div>
-
-    <!-- Profile Photo -->
-    <div class="hero-photo">
-      <img src="profile.jpg" alt="이호엽 프로필 사진" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">
+    <!-- 오른쪽: 이름 + 사진 + 약력 -->
+    <div class="hero-right">
+      <div style="margin-bottom:14px;text-align:center;">
+        <div class="hero-label" style="justify-content:center;">개혁신당 · 성북구</div>
+        <h1 class="hero-name" style="text-align:center;">이호엽</h1>
+        <div class="hero-name-sub" style="text-align:center;">더 젊게, 더 기민하게</div>
+      </div>
+      <div class="hero-photo">
+        <img src="profile.jpg" alt="이호엽 프로필 사진" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">
+        <div class="hero-photo-overlay">
+          <div class="hero-photo-role">성북구의회 의원 후보</div>
+        </div>
+      </div>
+      <div class="hero-bio">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-txt">부천고등학교 졸업</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-txt">🎓 고려대학교 경영학과 졸업</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-txt">(현) 개혁신당 성북구 지역발전특별위원회 부위원장</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-txt">(현) 개혁신당 서울시당 대변인</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   </div><!-- /hero-inner -->
@@ -711,85 +980,6 @@
 <!-- CARDS -->
 <div class="cards-wrap">
 
-  <!-- Social card grid -->
-  <div class="social-card-grid reveal">
-    <a href="https://www.instagram.com/hoyup97/" target="_blank" class="social-card-item">
-      <img src="Instagram_logo.svg" alt="인스타그램" class="sc2-logo">
-      <div class="sc2-label">인스타그램</div>
-      <div class="sc2-desc">일상과 활동을<br>사진으로 공유해요</div>
-      <div class="sc2-arrow">인스타 구경하기 →</div>
-    </a>
-    <a href="https://blog.naver.com/hyl005" target="_blank" class="social-card-item">
-      <img src="naver_blog.svg" alt="블로그" class="sc2-logo">
-      <div class="sc2-label">블로그</div>
-      <div class="sc2-desc">정책과 생각을<br>글로 나눠요</div>
-      <div class="sc2-arrow">블로그 구경하기 →</div>
-    </a>
-    <a href="https://www.facebook.com/hoyup.lee/" target="_blank" class="social-card-item">
-      <img src="Facebook_logo.svg" alt="페이스북" class="sc2-logo">
-      <div class="sc2-label">페이스북</div>
-      <div class="sc2-desc">소식과 이야기를<br>함께 나눠요</div>
-      <div class="sc2-arrow">페이스북 바로가기 →</div>
-    </a>
-    <a href="sms:01093023408" class="social-card-item">
-      <div class="sc2-emoji">💬</div>
-      <div class="sc2-label">문자 보내기</div>
-      <div class="sc2-desc">010-9302-3408<br>직접 연락해 주세요</div>
-      <div class="sc2-arrow">문자하기 →</div>
-    </a>
-  </div>
-
-  <!-- About -->
-  <div class="section-header reveal">
-    <div class="sec-title">이호엽은 누구인가요</div>
-    <div class="sec-tag">About</div>
-  </div>
-  <div class="card card-about reveal">
-    <div class="card-about-left">
-      <div class="yt-placeholder">
-        <div class="yt-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect width="48" height="48" rx="12" fill="#FF0000" opacity="0.12"/>
-            <path d="M20 17L34 24L20 31V17Z" fill="#FF0000"/>
-          </svg>
-        </div>
-        <p class="yt-label">유튜브 영상을 연결해주세요</p>
-        <span class="yt-sub">대표 영상 URL을 입력하면 여기에 표시됩니다</span>
-        <div class="yt-input-row">
-          <input class="yt-input" id="ytInput" type="url" placeholder="https://www.youtube.com/watch?v=...">
-          <button class="yt-btn" id="ytBtn">연결</button>
-        </div>
-      </div>
-      <div class="yt-embed" id="ytEmbed" style="display:none;">
-        <iframe id="ytFrame" width="100%" height="100%" frameborder="0" allowfullscreen
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          style="border-radius:12px;"></iframe>
-      </div>
-    </div>
-    <div class="card-about-right">
-      <p class="about-desc">
-        현장을 직접 뛰며 주민의 목소리를 듣고,<br>
-        데이터와 실행력으로 변화를 만들겠습니다.<br>
-        젊은 에너지로 성북구의 내일을 함께 그려가겠습니다.
-      </p>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-yr">고등학교</div>
-          <div class="tl-txt">부천고등학교 졸업</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-yr">대학교</div>
-          <div class="tl-txt">고려대학교 경영학과</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-yr">현직</div>
-          <div class="tl-txt">개혁신당 성북구 지역발전특별위원회 부위원장</div>
-          <div class="tl-txt">개혁신당 서울시당 대변인</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Pledges -->
   <div class="section-header reveal" style="margin-top:20px;">
     <div class="sec-title">핵심 공약</div>
@@ -798,48 +988,183 @@
   <div class="pledge-row">
     <div class="pledge-card reveal reveal-d1">
       <div class="pledge-num">01</div>
-      <div class="pledge-icon">🚌</div>
       <div class="pledge-title">막힘없는 마을버스</div>
       <div class="pledge-desc">출퇴근 지옥 해결, 배차간격 정상화로 일상의 이동을 편하게</div>
     </div>
     <div class="pledge-card reveal reveal-d2">
       <div class="pledge-num">02</div>
-      <div class="pledge-icon">💻</div>
       <div class="pledge-title">투명한 디지털 행정</div>
       <div class="pledge-desc">데이터 기반 실시간 주민 소통 플랫폼 구축으로 행정 신뢰 UP</div>
     </div>
     <div class="pledge-card reveal reveal-d3">
       <div class="pledge-num">03</div>
-      <div class="pledge-icon">🔒</div>
       <div class="pledge-title">안전한 주거환경</div>
       <div class="pledge-desc">골목길 정비 및 스마트 안전망 확충으로 모두가 안심하는 동네</div>
     </div>
     <div class="pledge-card reveal reveal-d4">
       <div class="pledge-num">04</div>
-      <div class="pledge-icon">💰</div>
       <div class="pledge-title">세금낭비 제로</div>
       <div class="pledge-desc">시정 예산 삭감 및 구민 혜택 환원으로 실질적인 생활비 절감</div>
     </div>
   </div>
 
+  <!-- University Pledges -->
+  <div class="section-header reveal" style="margin-top:20px;">
+    <div class="sec-title">대학별 공약</div>
+    <div class="sec-tag">University</div>
+  </div>
+  <div class="univ-row">
+    <a href="./ku/" class="univ-card reveal reveal-d1">
+      <img class="univ-logo" src="./images/univ/korea_univ_logo.svg" alt="고려대학교 로고">
+      <div class="univ-name">고려대학교</div>
+      <div class="univ-arrow">공약 보기 →</div>
+    </a>
+    <a href="./sungshin/" class="univ-card reveal reveal-d2">
+      <img class="univ-logo" src="./images/univ/sungshin_logo.png" alt="성신여자대학교 로고">
+      <div class="univ-name">성신여자대학교</div>
+      <div class="univ-arrow">공약 보기 →</div>
+    </a>
+    <a href="./hansung/" class="univ-card reveal reveal-d3">
+      <img class="univ-logo" src="./images/univ/hansung_logo.jpeg" alt="한성대학교 로고">
+      <div class="univ-name">한성대학교</div>
+      <div class="univ-arrow">공약 보기 →</div>
+    </a>
+  </div>
+
+  <!-- Apartment Pledges -->
+  <div class="section-header reveal" style="margin-top:20px;">
+    <div class="sec-title">아파트별 공약</div>
+    <div class="sec-tag">Apartment</div>
+  </div>
+  <div class="apt-search-wrap reveal">
+    <span class="apt-search-icon">🔍</span>
+    <input class="apt-search" id="aptSearch" type="text" placeholder="아파트 이름으로 검색...">
+  </div>
+  <div class="apt-search-meta">
+    <span id="aptCount"></span>
+  </div>
+  <div class="apt-grid" id="aptGrid">
+    <a href="./apt/raemian-anam/" class="apt-card reveal reveal-d1">
+      <div class="apt-name">안암 래미안</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/daekwang-anam/" class="apt-card reveal reveal-d2">
+      <div class="apt-name">안암 대광</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/samik-anam/" class="apt-card reveal reveal-d3">
+      <div class="apt-name">안암 삼익</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/harrington-anam/" class="apt-card reveal reveal-d4">
+      <div class="apt-name">해링턴플레이스 안암</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/anam-apt/" class="apt-card reveal reveal-d1">
+      <div class="apt-name">안암아파트</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/parkview-bomun/" class="apt-card reveal reveal-d2">
+      <div class="apt-name">보문파크뷰자이</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/richville-bomun/" class="apt-card reveal reveal-d3">
+      <div class="apt-name">보문 리슈빌하우트</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/efeel-bomun/" class="apt-card reveal reveal-d4">
+      <div class="apt-name">이편한세상 보문</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/ipark-bomun/" class="apt-card reveal reveal-d1">
+      <div class="apt-name">보문아이파크</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/anam-bomun/" class="apt-card reveal reveal-d2">
+      <div class="apt-name">보문아남</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/central-ipark-bomun/" class="apt-card reveal reveal-d3">
+      <div class="apt-name">보문센트럴아이파크</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/housetory-bomun/" class="apt-card reveal reveal-d4">
+      <div class="apt-name">보문하우스토리</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/hanshin-hanjin/" class="apt-card reveal reveal-d1">
+      <div class="apt-name">한신한진</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/brownstone-donam/" class="apt-card reveal reveal-d2">
+      <div class="apt-name">브라운스톤돈암</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/ilsin-donam/" class="apt-card reveal reveal-d3">
+      <div class="apt-name">돈암일신건영휴먼빌</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/kolon-donam/" class="apt-card reveal reveal-d4">
+      <div class="apt-name">돈암코오롱하늘채</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/posco-donam/" class="apt-card reveal reveal-d1">
+      <div class="apt-name">돈암포스코더샵</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/hillstate-donam/" class="apt-card reveal reveal-d2">
+      <div class="apt-name">돈암힐스테이트</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/shinil-donam/" class="apt-card reveal reveal-d3">
+      <div class="apt-name">돈암신일해피트리</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/hyundai-dongsomun/" class="apt-card reveal reveal-d4">
+      <div class="apt-name">동소문현대</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/prugio-samson/" class="apt-card reveal reveal-d1">
+      <div class="apt-name">삼선푸르지오</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/kolon-samson/" class="apt-card reveal reveal-d2">
+      <div class="apt-name">삼선코오롱</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/skview-samson/" class="apt-card reveal reveal-d3">
+      <div class="apt-name">삼선SK뷰</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/hillstate-samson/" class="apt-card reveal reveal-d4">
+      <div class="apt-name">삼선힐스테이트</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <a href="./apt/shville-samson/" class="apt-card reveal reveal-d1">
+      <div class="apt-name">삼선1SH-VILLE</div>
+      <div class="apt-arrow">→</div>
+    </a>
+    <div class="apt-no-result" id="aptNoResult">검색 결과가 없습니다 🔍</div>
+  </div>
+
   <!-- Activity Photos -->
   <div class="section-header reveal" style="margin-top:20px;">
-    <div class="sec-title">활동 사진</div>
+    <div class="sec-title">활동</div>
     <div class="sec-tag">Gallery</div>
   </div>
   <div class="card gallery-card reveal">
     <div class="gallery-carousel">
       <div class="gallery-track-wrap">
         <div class="gallery-track" id="galleryTrack">
-          <div class="gallery-slot">
+          <div class="gallery-slot" onclick="showComingSoon()">
             <img src="activity1.jpg" alt="활동사진 1" onerror="this.parentElement.classList.add('empty')">
             <div class="gallery-empty-msg">activity1.jpg</div>
           </div>
-          <div class="gallery-slot">
+          <div class="gallery-slot" onclick="showComingSoon()">
             <img src="activity2.jpg" alt="활동사진 2" onerror="this.parentElement.classList.add('empty')">
             <div class="gallery-empty-msg">activity2.jpg</div>
           </div>
-          <div class="gallery-slot">
+          <div class="gallery-slot" onclick="showComingSoon()">
             <img src="activity3.jpg" alt="활동사진 3" onerror="this.parentElement.classList.add('empty')">
             <div class="gallery-empty-msg">activity3.jpg</div>
           </div>
@@ -884,6 +1209,30 @@
     </div>
   </div>
 
+  <!-- Social card grid -->
+  <div class="social-card-grid reveal">
+    <a href="https://www.instagram.com/hoyup97/" target="_blank" class="social-card-item">
+      <img src="Instagram_logo.svg" alt="인스타그램" class="sc2-logo">
+      <div class="sc2-label">인스타그램</div>
+      <div class="sc2-arrow">바로가기 →</div>
+    </a>
+    <a href="https://blog.naver.com/hyl005" target="_blank" class="social-card-item">
+      <img src="naver_blog.svg" alt="블로그" class="sc2-logo">
+      <div class="sc2-label">블로그</div>
+      <div class="sc2-arrow">바로가기 →</div>
+    </a>
+    <a href="https://www.facebook.com/hoyup.lee/" target="_blank" class="social-card-item">
+      <img src="Facebook_logo.svg" alt="페이스북" class="sc2-logo">
+      <div class="sc2-label">페이스북</div>
+      <div class="sc2-arrow">바로가기 →</div>
+    </a>
+    <a href="sms:01093023408" class="social-card-item">
+      <div class="sc2-emoji">💬</div>
+      <div class="sc2-label">문자 보내기</div>
+      <div class="sc2-arrow">바로가기 →</div>
+    </a>
+  </div>
+
 </div>
 
 <footer>
@@ -907,28 +1256,9 @@
     rng.style.left=rx+'px'; rng.style.top=ry+'px';
     requestAnimationFrame(loop);
   })();
-  document.querySelectorAll('a,button,.pledge-card').forEach(el=>{
+  document.querySelectorAll('a,button,.pledge-card,.univ-card,.apt-card').forEach(el=>{
     el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';rng.style.width='48px';rng.style.height='48px';});
     el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';rng.style.width='34px';rng.style.height='34px';});
-  });
-
-  // YouTube embed
-  document.getElementById('ytBtn').addEventListener('click', () => {
-    const val = document.getElementById('ytInput').value.trim();
-    if (!val) return;
-    let videoId = '';
-    try {
-      const url = new URL(val);
-      if (url.hostname.includes('youtu.be')) {
-        videoId = url.pathname.slice(1);
-      } else {
-        videoId = url.searchParams.get('v') || '';
-      }
-    } catch(e) {}
-    if (!videoId) { alert('올바른 유튜브 링크를 입력해주세요.'); return; }
-    document.getElementById('ytFrame').src = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`;
-    document.querySelector('.yt-placeholder').style.display = 'none';
-    document.getElementById('ytEmbed').style.display = 'block';
   });
 
   // News
@@ -1018,10 +1348,69 @@
     });
   })();
 
+  // Apartment search
+  const aptSearch = document.getElementById('aptSearch');
+  const aptGrid = document.getElementById('aptGrid');
+  const aptCountEl = document.getElementById('aptCount');
+  const aptNoResult = document.getElementById('aptNoResult');
+  const aptCards = aptGrid.querySelectorAll('.apt-card');
+  const totalApt = aptCards.length;
+
+  function updateAptCount(visible) {
+    aptCountEl.textContent = `총 ${totalApt}개 중 ${visible}개`;
+  }
+  updateAptCount(totalApt);
+
+  aptSearch.addEventListener('input', () => {
+    const q = aptSearch.value.trim().toLowerCase();
+    let visible = 0;
+    aptCards.forEach(card => {
+      const name = card.querySelector('.apt-name').textContent.toLowerCase();
+      const match = !q || name.includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    updateAptCount(visible);
+    aptNoResult.style.display = visible === 0 ? 'block' : 'none';
+  });
+
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
   }, {threshold: 0.1});
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  (function() {
+    const statEls = document.querySelectorAll('.problem-stat');
+    const slideObs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.animationDelay = (i * 0.15) + 's';
+          e.target.classList.add('animate');
+          slideObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    statEls.forEach(el => slideObs.observe(el));
+  })();
+
+  function showComingSoon() {
+    document.getElementById('comingSoonModal').classList.add('open');
+  }
+  document.getElementById('comingSoonModal').addEventListener('click', function(e) {
+    if (e.target === this || e.target.classList.contains('csm-close')) {
+      this.classList.remove('open');
+    }
+  });
 </script>
+
+<!-- Coming Soon Modal -->
+<div id="comingSoonModal" class="csm-overlay">
+  <div class="csm-box">
+    <div class="csm-icon">🎬</div>
+    <div class="csm-title">바로가기 준비중입니다</div>
+    <div class="csm-desc">유튜브 채널 및 블로그를<br>곧 오픈할 예정입니다.</div>
+    <button class="csm-close">닫기</button>
+  </div>
+</div>
 </body>
 </html>
