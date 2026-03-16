@@ -1019,16 +1019,48 @@
       <div class="univ-name">고려대학교</div>
       <div class="univ-arrow">공약 보기 →</div>
     </a>
-    <a href="./sungshin/" class="univ-card reveal reveal-d2">
+    <div class="univ-card reveal reveal-d2" style="position:relative;cursor:default;">
       <img class="univ-logo" src="./images/univ/sungshin_logo.png" alt="성신여자대학교 로고">
       <div class="univ-name">성신여자대학교</div>
       <div class="univ-arrow">공약 보기 →</div>
-    </a>
-    <a href="./hansung/" class="univ-card reveal reveal-d3">
+      <div style="
+        position:absolute;
+        inset:0;
+        background:rgba(248,248,248,0.85);
+        backdrop-filter:blur(4px);
+        -webkit-backdrop-filter:blur(4px);
+        border-radius:inherit;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:6px;
+        pointer-events:all;
+      ">
+        <div style="font-size:15px;font-weight:700;color:#1C1C1C;">준비 중입니다</div>
+      </div>
+    </div>
+    <div class="univ-card reveal reveal-d3" style="position:relative;cursor:default;">
       <img class="univ-logo" src="./images/univ/hansung_logo.jpeg" alt="한성대학교 로고">
       <div class="univ-name">한성대학교</div>
       <div class="univ-arrow">공약 보기 →</div>
-    </a>
+      <div style="
+        position:absolute;
+        inset:0;
+        background:rgba(248,248,248,0.85);
+        backdrop-filter:blur(4px);
+        -webkit-backdrop-filter:blur(4px);
+        border-radius:inherit;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:6px;
+        pointer-events:all;
+      ">
+        <div style="font-size:15px;font-weight:700;color:#1C1C1C;">준비 중입니다</div>
+      </div>
+    </div>
   </div>
 
   <!-- Apartment Pledges -->
@@ -1036,14 +1068,15 @@
     <div class="sec-title">아파트별 공약</div>
     <div class="sec-tag">Apartment</div>
   </div>
-  <div class="apt-search-wrap reveal">
-    <span class="apt-search-icon">🔍</span>
-    <input class="apt-search" id="aptSearch" type="text" placeholder="아파트 이름으로 검색...">
-  </div>
-  <div class="apt-search-meta">
-    <span id="aptCount"></span>
-  </div>
-  <div class="apt-grid" id="aptGrid">
+  <div style="position:relative;">
+    <div class="apt-search-wrap reveal">
+      <span class="apt-search-icon">🔍</span>
+      <input class="apt-search" id="aptSearch" type="text" placeholder="아파트 이름으로 검색...">
+    </div>
+    <div class="apt-search-meta">
+      <span id="aptCount"></span>
+    </div>
+    <div class="apt-grid" id="aptGrid">
     <a href="./apt/raemian-anam/" class="apt-card reveal reveal-d1">
       <div class="apt-name">안암 래미안</div>
       <div class="apt-arrow">→</div>
@@ -1144,7 +1177,27 @@
       <div class="apt-name">삼선1SH-VILLE</div>
       <div class="apt-arrow">→</div>
     </a>
-    <div class="apt-no-result" id="aptNoResult">검색 결과가 없습니다 🔍</div>
+      <div class="apt-no-result" id="aptNoResult">검색 결과가 없습니다 🔍</div>
+    </div>
+    <!-- 준비중 오버레이 -->
+    <div style="
+      position:absolute;
+      inset:0;
+      background:rgba(248,248,248,0.85);
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
+      border-radius:16px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      pointer-events:all;
+      z-index:10;
+    ">
+      <div style="font-size:20px;font-weight:700;color:#1C1C1C;">준비 중입니다</div>
+      <div style="font-size:14px;color:#888;">각 아파트별 공약을 준비하고 있습니다</div>
+    </div>
   </div>
 
   <!-- Activity Photos -->
