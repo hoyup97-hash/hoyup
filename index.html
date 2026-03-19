@@ -506,6 +506,26 @@
     transform: translateY(-8px);
     box-shadow: 0 20px 48px rgba(255,82,0,0.14), 0 0 0 1px rgba(255,82,0,0.08);
   }
+  .pledge-card-locked {
+    pointer-events: none;
+    user-select: none;
+  }
+  .pledge-card-locked::after {
+    content: attr(data-overlay);
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.92);
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.35);
+    letter-spacing: 0.02em;
+  }
 
   .pledge-header {
     display: flex;
@@ -597,37 +617,6 @@
     padding: 13px 20px;
     width: 100%;
     cursor: default;
-  }
-
-  /* 공개 예정 카드 오버레이 */
-  .pledge-card--soon {
-    pointer-events: none;
-  }
-  .pledge-card--soon::after {
-    content: '추후 공개 예정입니다';
-    position: absolute;
-    inset: 0;
-    background: rgba(248,248,248,0.72);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    font-weight: 800;
-    color: rgba(28,28,28,0.55);
-    letter-spacing: -0.01em;
-    border-radius: 20px;
-    z-index: 2;
-  }
-  .pledge-card--soon-dated::after {
-    content: '3월 20일 공개 예정';
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(18px, 2vw, 24px);
-    font-weight: 900;
-    color: var(--orange);
-    letter-spacing: -0.03em;
-    text-shadow: 0 1px 12px rgba(255,82,0,0.18);
   }
 
   /* Schedule card */
@@ -1020,6 +1009,7 @@
     background: rgba(255,82,0,.15); border: 1px solid rgba(255,82,0,.3);
     border-radius: 10px; padding: 10px 18px; margin-bottom: 32px;
     font-size: 13px; color: rgba(255,255,255,.8); font-weight: 500;
+    white-space: nowrap;
   }
   .donate-limit strong { color: var(--orange); font-weight: 700; }
   .donate-btns {
@@ -1127,40 +1117,27 @@
   .univ-card:hover .univ-arrow { color: var(--orange); }
   .univ-card-soon { opacity: 0.45; pointer-events: none; }
   .univ-card-soon .univ-arrow { color: var(--gray); }
-
-  /* 대학별 공약 오버레이 */
-  .univ-card--soon {
-    pointer-events: none;
-  }
-  .univ-card--soon::before {
-    content: '추후 공개 예정입니다';
+  .univ-card-locked { pointer-events: none; user-select: none; }
+  .univ-card-locked::before {
+    content: attr(data-overlay);
     position: absolute;
     inset: 0;
-    background: rgba(248,248,248,0.72);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    background: rgba(255,255,255,0.92);
+    border-radius: var(--radius);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
-    font-weight: 800;
-    color: rgba(28,28,28,0.55);
-    letter-spacing: -0.01em;
-    border-radius: var(--radius);
-    z-index: 2;
-  }
-  .univ-card--soon-dated::before {
-    content: '3월 21일 공개 예정';
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(16px, 1.8vw, 20px);
-    font-weight: 900;
-    color: #981E32;
-    letter-spacing: -0.03em;
-    text-shadow: 0 1px 12px rgba(152,30,50,0.2);
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.35);
+    letter-spacing: 0.02em;
+    z-index: 1;
   }
 
   .univ-logo { width: 56px; height: 56px; object-fit: contain; }
-  .univ-name { font-size: 14px; font-weight: 800; letter-spacing: -.02em; margin-top: 4px; }
+  .univ-name { font-size: 14px; font-weight: 800; letter-spacing: -.02em; margin-top: 4px; white-space: nowrap; }
   .univ-arrow {
     margin-top: auto; padding-top: 12px;
     font-size: 11px; font-weight: 700; letter-spacing: .1em;
@@ -1224,7 +1201,6 @@
     display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
     border: 1.5px solid transparent;
     transition: border-color .22s, background .22s, transform .22s, box-shadow .22s;
-    position: relative; overflow: hidden;
   }
   .apt-card:hover {
     border-color: var(--orange);
@@ -1234,23 +1210,27 @@
   }
   .apt-card:hover .apt-arrow { color: var(--orange); }
   .apt-card[style*="display: none"] { display: none !important; }
-  .apt-card-soon { pointer-events: none; cursor: default; }
+  .apt-card-soon {
+    pointer-events: none;
+    cursor: default;
+    user-select: none;
+  }
   .apt-card-soon::after {
-    content: '추후 공개 예정';
+    content: '공개 예정입니다';
     position: absolute;
     inset: 0;
-    background: rgba(248,248,248,0.78);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    background: rgba(255,255,255,0.92);
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 11px;
-    font-weight: 800;
-    color: rgba(28,28,28,0.45);
+    font-weight: 700;
+    color: rgba(0,0,0,0.35);
     letter-spacing: 0.02em;
-    border-radius: 12px;
-    z-index: 2;
+    z-index: 1;
   }
 
   .apt-name { font-size: 12px; font-weight: 700; letter-spacing: -.01em; line-height: 1.35; }
@@ -1420,7 +1400,7 @@
       <div class="pledge-desc">출퇴근 지옥 해결, 배차간격 정상화로 일상의 이동을 편하게</div>
       <span class="pledge-more">자세히 보기 →</span>
     </a>
-    <a href="./tax/" class="pledge-card pledge-card--soon pledge-card--soon-dated reveal reveal-d2" style="text-decoration:none;color:inherit;">
+    <div class="pledge-card pledge-card-locked reveal reveal-d2" data-overlay="3월 20일 금요일 12시 공개 예정">
       <div class="pledge-header">
         <div class="pledge-num">02</div>
         <div class="pledge-title">세금 낭비 제로</div>
@@ -1430,10 +1410,10 @@
         <span class="pledge-badge">재정자립도 약 17%</span>
         <span class="pledge-badge">910억 발행</span>
       </div>
-      <div class="pledge-desc">재정자립도 서울 하위권인 성북구, 상품권 할인 보조엔 연 45억+ — 성북 재정 공개 및 우선순위 재편</div>
+      <div class="pledge-desc">재정자립도 서울 하위권인 성북구, 상품권 할인 보조엔 올해 80억 이상 지출 예정 — 성북 재정 공개 및 우선순위 재편</div>
       <span class="pledge-more">자세히 보기 →</span>
-    </a>
-    <div class="pledge-card pledge-card--soon reveal reveal-d3">
+    </div>
+    <div class="pledge-card pledge-card-locked reveal reveal-d3" data-overlay="공개 예정입니다">
       <div class="pledge-header">
         <div class="pledge-num">03</div>
         <div class="pledge-title">퇴근할 때까지,<br>성북이 같이 봅니다</div>
@@ -1442,7 +1422,7 @@
       <div class="pledge-desc">오후 돌봄 공백 제로 — 학교가 끝나도 부모가 퇴근할 때까지 아이가 안전한 성북구</div>
       <span class="pledge-soon">공개 예정입니다</span>
     </div>
-    <div class="pledge-card pledge-card--soon reveal reveal-d4">
+    <div class="pledge-card pledge-card-locked reveal reveal-d4" data-overlay="공개 예정입니다">
       <div class="pledge-header">
         <div class="pledge-num">04</div>
         <div class="pledge-title">성북에서 공부했으면,<br>성북에서 시작하세요</div>
@@ -1459,17 +1439,17 @@
     <div class="sec-tag">University</div>
   </div>
   <div class="univ-row">
-    <a href="./universities/korea/" class="univ-card univ-card--soon univ-card--soon-dated reveal reveal-d1">
+    <div class="univ-card univ-card-locked reveal reveal-d1" data-overlay="공개 예정입니다">
       <img class="univ-logo" src="./assets/logos/korea_univ_logo.svg" alt="고려대학교 로고">
       <div class="univ-name">고려대학교</div>
       <div class="univ-arrow">공약 보기 →</div>
-    </a>
-    <div class="univ-card univ-card--soon reveal reveal-d2">
+    </div>
+    <div class="univ-card univ-card-locked reveal reveal-d2" data-overlay="공개 예정입니다">
       <img class="univ-logo" src="./assets/logos/sungshin_logo.png" alt="성신여자대학교 로고">
       <div class="univ-name">성신여자대학교</div>
       <div class="univ-arrow">공개 예정입니다</div>
     </div>
-    <div class="univ-card univ-card--soon reveal reveal-d3">
+    <div class="univ-card univ-card-locked reveal reveal-d3" data-overlay="공개 예정입니다">
       <img class="univ-logo" src="./assets/logos/hansung_logo.jpeg" alt="한성대학교 로고">
       <div class="univ-name">한성대학교</div>
       <div class="univ-arrow">공개 예정입니다</div>
@@ -1636,11 +1616,11 @@
 
       <!-- 오늘 일정 -->
       <div class="sched-today">
-        <div class="sched-panel-label">오늘 일정 <span>3월 19일 목</span></div>
+        <div class="sched-panel-label">오늘 일정 <span>3월 20일 금</span></div>
         <div class="sched-timeline">
           <div class="sched-tl-item tl-now">
             <div class="sched-tl-dot"></div>
-            <div class="sched-tl-title">감기몸살로 인한 내부일정</div>
+            <div class="sched-tl-title">공약 연구 및 개발</div>
           </div>
         </div>
       </div>
@@ -1669,22 +1649,22 @@
               <div class="sched-day-empty">—</div>
             </div>
           </div>
-          <div class="sched-day-row week-today">
+          <div class="sched-day-row">
             <div class="sched-day-label">목 19</div>
             <div class="sched-day-events">
-              <div class="sched-week-event">감기몸살로 인한 내부일정</div>
+              <div class="sched-day-empty">—</div>
             </div>
           </div>
-          <div class="sched-day-row">
+          <div class="sched-day-row week-today">
             <div class="sched-day-label">금 20</div>
             <div class="sched-day-events">
-              <div class="sched-day-empty">미정</div>
+              <div class="sched-week-event">공약 연구 및 개발</div>
             </div>
           </div>
           <div class="sched-day-row week-sat">
             <div class="sched-day-label">토 21</div>
             <div class="sched-day-events">
-              <div class="sched-day-empty">미정</div>
+              <div class="sched-week-event">공약 영상 촬영 및 제작</div>
             </div>
           </div>
           <div class="sched-day-row week-sun">

@@ -943,7 +943,6 @@ sup.fn {
 .share-kakao  { background: #FEE500; color: #191919; }
 .share-link   { background: rgba(0,0,0,0.08); color: #1a1a1a; }
 .share-twitter { background: #000; color: #fff; }
-.share-main { background: var(--yellow); color: #191919; padding: 16px 36px; font-size: 16px; }
 .share-btn-icon {
   display: flex; align-items: center; justify-content: center;
   width: 20px; height: 20px;
@@ -972,183 +971,6 @@ sup.fn {
   transition: transform .2s ease;
 }
 #floatShare:hover { transform: scale(1.08); }
-
-/* ── ABOUT (슬로건 섹션 내 통합) ── */
-.slogan-about-wrap {
-  width: 100%;
-  max-width: 680px;
-  text-align: left;
-  margin: 60px 0;
-}
-.slogan-about-divider {
-  width: 40px;
-  height: 2px;
-  background: rgba(255,255,255,0.15);
-  margin: 0 auto 48px;
-}
-.about-tag-line {
-  font-size: clamp(13px, 2vw, 15px);
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: #FF5200;
-  margin-bottom: 14px;
-  text-align: center;
-}
-.about-heading {
-  font-size: clamp(26px, 4vw, 38px);
-  font-weight: 900;
-  color: #fff;
-  line-height: 1.2;
-  letter-spacing: -.03em;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.about-top {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 2rem;
-  align-items: start;
-  margin: 2rem 0;
-}
-@media (max-width: 540px) {
-  .about-top { grid-template-columns: 1fr; }
-  .about-photo-wrap { margin: 0 auto; }
-}
-.about-photo-wrap {
-  width: 220px;
-  height: 275px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.about-photo-wrap img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.about-info { display: flex; flex-direction: column; gap: 1.25rem; }
-.about-party-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,82,0,0.18);
-  border: 1px solid rgba(255,82,0,0.45);
-  border-radius: 4px;
-  padding: 6px 14px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #ff8c5a;
-  letter-spacing: 0.05em;
-  width: fit-content;
-}
-.about-party-badge::before {
-  content: '';
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #FF5200;
-  box-shadow: 0 0 6px rgba(255,82,0,0.7);
-}
-.about-profile-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem 1.5rem;
-}
-@media (max-width: 380px) {
-  .about-profile-grid { grid-template-columns: 1fr; }
-}
-.about-item-label {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--yellow);
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-}
-.about-item-value {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #fff;
-}
-.about-position-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-}
-.about-position-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.5;
-}
-.about-position-item::before {
-  content: '';
-  width: 3px; height: 3px;
-  border-radius: 50%;
-  background: rgba(255,82,0,0.7);
-  flex-shrink: 0;
-  margin-top: 7px;
-}
-.about-honest-box {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 10px;
-  padding: 1.75rem 2rem;
-  margin: 2rem 0;
-}
-.about-honest-box p {
-  font-size: 1rem;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.9;
-}
-.about-honest-box strong { color: #fff; font-weight: 700; }
-.about-timeline {
-  margin: 2rem 0 0;
-  display: flex;
-  flex-direction: column;
-}
-.about-tl-item {
-  display: flex;
-  gap: 1.25rem;
-}
-.about-tl-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 28px;
-  flex-shrink: 0;
-}
-.about-tl-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: #FF5200;
-  border: 2px solid var(--yellow);
-  flex-shrink: 0;
-  margin-top: 5px;
-}
-.about-tl-line {
-  width: 1px; flex: 1;
-  background: rgba(255,82,0,0.25);
-  margin: 4px 0;
-  min-height: 1.5rem;
-}
-.about-tl-item:last-child .about-tl-line { display: none; }
-.about-tl-content { padding-bottom: 2rem; }
-.about-tl-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.3rem;
-}
-.about-tl-desc {
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.7;
-}
 </style>
 </head>
 <body>
@@ -1361,7 +1183,7 @@ sup.fn {
   </div>
 </div>
 
-<!-- SLOGAN + ABOUT -->
+<!-- SLOGAN -->
 <div class="slogan-bg">
   <div class="slogan-inner">
     <div class="slogan-sub-text reveal">성북구의회 가선거구 · 후보 이호엽</div>
@@ -1369,54 +1191,6 @@ sup.fn {
       이대로는 안 됩니다<br>
       <span class="yellow">이호엽이 바꿉니다</span>
     </div>
-
-    <div class="slogan-about-wrap reveal">
-      <div class="slogan-about-divider"></div>
-      <div class="about-tag-line">이호엽은 누구인가</div>
-      <h2 class="about-heading">
-        성북구에서 살고,<br>성북구를 바꾸려 합니다
-      </h2>
-      <div class="about-top">
-        <div class="about-photo-wrap">
-          <img src="../assets/images/photo.jpg" alt="이호엽">
-        </div>
-        <div class="about-info">
-          <div class="about-party-badge">개혁신당</div>
-          <div class="about-profile-grid">
-            <div>
-              <div class="about-item-label">나이</div>
-              <div class="about-item-value">만 29세</div>
-            </div>
-            <div>
-              <div class="about-item-label">학교</div>
-              <div class="about-item-value">고려대학교</div>
-            </div>
-            <div>
-              <div class="about-item-label">전공</div>
-              <div class="about-item-value">경영학과</div>
-            </div>
-            <div>
-              <div class="about-item-label">지역구</div>
-              <div class="about-item-value">성북구</div>
-            </div>
-          </div>
-          <div>
-            <div class="about-item-label" style="margin-bottom:0.6rem;">당직</div>
-            <div class="about-position-list">
-              <div class="about-position-item">개혁신당 성북구 지역발전특위원회 부위원장</div>
-              <div class="about-position-item">개혁신당 서울시당 대변인</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div style="display:inline-block; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:24px 48px; text-align:center; margin:24px 0;">
-      <span style="font-size:14px; color:#888; letter-spacing:.2em; display:block; margin-bottom:6px;">기호</span>
-      <span style="font-size:clamp(48px,12vw,96px); font-weight:900; color:#FF5200; line-height:1; display:block;">4번</span>
-      <span style="font-size:clamp(32px,8vw,64px); font-weight:900; color:#fff; line-height:1.1; display:block;">이호엽</span>
-    </div>
-
     <div class="slogan-name reveal">마을버스, 다시 제때 옵니다</div>
   </div>
 </div>
@@ -1485,10 +1259,12 @@ sup.fn {
 <!-- SHARE -->
 <div class="share-section">
   <p class="share-section-label">이 공약이 필요하다고 생각하신다면, 주변에 알려주세요.</p>
-  <button class="share-btn share-main" onclick="sharePage()">
-    <span class="share-btn-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-    공유하기
-  </button>
+  <div class="share-grid">
+    <button class="share-btn share-kakao" onclick="sharePage()">
+      <span class="share-btn-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.03 2 2 5.36 2 9.51c0 2.57 1.68 4.83 4.23 6.12l-1.08 4.02 4.72-3.1c.37.05.74.07 1.13.07 4.97 0 9-3.36 9-7.51S15.97 2 11 2z" fill="#191919"/></svg></span>
+      공유하기
+    </button>
+  </div>
   <p class="share-copied" id="copy-msg" aria-live="polite"></p>
 </div>
 
@@ -1582,8 +1358,15 @@ function sharePage() {
       url: window.location.href
     });
   } else {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      alert('링크가 복사되었습니다.');
+    var isKakao = /KAKAOTALK/i.test(navigator.userAgent);
+    navigator.clipboard.writeText(window.location.href).then(function () {
+      var msg = document.getElementById('copy-msg');
+      if (isKakao) {
+        msg.textContent = '✓ 링크가 복사됐습니다. 카카오톡 채팅창에 붙여넣기 해서 공유하세요.';
+      } else {
+        msg.textContent = '✓ 링크가 복사됐습니다.';
+      }
+      setTimeout(function () { msg.textContent = ''; }, 3500);
     });
   }
 }

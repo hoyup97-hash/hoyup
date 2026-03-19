@@ -253,6 +253,17 @@ footer {
   color: var(--color-accent);
   display: block;
 }
+.hero-stat-highlight {
+  color: var(--color-accent);
+}
+.hero-sub-note {
+  display: block;
+  font-size: 0.5em;
+  color: var(--color-text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 6px;
+}
 .hero-sub {
   font-size: clamp(0.9rem, 1.8vw, 1.05rem);
   color: var(--color-muted);
@@ -531,6 +542,32 @@ footer {
 }
 .cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.28); }
 
+/* ── SHARE SECTION ── */
+.share-section {
+  background: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+  padding: 56px 24px;
+  text-align: center;
+}
+.share-section-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-bottom: 24px;
+}
+.share-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.share-copied {
+  font-size: .75rem;
+  color: rgba(0,0,0,.4);
+  min-height: 1.3em;
+  margin-top: 14px;
+}
+
 /* ── BACK TO MAIN ── */
 .back-to-main {
   background: var(--gray-50);
@@ -597,7 +634,7 @@ footer {
       <span class="hero-ticker-inner">
         <span class="ticker-item">재정자립도 꼴찌권</span>
         <span class="ticker-dot"></span>
-        <span class="ticker-item">상품권 보조금 서울 1등</span>
+        <span class="ticker-item">상품권 발행 서울 1등</span>
         <span class="ticker-dot"></span>
         <span class="ticker-item">22억 땅 20년 방치</span>
         <span class="ticker-dot"></span>
@@ -609,7 +646,7 @@ footer {
         <span class="ticker-dot"></span>
         <span class="ticker-item">재정자립도 꼴찌권</span>
         <span class="ticker-dot"></span>
-        <span class="ticker-item">상품권 보조금 서울 1등</span>
+        <span class="ticker-item">상품권 발행 서울 1등</span>
         <span class="ticker-dot"></span>
         <span class="ticker-item">22억 땅 20년 방치</span>
         <span class="ticker-dot"></span>
@@ -628,8 +665,8 @@ footer {
 
     <div class="hero-headline-wrap">
       <h1 class="hero-headline reveal">
-        재정자립도 꼴찌권,<br>
-        상품권 발행은 서울 1등.<br>
+        재정자립도 꼴찌권 <span class="hero-stat-highlight">17%</span>,<br>
+        상품권 발행은 <span class="hero-stat-highlight">서울 1등</span>.<span class="hero-sub-note">(2025년 910억 발행)</span>
         <em class="hero-question">구민 세금 어디 갔습니까.</em>
       </h1>
     </div>
@@ -659,13 +696,13 @@ footer {
         <span class="number-value">약 17<span class="number-unit">%</span></span>
         <span class="number-context-tag">서울 평균 26.4%</span>
       </div>
-      <span class="number-label">성북구 재정자립도 (2024)</span>
+      <span class="number-label">성북구 재정자립도 (2025)</span>
       <p class="number-desc">
         스스로 벌어들이는 세금이 전체 예산의 약 17%뿐입니다.
         나머지는 중앙정부·서울시에서 받아 씁니다.
         자립도가 낮을수록 세금 한 푼의 무게는 더 무겁습니다.
       </p>
-      <span class="number-source">서울시의회 제출자료 2025.3.4.</span>
+      <span class="number-source">서울시 통계통합플랫폼 — 자치구별 재정자립도</span>
     </div>
 
     <div class="number-item reveal">
@@ -1162,7 +1199,7 @@ footer {
         <span class="source-num">19</span>
         <div class="source-content">
           <span class="source-title">국회예산정책처 「지역사랑상품권 발행 및 관리체계 평가」 (2025.11.)</span>
-          <span class="source-detail">자치단체별 운영 수수료 공식 자료 부재 지적 / 재정자립도 낮은 지역 지방비 부담 문제 / 고령층 디지털 접근 격차 개선 과제 명시</span>
+          <span class="source-detail">자치단체별 운영 수수료 공식 자료 부재 지적 / 재정자립도 낮은 지역 지방비 최소분담율(5%) 동일 적용의 문제 제기 / 지류상품권 판매·환전 수수료 자치단체별 최대 6배 격차 확인</span>
         </div>
       </div>
 
@@ -1171,50 +1208,16 @@ footer {
 </section>
 
 
-<!-- ZONE 5 · CTA -->
-<section class="cta-section" id="cta">
-  <div class="cta-inner">
-    <h2 class="cta-headline reveal">같은 문제, 반복되지 않도록</h2>
-    <p class="cta-sub reveal">
-      이 공약이 필요하다고 생각하신다면, 주변에 알려주세요.
-    </p>
-
-    <div class="cta-share-grid reveal">
-
-      <button class="share-btn share-kakao" onclick="shareKakao()">
-        <span class="share-btn-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <path d="M11 2C6.03 2 2 5.36 2 9.51c0 2.57 1.68 4.83 4.23 6.12l-1.08 4.02 4.72-3.1c.37.05.74.07 1.13.07 4.97 0 9-3.36 9-7.51S15.97 2 11 2z" fill="#191919"/>
-          </svg>
-        </span>
-        <span class="share-btn-label">카카오톡으로 공유</span>
-      </button>
-
-      <button class="share-btn share-link" onclick="copyLink()">
-        <span class="share-btn-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <path d="M9 13a4.5 4.5 0 006.36.07l2-2a4.5 4.5 0 00-6.37-6.36L9.87 5.83" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M13 9a4.5 4.5 0 00-6.36-.07l-2 2a4.5 4.5 0 006.37 6.36L12.13 16.17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <span class="share-btn-label">링크 복사</span>
-      </button>
-
-      <button class="share-btn share-twitter" onclick="shareTwitter()">
-        <span class="share-btn-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M3 3l5.5 7.5L3 17h2l4.5-5.5L14 17h3l-5.8-7.8L17 3h-2l-4.2 5.1L6 3H3z" fill="currentColor"/>
-          </svg>
-        </span>
-        <span class="share-btn-label">X(트위터) 공유</span>
-      </button>
-
-    </div>
-
-    <p class="cta-copied" id="copy-msg" aria-live="polite"></p>
-    <p class="cta-note">공약 관련 의견이나 제보는 언제든 환영합니다.</p>
+<!-- SHARE -->
+<div class="share-section">
+  <p class="share-section-label">이 공약이 필요하다고 생각하신다면, 주변에 알려주세요.</p>
+  <div class="share-grid">
+    <button class="share-btn share-kakao" onclick="sharePage()">
+      공유하기
+    </button>
   </div>
-</section>
+  <p class="share-copied" id="copy-msg" aria-live="polite"></p>
+</div>
 
 
 <!-- BACK TO MAIN -->
