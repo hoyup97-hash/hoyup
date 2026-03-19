@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한성대학교 공약 — 이호엽</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  #floatShare {
+    position: fixed;
+    bottom: 28px; right: 24px;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: #FF5200;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(255,82,0,.35);
+    z-index: 999;
+    transition: transform .2s ease;
+  }
+  #floatShare:hover { transform: scale(1.08); }
+
+  .share-wrap { text-align:center; margin-top:36px; }
+  .share-grid { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .share-btn {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:100px;
+    font-size:0.875rem; font-weight:700;
+    border:none; cursor:pointer; font-family:inherit;
+    transition:transform .15s, opacity .15s;
+  }
+  .share-btn:hover { transform:translateY(-2px); opacity:.9; }
+  .share-btn:active { transform:translateY(0); }
+  .share-kakao   { background:#FEE500; color:#191919; }
+  .share-link    { background:rgba(0,0,0,0.08); color:#1a1a1a; }
+  .share-twitter { background:#000; color:#fff; }
+  .share-btn-icon { display:flex; align-items:center; justify-content:center; width:18px; height:18px; }
+  .share-copied { font-size:.72rem; color:rgba(0,0,0,.4); min-height:1.2em; text-align:center; margin-top:8px; }
+  footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 48px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; gap: 40px; flex-wrap: wrap; }
+  .footer-logo { font-size: 22px; font-weight: 900; letter-spacing: -0.03em; color: white; }
+  .footer-logo span { color: #FF6B00; }
+  .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.6; }
+  .footer-info { text-align: right; font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.8; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.2); }
+  .footer-yellow { color: #FF6B00; }
+</style>
+</head>
+<body>
+<button id="floatShare" onclick="sharePage()" aria-label="이 페이지 공유하기">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+</button>
+<a href="../../" class="back">← 돌아가기</a>
+<div class="badge">University Pledge</div>
+<div class="title">한성대학교<br>공약 준비중입니다</div>
+<div class="divider"></div>
+<div class="desc">
+  한성대학교 학생 여러분을 위한 공약을<br>
+  곧 공개 예정입니다.
+</div>
+<div class="share-wrap">
+  <div class="share-grid">
+    <button class="share-btn share-kakao" onclick="shareKakao()">
+      <span class="share-btn-icon"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.03 2 2 5.36 2 9.51c0 2.57 1.68 4.83 4.23 6.12l-1.08 4.02 4.72-3.1c.37.05.74.07 1.13.07 4.97 0 9-3.36 9-7.51S15.97 2 11 2z" fill="#191919"/></svg></span>
+      카카오톡으로 공유
+    </button>
+    <button class="share-btn share-link" onclick="copyLink()">
+      <span class="share-btn-icon"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M9 13a4.5 4.5 0 006.36.07l2-2a4.5 4.5 0 00-6.37-6.36L9.87 5.83" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 9a4.5 4.5 0 00-6.36-.07l-2 2a4.5 4.5 0 006.37 6.36L12.13 16.17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      링크 복사
+    </button>
+    <button class="share-btn share-twitter" onclick="shareTwitter()">
+      <span class="share-btn-icon"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M3 3l5.5 7.5L3 17h2l4.5-5.5L14 17h3l-5.8-7.8L17 3h-2l-4.2 5.1L6 3H3z" fill="currentColor"/></svg></span>
+      X(트위터) 공유
+    </button>
+  </div>
+  <p class="share-copied" id="copy-msg" aria-live="polite"></p>
+</div>
+<script>
+function sharePage() {
+  if (navigator.share) {
+    navigator.share({
+      title: '한성대학교 공약 — 이호엽',
+      text: '2026 성북구의회 후보 이호엽의 한성대학교 공약을 확인해보세요.',
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('링크가 복사되었습니다.');
+    });
+  }
+}
+
+function shareKakao() {
+  if (window.Kakao && window.Kakao.Share) {
+    window.Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '한성대학교 공약 — 이호엽',
+        description: '2026 성북구의회 후보 이호엽의 한성대학교 공약을 확인해보세요.',
+        link: { mobileWebUrl: location.href, webUrl: location.href }
+      }
+    });
+  } else { copyLink(); }
+}
+
+function copyLink() {
+  var msg = document.getElementById('copy-msg');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(location.href).then(function () {
+      msg.textContent = '✓ 링크가 복사됐습니다.';
+      setTimeout(function () { msg.textContent = ''; }, 2800);
+    });
+  } else {
+    var el = document.createElement('textarea');
+    el.value = location.href;
+    el.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+    msg.textContent = '✓ 링크가 복사됐습니다.';
+    setTimeout(function () { msg.textContent = ''; }, 2800);
+  }
+}
+
+function shareTwitter() {
+  var text = '2026 성북구의회 후보 이호엽의 한성대학교 공약을 확인해보세요.';
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(location.href), '_blank', 'width=560,height=420');
+}
+</script>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">이<span>호</span>엽</div>
+        <div class="footer-tagline">성북구의회 가선거구 후보<br>한성대학교 공약</div>
+      </div>
+      <div class="footer-info">2026 지방선거<br>성북구의회 가선거구</div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 이호엽. 직접 만들었고, 직접 지킵니다.</span>
+      <span class="footer-yellow">이호엽이 바꿉니다</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

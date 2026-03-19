@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구의원 후보 — 20대가 만드는 변화</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --crimson: #8B0000;
+  --crimson-light: #a30000;
+  --gold: #c9a84c;
+  --gold-light: #e8c97e;
+  --cream: #f5f0e8;
+  --dark: #0d0505;
+  --dark2: #160a0a;
+  --dark3: #1f0f0f;
+  --text-muted: rgba(255,255,255,0.5);
+  --text-body: rgba(255,255,255,0.82);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--dark);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.22s; }
+.reveal-delay-3 { transition-delay: 0.34s; }
+.reveal-delay-4 { transition-delay: 0.46s; }
+
+/* ── HEADER ── */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 52px;
+  background: rgba(13,5,5,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(139,0,0,0.25);
+}
+.site-header-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+}
+.site-header-back:hover { color: rgba(255,255,255,0.85); }
+.site-header-center {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.site-header-name {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+.site-header-name span {
+  color: #FF5200;
+}
+.site-header-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(255,255,255,0.2);
+  margin: 0 14px;
+}
+.site-header-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+.site-header-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8rem 1.5rem 4rem;
+  position: relative;
+  background: var(--dark);
+  overflow: hidden;
+}
+
+/* diagonal grid lines */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background:
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 80px,
+      rgba(139,0,0,0.07) 80px,
+      rgba(139,0,0,0.07) 81px
+    ),
+    repeating-linear-gradient(
+      -60deg,
+      transparent,
+      transparent 80px,
+      rgba(139,0,0,0.05) 80px,
+      rgba(139,0,0,0.05) 81px
+    );
+  pointer-events: none;
+}
+
+/* large faint "0" watermark */
+.hero::after {
+  content: '0';
+  position: absolute;
+  right: -5vw;
+  bottom: -5vh;
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(18rem, 45vw, 36rem);
+  font-weight: 900;
+  color: rgba(139,0,0,0.09);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 99px;
+  padding: 7px 22px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--gold-light);
+  margin-bottom: 2.5rem;
+  position: relative;
+  animation: fadeDown 1s ease both;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform: scale(1); }
+  50% { opacity:0.4; transform: scale(0.7); }
+}
+
+.hero-eyebrow {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  position: relative;
+  animation: fadeDown 1s 0.15s ease both;
+}
+
+.hero-headline {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(2.8rem, 9vw, 7rem);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  position: relative;
+  animation: fadeDown 1s 0.25s ease both;
+}
+.hero-headline .gold { color: var(--gold-light); }
+.hero-headline .stroke {
+  -webkit-text-stroke: 2px rgba(255,255,255,0.25);
+  color: transparent;
+}
+
+.hero-sub {
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin-top: 1.75rem;
+  max-width: 520px;
+  position: relative;
+  animation: fadeDown 1s 0.35s ease both;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 3rem;
+  position: relative;
+  animation: fadeDown 1s 0.45s ease both;
+}
+.btn-primary {
+  background: var(--crimson);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 15px 38px;
+  border-radius: 3px;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  border: 2px solid var(--crimson);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--crimson-light); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 15px 38px;
+  border-radius: 3px;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-2px); }
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.45; }
+  50% { transform: translateX(-50%) translateY(9px); opacity: 0.8; }
+}
+.scroll-arrow {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollBounce 1.6s ease-in-out infinite;
+  pointer-events: none;
+  line-height: 1;
+  color: rgba(255,255,255,0.6);
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+}
+.scroll-arrow svg { width: 28px; height: 28px; display: block; }
+@keyframes scrollDrop {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes fadeDown {
+  from { opacity:0; transform: translateY(-20px); }
+  to { opacity:1; transform: none; }
+}
+
+/* ── ZERO SECTION ── */
+.zero-section {
+  background: var(--crimson);
+  padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.zero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg, transparent, transparent 60px,
+    rgba(0,0,0,0.06) 60px, rgba(0,0,0,0.06) 61px
+  );
+}
+.zero-big {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(5rem, 22vw, 14rem);
+  font-weight: 900;
+  line-height: 0.85;
+  color: #fff;
+  position: relative;
+  letter-spacing: -0.05em;
+}
+.zero-label {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: rgba(255,255,255,0.85);
+  margin-top: 1.5rem;
+  line-height: 1.7;
+  position: relative;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+.zero-label strong { font-weight: 700; color: #fff; }
+.zero-pair {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(2rem, 8vw, 6rem);
+  position: relative;
+  flex-wrap: wrap;
+}
+.zero-pair::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  width: 1px;
+  background: rgba(255,255,255,0.2);
+}
+@media (max-width: 520px) {
+  .zero-pair::after { display: none; }
+}
+
+/* ── WHY SECTION ── */
+.why-section {
+  padding: clamp(4rem, 10vw, 8rem) 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tag-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+.tag-line::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+}
+.tag-line span {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.big-heading {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.8rem, 5.5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.28;
+  margin-bottom: 2rem;
+}
+
+.body-text {
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  color: var(--text-body);
+  line-height: 2;
+}
+
+/* ── INCIDENT BLOCK ── */
+.incident {
+  margin: 3rem 0;
+  background: var(--crimson);
+  border-radius: 6px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.incident::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, transparent, transparent 30px,
+    rgba(0,0,0,0.06) 30px, rgba(0,0,0,0.06) 31px
+  );
+}
+.incident-year {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(3.5rem, 10vw, 6rem);
+  font-weight: 900;
+  color: rgba(0,0,0,0.12);
+  line-height: 1;
+  position: absolute;
+  right: 1rem;
+  top: -0.5rem;
+  pointer-events: none;
+  user-select: none;
+}
+.incident-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  position: relative;
+}
+.incident-text {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.incident-body {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.9;
+  position: relative;
+}
+
+/* ── REALITY CARDS ── */
+.reality-section {
+  background: var(--dark3);
+  padding: clamp(3rem, 8vw, 5rem) 1.5rem;
+}
+.reality-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.stat-highlight {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.stat-highlight-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  font-weight: 900;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.stat-highlight-label {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  line-height: 1.7;
+}
+.stat-highlight-label strong { color: #fff; font-weight: 700; }
+.reality-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.reality-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+}
+.reality-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.reality-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+.reality-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ── QUOTE BLOCK ── */
+.quote-block {
+  margin: 3rem -1.5rem 0;
+  background: #0d0505;
+  border-top: 1px solid rgba(139,0,0,0.3);
+  border-bottom: 1px solid rgba(139,0,0,0.3);
+  padding: clamp(3rem, 8vw, 6rem) 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quote-block::before {
+  content: '"';
+  position: absolute;
+  top: -0.2em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(12rem, 35vw, 22rem);
+  font-weight: 900;
+  color: rgba(139,0,0,0.07);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.quote-text {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.05rem, 3.2vw, 1.7rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  word-break: keep-all;
+  max-width: none;
+}
+.quote-text.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.quote-text em {
+  color: var(--gold-light);
+  font-style: normal;
+  display: block;
+  font-size: clamp(1.5rem, 5vw, 2.8rem);
+  margin-top: 0.25em;
+}
+.quote-source {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  position: relative;
+}
+
+/* ── MATH SECTION ── */
+.math-section {
+  background: var(--dark2);
+  padding: clamp(4rem, 10vw, 7rem) 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.math-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, transparent, transparent 60px,
+    rgba(139,0,0,0.04) 60px, rgba(139,0,0,0.04) 61px
+  );
+  pointer-events: none;
+}
+.math-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+}
+.math-equation {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 2.5rem 0 3rem;
+}
+.math-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0 1.25rem;
+  align-items: start;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.math-row.visible {
+  opacity: 1;
+  transform: none;
+}
+.math-row:nth-child(1) { transition-delay: 0s; }
+.math-row:nth-child(2) { transition-delay: 0.18s; }
+.math-row:nth-child(3) { transition-delay: 0.36s; border-bottom: none; }
+.math-op {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1.2;
+  padding-top: 0.1rem;
+}
+.math-row:first-child .math-op { visibility: hidden; }
+.math-content {}
+.math-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.04em;
+}
+.math-row:nth-child(2) .math-num { color: var(--gold-light); }
+.math-label {
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+.math-label strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+.math-result {
+  margin-top: 0.5rem;
+  padding: 2rem 2rem;
+  background: var(--crimson);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s 0.6s ease, transform 0.7s 0.6s ease;
+}
+.math-result.visible {
+  opacity: 1;
+  transform: none;
+}
+.math-result::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg, transparent, transparent 60px,
+    rgba(0,0,0,0.06) 60px, rgba(0,0,0,0.06) 61px
+  );
+}
+.math-result-inner { position: relative; }
+.math-result-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.math-result-text {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.5;
+  text-align: center;
+}
+.math-result-text em {
+  font-style: normal;
+  color: var(--gold-light);
+}
+
+/* ── DIVIDER LINE ── */
+.section-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(139,0,0,0.3), transparent);
+  margin: 0;
+}
+
+/* ── PROMISE SECTION ── */
+.promise-section {
+  background: var(--dark2);
+  padding: clamp(4rem, 10vw, 8rem) 0;
+}
+.promise-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.promise-grid {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 3rem;
+  padding: 0.5rem 1.5rem 1.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+}
+.promise-grid::-webkit-scrollbar { display: none; }
+.promise-grid.is-dragging { cursor: grabbing; }
+.promise-grid .promise-card {
+  flex: 0 0 min(300px, 78vw);
+  scroll-snap-align: start;
+}
+
+.promise-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 2px solid var(--crimson);
+  border-radius: 4px;
+  padding: 2rem 1.5rem;
+  transition: background 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.promise-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(139,0,0,0.12), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.promise-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-4px); }
+.promise-card:hover::before { opacity: 1; }
+
+.promise-card.tbd {
+  border-top-color: rgba(255,255,255,0.15);
+  opacity: 0.45;
+}
+
+.p-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  opacity: 0.7;
+}
+.promise-card.tbd .p-num { color: rgba(255,255,255,0.3); }
+
+.p-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+}
+.promise-card.tbd .p-title { color: rgba(255,255,255,0.4); }
+
+.p-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ── CLOSING ── */
+.closing-section {
+  padding: clamp(5rem, 12vw, 10rem) 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.closing-section::before {
+  content: '투표';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(10rem, 35vw, 24rem);
+  font-weight: 900;
+  color: rgba(139,0,0,0.05);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+.closing-inner { position: relative; max-width: 680px; margin: 0 auto; }
+
+.closing-headline {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.8rem, 6vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.28;
+  margin-bottom: 1.5rem;
+}
+.closing-headline .gold { color: var(--gold-light); }
+
+.closing-body {
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: var(--text-muted);
+  line-height: 2;
+  margin-bottom: 3rem;
+}
+
+/* ── ABOUT SECTION ── */
+.about-section {
+  background: var(--dark2);
+  padding: clamp(4rem, 10vw, 7rem) 1.5rem;
+  position: relative;
+}
+.about-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255,107,0,0.045) 0%, transparent 70%);
+  pointer-events: none;
+}
+.about-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.profile-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 2px solid var(--crimson);
+  border-radius: 6px;
+  padding: 2rem;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem;
+}
+@media (max-width: 480px) {
+  .profile-card { grid-template-columns: 1fr; }
+}
+.profile-item-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.profile-item-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+}
+.honest-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 1.75rem 2rem;
+  margin: 2rem 0;
+}
+.honest-box p {
+  font-size: 1rem;
+  color: var(--text-body);
+  line-height: 1.9;
+}
+.honest-box strong { color: #fff; font-weight: 700; }
+.timeline {
+  margin: 2rem 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.timeline-item {
+  display: flex;
+  gap: 1.25rem;
+}
+.timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28px;
+  flex-shrink: 0;
+}
+.timeline-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--crimson);
+  border: 2px solid var(--gold);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.timeline-line {
+  width: 1px; flex: 1;
+  background: rgba(139,0,0,0.3);
+  margin: 4px 0;
+  min-height: 1.5rem;
+}
+.timeline-item:last-child .timeline-line { display: none; }
+.timeline-content { padding-bottom: 2rem; }
+.timeline-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+.timeline-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.about-top {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin: 2rem 0;
+}
+@media (max-width: 540px) {
+  .about-top { grid-template-columns: 1fr; }
+  .photo-wrap { margin: 0 auto; }
+}
+.photo-wrap {
+  width: 220px;
+  height: 275px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.photo-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.photo-placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.3;
+}
+.about-info { display: flex; flex-direction: column; gap: 1.25rem; }
+.party-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 107, 0, 0.18);
+  border: 1px solid rgba(255, 107, 0, 0.45);
+  border-radius: 4px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ff9a5c;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+.party-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff6b00;
+  box-shadow: 0 0 6px rgba(255,107,0,0.7);
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+@media (max-width: 380px) {
+  .profile-grid { grid-template-columns: 1fr; }
+}
+.position-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+.position-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+.position-item::before {
+  content: '';
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 107, 0, 0.7);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+/* ── FOOTER ── */
+footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; gap: 40px; flex-wrap: wrap; }
+.footer-logo { font-size: 22px; font-weight: 900; letter-spacing: -0.03em; color: white; }
+.footer-logo span { color: #FF6B00; }
+.footer-tagline { font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 8px; line-height: 1.6; }
+.footer-info { text-align: right; font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.8; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.2); }
+.footer-yellow { color: #FF6B00; }
+
+/* ── RESPONSIVE ── */
+@media (min-width: 640px) {
+  .promise-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .hero-headline .stroke { -webkit-text-stroke-width: 1px; }
+  .incident-year { display: none; }
+  .hero-cta-group { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-outline { width: 100%; text-align: center; }
+}
+
+/* ── PROMISE 4-card grid ── */
+@media (min-width: 640px) {
+  /* promise-grid는 슬라이더 유지 */
+}
+
+/* 01번 카드 — 히어로 강조 */
+.promise-card--hero {
+  border-top-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+.promise-card--hero .p-num {
+  color: var(--gold-light);
+  opacity: 1;
+}
+
+/* 수치 행 (01번 카드 내부) */
+.p-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.p-stat-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.p-stat-n {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  line-height: 1;
+  white-space: nowrap;
+}
+.p-stat-l {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+/* ── STAT COMPARE ── */
+.stat-compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+.stat-compare-item {
+  text-align: center;
+}
+.stat-compare-item--ours .stat-compare-num {
+  color: var(--gold-light);
+}
+.stat-compare-item--ours .stat-compare-school {
+  color: var(--gold);
+}
+.stat-compare-mascot {
+  font-size: 2.4rem;
+  margin-bottom: 0.4rem;
+  line-height: 1;
+}
+.stat-compare-school {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.stat-compare-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 900;
+  color: rgba(255,255,255,0.3);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stat-compare-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+.stat-compare-divider {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+
+/* ── PROMISE SLIDER DOTS ── */
+.promise-slider-outer { position: relative; }
+
+.promise-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 1.5rem 0.5rem;
+}
+.promise-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+  padding: 0;
+}
+.promise-dot.active {
+  background: var(--gold);
+  transform: scale(1.4);
+}
+
+/* ── DETAIL BUTTON ── */
+.detail-btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e8c97e;
+  text-align: center;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.detail-btn:hover, .detail-btn:active {
+  background: rgba(201,168,76,0.22);
+  border-color: rgba(201,168,76,0.6);
+  transform: translateY(-1px);
+}
+
+/* ── SHARE GRID ── */
+.share-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform .15s, opacity .15s;
+}
+.share-btn:hover { transform: translateY(-2px); opacity: .9; }
+.share-btn:active { transform: translateY(0); }
+.share-kakao  { background: #FEE500; color: #191919; }
+.share-link   { background: rgba(255,255,255,0.13); color: #fff; }
+.share-twitter { background: #000; color: #fff; }
+.share-btn-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px;
+}
+.share-copied {
+  font-size: .75rem;
+  color: rgba(255,255,255,.45);
+  min-height: 1.2em;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ── FLOATING SHARE BUTTON ── */
+#floatShare {
+  position: fixed;
+  bottom: 28px; right: 24px;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1a0000;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+  z-index: 999;
+  transition: opacity .3s ease, transform .3s ease;
+}
+#floatShare:hover { transform: scale(1.08); }
+</style>
+</head>
+<body>
+
+<!-- ── FLOATING SHARE ── -->
+<button id="floatShare" onclick="sharePage()" aria-label="이 내용 공유하기">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+</button>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <a href="../../" class="site-header-back">← 메인으로</a>
+  <div class="site-header-center">
+    <a href="../../" class="site-header-name">이<span>호</span>엽</a>
+    <div class="site-header-divider"></div>
+    <div class="site-header-sub">고려대학교 공약</div>
+  </div>
+  <div class="site-header-badge">성북구의회 후보</div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+
+  <h1 class="hero-headline">
+    우리 얘기인데,<br>
+    <span class="gold">왜 우리가</span> 없었을까
+  </h1>
+  <p class="hero-sub">
+    우리의 문제는 우리가 해결해야 합니다.<br>
+    고려대, 그리고 이 지역 20대를 위해 싸우겠습니다.
+  </p>
+  <div class="scroll-arrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+</section>
+
+<!-- ── ZERO ── -->
+<section class="zero-section">
+  <div class="zero-big" id="zero-num" style="opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;">0명</div>
+  <p class="zero-label" id="zero-label" style="opacity:0;transform:translateY(20px);transition:opacity 0.8s 0.2s ease,transform 0.8s 0.2s ease;">
+    지금 성북구 구의회의 <strong>20대 구의원 수</strong>
+  </p>
+  <p class="zero-label" id="zero-label2" style="opacity:0;transform:translateY(20px);transition:opacity 0.8s 0.35s ease,transform 0.8s 0.35s ease;margin-top:0.5rem;">
+    성북구 구의원 22명 중 <strong>고려대 출신 구의원 수</strong>
+  </p>
+</section>
+
+<!-- ── WHY ── -->
+<section class="why-section" id="why">
+  <div class="tag-line reveal"><span>왜 20대 구의원이 필요한가</span></div>
+  <h2 class="big-heading reveal reveal-delay-1">
+    구의회에 우리의<br>목소리가 없었습니다
+  </h2>
+  <p class="body-text reveal reveal-delay-2">
+    지금까지 구의회는 20대 없이 돌아갔습니다.<br>
+    청년의 삶에 직접 영향을 미치는 결정들이, 청년 없이 내려졌습니다.
+  </p>
+
+  <div class="incident reveal reveal-delay-3">
+    <div class="incident-year">12년</div>
+    <div class="incident-label">결정적 사례</div>
+    <div class="incident-text">
+      2013년부터 추진된 개운산 기숙사,<br>지금도 표류 중입니다.
+    </div>
+    <p class="incident-body">
+      고려대는 개운산 부지에 1,100명 규모의 기숙사 신축을 추진했습니다.
+      <strong><em style="font-size:1.1rem">구의회와 구청의 반대</em></strong>로 12년째 허가가 나지 않았고, 지금도 진행 중인 현재의 문제입니다.
+    </p>
+  </div>
+</section>
+
+<!-- ── REALITY ── -->
+<section class="reality-section">
+  <div class="reality-inner">
+    <div class="stat-compare reveal">
+      <div class="stat-compare-item stat-compare-item--ours">
+        <div class="stat-compare-mascot">🐯</div>
+        <div class="stat-compare-school">고려대</div>
+        <div class="stat-compare-num">12.4%</div>
+        <div class="stat-compare-label">서울 15개 대학 중 <strong>최하위</strong></div>
+      </div>
+      <div class="stat-compare-divider">vs</div>
+      <div class="stat-compare-item">
+        <div class="stat-compare-mascot">🦅</div>
+        <div class="stat-compare-school">연세대</div>
+        <div class="stat-compare-num">35%</div>
+        <div class="stat-compare-label">고려대의 약 <strong>3배</strong></div>
+      </div>
+    </div>
+    <p style="font-size:11px; color:#555; margin-top:12px; margin-bottom:48px; text-align:center;">* 대학알리미 2025년 10월 공시자료 기준</p>
+
+    <div class="tag-line reveal"><span>기숙사 못 들어가면 현실은</span></div>
+    <div class="reality-grid">
+      <div class="reality-card reveal reveal-delay-1">
+        <span class="reality-icon">💸</span>
+        <div class="reality-title">월 74~75만원</div>
+        <p class="reality-desc">안암동 원룸 평균 월세 66만원 관리비까지 더하면 매달 75만원 전년 대비 9.8% 상승, 서울 대학가 3위.</p>
+      </div>
+      <div class="reality-card reveal reveal-delay-2">
+        <span class="reality-icon">🎲</span>
+        <div class="reality-title">지원해도<br>10명 중 3명은 탈락</div>
+        <p class="reality-desc">
+          <span style="opacity:.5">2022년 1.25대 1</span><br>
+          <span style="opacity:.75">2023년 1.37대 1</span><br>
+          <strong>2024년 1.42대 1</strong>
+        </p>
+      </div>
+      <div class="reality-card reveal reveal-delay-3">
+        <span class="reality-icon">🚌</span>
+        <div class="reality-title">왕복 2~3시간<br>장거리 통학</div>
+        <p class="reality-desc">주거비를 감당 못 하면 우린 하루 두세 시간을 통학에 씁니다.</p>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-text" id="quote-text">
+        "과거 70~80년대 학생들의 민주화 시위로 인해 주민들이 <em>최루탄 가스를 마시는 피해만 입었다"</em>
+      </div>
+      <div class="quote-source">— 성북구의원 발언 · 2016년 연합뉴스 권영전 기자 보도 인용</div>
+    </div>
+    <p class="body-text reveal" style="margin-top:1.5rem; text-align:center; font-size:clamp(1.05rem, 3.5vw, 1.35rem); white-space:nowrap;">
+      우리가 직접 구의회를 바꿔야 합니다.
+    </p>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ── PROMISE ── -->
+<section class="promise-section" id="promise">
+  <div class="promise-inner">
+    <div class="tag-line reveal"><span>4대 공약</span></div>
+    <h2 class="big-heading reveal reveal-delay-1">
+      제가 하겠다고<br>약속하는 것들
+    </h2>
+
+    <div class="promise-slider-outer">
+      <div class="promise-grid" id="promiseSlider">
+
+      <div class="promise-card promise-card--hero reveal reveal-delay-1">
+        <div class="p-num">01</div>
+        <div class="p-title">개운산 기숙사,<br>이번엔 직접 뚫겠습니다</div>
+        <p class="p-desc">
+          2014년 성북구의회가 기숙사 건립 철회 결의안을 채택했습니다.<br>
+          그 사이 안암동 월세는 66만원이 됐습니다.<br><br>
+          부지는 지금도 고려대 소유입니다.<br>
+          막고 있는 건 성북구청 허가 하나뿐입니다.
+        </p>
+        <div class="p-stats">
+          <div class="p-stat-item">
+            <span class="p-stat-n">10.8%</span>
+            <span class="p-stat-l">기숙사 수용률 서울 최하위</span>
+          </div>
+          <div class="p-stat-item">
+            <span class="p-stat-n">12년</span>
+            <span class="p-stat-l">부지만 있고 착공 못 한 기간</span>
+          </div>
+        </div>
+        <button class="detail-btn" onclick="location.href='./gaewunsan/'">자세히 보기 →</button>
+      </div>
+
+      <div class="promise-card reveal reveal-delay-2">
+        <div class="p-num">02</div>
+        <div class="p-title">성북구가 학생 발이 되어야 합니다</div>
+        <p class="p-desc">버스도 학교가 알아서 셔틀 만들어 굴립니다. 그 셔틀조차 주말엔 없습니다. 자정 넘으면 귀가 수단은 택시뿐입니다.<br><br>안암동 마을버스 신설을 구청에 직접 건의하겠습니다.</p>
+      </div>
+
+      <div class="promise-card reveal reveal-delay-3">
+        <div class="p-num">03</div>
+        <div class="p-title">조심하는 건<br>내 몫이 아닙니다</div>
+        <p class="p-desc">카카오맵 켜고, 위치 공유하고, 이어폰 빼고 — 이게 매일 밤 귀갓길 루틴이 되어선 안 됩니다.<br><br>방범 인프라 실태를 행정감사로 공식 기록하고, CCTV·비상벨 취약 구간 정비 예산을 건의하겠습니다.</p>
+      </div>
+
+      <div class="promise-card reveal reveal-delay-4">
+        <div class="p-num">04</div>
+        <div class="p-title">성북구가 우리에게<br>돌려줄 차례입니다</div>
+        <p class="p-desc">7년간 189개 팀이 이 동네에서 창업했고, 투자유치 837억이 이 동네에서 나왔습니다. 그런데 성북구가 학생들에게 돌려준 것은 사실상 없습니다.<br><br>캠퍼스타운 기업 정착 인센티브와 총학↔구청 정례 협의체 구성을 건의하겠습니다.</p>
+      </div>
+
+      <div class="promise-card reveal reveal-delay-4">
+        <div class="p-num">05</div>
+        <div class="p-title">음식물 쓰레기봉투,<br>혼자 살면 너무 큽니다</div>
+        <p class="p-desc">1인 가구에게 기존 봉투는 버리기도 전에 냄새가 납니다. 송파구가 이미 시범 운영 중인 0.6리터 소형 음식물 쓰레기봉투를 성북구에 도입하겠습니다.<br><br>안암·보문·동선동은 서울에서 1인 가구 비율이 가장 높은 동네 중 하나입니다. 작은 봉투 하나가 매일의 불편을 바꿉니다.</p>
+      </div>
+
+    </div><!-- /.promise-grid -->
+
+      <div class="promise-dots" id="promiseDots">
+        <button class="promise-dot active" data-idx="0"></button>
+        <button class="promise-dot" data-idx="1"></button>
+        <button class="promise-dot" data-idx="2"></button>
+        <button class="promise-dot" data-idx="3"></button>
+        <button class="promise-dot" data-idx="4"></button>
+      </div>
+    </div><!-- /.promise-slider-outer -->
+
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<hr class="section-divider">
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="tag-line reveal" style="font-size:clamp(16px,3vw,24px);"><span style="font-size:inherit; letter-spacing:-.01em; text-transform:none;">이호엽은 누구인가</span></div>
+    <h2 class="big-heading reveal reveal-delay-1">
+      성북구에서 살고,<br>성북구를 바꾸려 합니다
+    </h2>
+
+    <div class="about-top reveal reveal-delay-2">
+      <!-- 사진: 아래 img 태그 주석 해제 후 src에 사진 경로 입력 -->
+      <div class="photo-wrap">
+        <img src="../../assets/images/photo.jpg" alt="이호엽">
+      </div>
+
+      <div class="about-info">
+        <div class="party-badge">개혁신당</div>
+
+        <div class="profile-grid">
+          <div>
+            <div class="profile-item-label">나이</div>
+            <div class="profile-item-value">만 29세</div>
+          </div>
+          <div>
+            <div class="profile-item-label">학교</div>
+            <div class="profile-item-value">고려대학교</div>
+          </div>
+          <div>
+            <div class="profile-item-label">전공</div>
+            <div class="profile-item-value">경영학과</div>
+          </div>
+          <div>
+            <div class="profile-item-label">지역구</div>
+            <div class="profile-item-value">성북구</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="profile-item-label" style="margin-bottom:0.6rem;">당직</div>
+          <div class="position-list">
+            <div class="position-item">개혁신당 성북구 지역발전특위원회 부위원장</div>
+            <div class="position-item">개혁신당 서울시당 대변인</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="honest-box reveal">
+      <p>
+        화려한 스펙은 없습니다.<br>
+        <strong>공부 열심히 했고, 한 번 창업해봤고, 실패도 해봤습니다.</strong><br>
+        그게 전부예요. 그런데 그게 여러분과 제일 비슷한 사람이라는 뜻이기도 합니다.
+      </p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">고려대학교 경영학과 재학</div>
+          <div class="timeline-desc">성북구에서 살며 기숙사 부족, 높은 월세, 지역 인프라 부재를 직접 경험했습니다.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">캠퍼스타운 스타트업 창업</div>
+          <div class="timeline-desc">고려대 캠퍼스타운 프로그램을 통해 창업을 경험했습니다. 지역과 대학이 얼마나 단절되어 있는지 몸으로 배웠습니다.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">성북구 구의원 출마</div>
+          <div class="timeline-desc">20대가 한 명도 없는 구의회를 바꾸기 위해 직접 출마를 결심했습니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MATH ── -->
+<section class="math-section">
+  <div class="math-inner">
+    <div class="tag-line reveal" style="font-size:clamp(16px,3vw,24px);"><span style="font-size:inherit; letter-spacing:-.01em; text-transform:none;">기호4번으로 어떻게 당선되냐고 ??</span></div>
+    <h2 class="big-heading reveal reveal-delay-1">
+      숫자로 보면<br>이미 답이 나옵니다
+    </h2>
+
+    <div class="math-equation">
+      <div class="math-row">
+        <div class="math-op">—</div>
+        <div class="math-content">
+          <div class="math-num">5,485</div>
+          <div class="math-label">2022년 성북구 가선거구 당선에 필요했던 표 수.<br><strong>이 숫자면 구의회에 들어갑니다.</strong></div>
+        </div>
+      </div>
+      <div class="math-row">
+        <div class="math-op">vs</div>
+        <div class="math-content">
+          <div class="math-num">14,000+</div>
+          <div class="math-label">안암·보문·동선동 일대에 거주하는<br><strong>고려대 재학생 추산 인원</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="math-result">
+      <div class="math-result-inner">
+        <div class="math-result-label">당선 가능성</div>
+        <div class="math-result-text">
+          3인 선거구는 3등,<br>5인선거구는 5등만 하면 됩니다.<br>
+          이제 <em>우리가 직접 들어갈 차례</em>입니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING ── -->
+<section class="closing-section">
+  <div class="closing-inner">
+    <h2 class="closing-headline reveal">
+      여러분이 저를 찍어야<br>
+      <span class="gold">제가 일할 수 있습니다</span>
+    </h2>
+
+    <div class="reveal reveal-delay-1" style="display:inline-block; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:24px 48px; text-align:center; margin:24px 0;">
+      <span style="font-size:14px; color:#888; letter-spacing:.2em; display:block; margin-bottom:6px;">기호</span>
+      <span style="font-size:clamp(48px,12vw,96px); font-weight:900; color:#FF5200; line-height:1; display:block;">4번</span>
+      <span style="font-size:clamp(32px,8vw,64px); font-weight:900; color:#fff; line-height:1.1; display:block;">이호엽</span>
+    </div>
+
+    <p class="closing-body reveal reveal-delay-2">
+      구의회 안에 20대가 없으면,<br>20대를 위한 정책도 없습니다.<br>
+      한 표가 구의회를 바꿉니다.
+    </p>
+
+    <div class="reveal reveal-delay-3" id="inlineShareWrap" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+      <div class="share-grid">
+        <button class="share-btn share-kakao" onclick="shareKakao()">
+          <span class="share-btn-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.03 2 2 5.36 2 9.51c0 2.57 1.68 4.83 4.23 6.12l-1.08 4.02 4.72-3.1c.37.05.74.07 1.13.07 4.97 0 9-3.36 9-7.51S15.97 2 11 2z" fill="#191919"/></svg></span>
+          카카오톡으로 공유
+        </button>
+        <button class="share-btn share-link" onclick="copyLink()">
+          <span class="share-btn-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none"><path d="M9 13a4.5 4.5 0 006.36.07l2-2a4.5 4.5 0 00-6.37-6.36L9.87 5.83" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 9a4.5 4.5 0 00-6.36-.07l-2 2a4.5 4.5 0 006.37 6.36L12.13 16.17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          링크 복사
+        </button>
+        <button class="share-btn share-twitter" onclick="shareTwitter()">
+          <span class="share-btn-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M3 3l5.5 7.5L3 17h2l4.5-5.5L14 17h3l-5.8-7.8L17 3h-2l-4.2 5.1L6 3H3z" fill="currentColor"/></svg></span>
+          X(트위터) 공유
+        </button>
+      </div>
+      <p class="share-copied" id="copy-msg" aria-live="polite"></p>
+      <a href="../../" style="font-size:0.95rem; font-weight:600; padding:13px 36px; border-radius:100px; border:1px solid rgba(255,255,255,0.3); color:#fff; text-decoration:none; letter-spacing:.02em;">
+        ← 메인으로
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BACK TO MAIN -->
+<div style="background: var(--dark2); border-top: 1px solid rgba(255,255,255,0.06); padding: 48px 40px; text-align: center;">
+  <a href="../../" style="display:inline-flex; align-items:center; gap:10px; background:var(--crimson); color:white; font-size:15px; font-weight:700; padding:16px 32px; border-radius:100px; text-decoration:none; letter-spacing:-0.02em; transition:transform 0.2s, box-shadow 0.2s;"
+    onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(139,0,0,0.4)'"
+    onmouseout="this.style.transform='';this.style.boxShadow=''">
+    ← 이호엽 메인으로 돌아가기
+  </a>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">이<span>호</span>엽</div>
+        <div class="footer-tagline">성북구의회 가선거구 후보<br>고려대학교 공약</div>
+      </div>
+      <div class="footer-info">2026 지방선거<br>성북구의회 가선거구</div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 이호엽. 직접 만들었고, 직접 지킵니다.</span>
+      <span class="footer-yellow">이호엽이 바꿉니다</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const mathRows = document.querySelectorAll('.math-row, .math-result');
+const mathObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      mathObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+mathRows.forEach(el => mathObserver.observe(el));
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const zeroNum = document.getElementById('zero-num');
+const zeroLabel = document.getElementById('zero-label');
+const zeroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      zeroNum.style.opacity = '1';
+      zeroNum.style.transform = 'translateY(0)';
+      zeroLabel.style.opacity = '1';
+      zeroLabel.style.transform = 'translateY(0)';
+      const zeroLabel2 = document.getElementById('zero-label2');
+      if (zeroLabel2) {
+        zeroLabel2.style.opacity = '1';
+        zeroLabel2.style.transform = 'translateY(0)';
+      }
+      zeroObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+zeroObserver.observe(zeroNum);
+
+const zeroNum2 = document.getElementById('zero-num2');
+const zeroLabel2 = document.getElementById('zero-label2');
+if (zeroNum2) {
+  const zeroObserver2 = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        zeroNum2.style.opacity = '1';
+        zeroNum2.style.transform = 'translateY(0)';
+        zeroLabel2.style.opacity = '1';
+        zeroLabel2.style.transform = 'translateY(0)';
+        zeroObserver2.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  zeroObserver2.observe(zeroNum2);
+}
+
+const quoteText = document.getElementById('quote-text');
+if (quoteText) {
+  const quoteObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        quoteText.classList.add('visible');
+        quoteObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  quoteObserver.observe(quoteText);
+}
+/* slider drag */
+const slider = document.getElementById('promiseSlider');
+const dots = document.querySelectorAll('.promise-dot');
+
+if (slider) {
+  /* 드래그 */
+  let isDown = false, hasDragged = false, startX, scrollLeft;
+  slider.addEventListener('mousedown', e => {
+    if (e.target.closest('a')) return; // 링크 클릭은 드래그 무시
+    isDown = true;
+    hasDragged = false;
+    slider.classList.add('is-dragging');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('is-dragging'); });
+  slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('is-dragging'); });
+  slider.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    if (Math.abs(x - startX) > 5) {
+      hasDragged = true;
+      slider.scrollLeft = scrollLeft - (x - startX) * 1.2;
+    }
+  });
+  slider.addEventListener('click', e => {
+    if (hasDragged && !e.target.closest('a')) e.preventDefault();
+    hasDragged = false;
+  }, true);
+
+  /* dot 클릭 → 해당 카드로 스크롤 */
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = +dot.dataset.idx;
+      const cards = slider.querySelectorAll('.promise-card');
+      if (cards[idx]) {
+        slider.scrollTo({ left: cards[idx].offsetLeft - 24, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* 스크롤 → dot sync */
+  slider.addEventListener('scroll', () => {
+    const cards = slider.querySelectorAll('.promise-card');
+    let closest = 0, minDist = Infinity;
+    cards.forEach((card, i) => {
+      const dist = Math.abs(card.offsetLeft - slider.scrollLeft - 24);
+      if (dist < minDist) { minDist = dist; closest = i; }
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+  }, { passive: true });
+}
+
+function sharePage() {
+  if (navigator.share) {
+    navigator.share({
+      title: '고려대 기숙사, 12년째 표류 중 — 이호엽',
+      text: '구의회가 12년간 막아온 고려대 기숙사. 우리가 직접 구의회를 바꿔야 합니다.',
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('링크가 복사되었습니다.');
+    });
+  }
+}
+
+function shareKakao() {
+  if (window.Kakao && window.Kakao.Share) {
+    window.Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '고려대 기숙사, 12년째 표류 중 — 이호엽',
+        description: '구의회가 12년간 막아온 고려대 기숙사. 우리가 직접 구의회를 바꿔야 합니다.',
+        link: { mobileWebUrl: location.href, webUrl: location.href }
+      }
+    });
+  } else {
+    copyLink();
+  }
+}
+
+function copyLink() {
+  var msg = document.getElementById('copy-msg');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(location.href).then(function () {
+      msg.textContent = '✓ 링크가 복사됐습니다.';
+      setTimeout(function () { msg.textContent = ''; }, 2800);
+    });
+  } else {
+    var el = document.createElement('textarea');
+    el.value = location.href;
+    el.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    msg.textContent = '✓ 링크가 복사됐습니다.';
+    setTimeout(function () { msg.textContent = ''; }, 2800);
+  }
+}
+
+function shareTwitter() {
+  var text = '구의회가 12년간 막아온 고려대 기숙사. 우리가 직접 구의회를 바꿔야 합니다.';
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(location.href), '_blank', 'width=560,height=420');
+}
+</script>
+</body>
+</html>

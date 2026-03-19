@@ -1,0 +1,272 @@
+<!--
+  ══════════════════════════════════════════════════
+  SNIPPET: 이호엽은 누구인가 (About Section)
+  출처: /universities/korea/index.html
+  용도: 다른 대학 페이지에 붙여넣기용
+  주의: 아래 CSS 변수들이 페이지에 선언되어 있어야 함
+        --dark2, --crimson, --gold, --text-body, --text-muted
+  ══════════════════════════════════════════════════
+-->
+
+<!-- ── CSS ── -->
+<style>
+/* ── ABOUT SECTION ── */
+.about-section {
+  background: var(--dark2);
+  padding: clamp(4rem, 10vw, 7rem) 1.5rem;
+  position: relative;
+}
+.about-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255,107,0,0.045) 0%, transparent 70%);
+  pointer-events: none;
+}
+.about-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.about-top {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin: 2rem 0;
+}
+@media (max-width: 540px) {
+  .about-top { grid-template-columns: 1fr; }
+  .photo-wrap { margin: 0 auto; }
+}
+.photo-wrap {
+  width: 220px;
+  height: 275px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.photo-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.about-info { display: flex; flex-direction: column; gap: 1.25rem; }
+.party-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 107, 0, 0.18);
+  border: 1px solid rgba(255, 107, 0, 0.45);
+  border-radius: 4px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ff9a5c;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+.party-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff6b00;
+  box-shadow: 0 0 6px rgba(255,107,0,0.7);
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+@media (max-width: 380px) {
+  .profile-grid { grid-template-columns: 1fr; }
+}
+.profile-item-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.profile-item-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+}
+.position-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+.position-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+.position-item::before {
+  content: '';
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 107, 0, 0.7);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+.honest-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 1.75rem 2rem;
+  margin: 2rem 0;
+}
+.honest-box p {
+  font-size: 1rem;
+  color: var(--text-body);
+  line-height: 1.9;
+}
+.honest-box strong { color: #fff; font-weight: 700; }
+.timeline {
+  margin: 2rem 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.timeline-item {
+  display: flex;
+  gap: 1.25rem;
+}
+.timeline-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28px;
+  flex-shrink: 0;
+}
+.timeline-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--crimson);
+  border: 2px solid var(--gold);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.timeline-line {
+  width: 1px; flex: 1;
+  background: rgba(139,0,0,0.3);
+  margin: 4px 0;
+  min-height: 1.5rem;
+}
+.timeline-item:last-child .timeline-line { display: none; }
+.timeline-content { padding-bottom: 2rem; }
+.timeline-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+.timeline-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+</style>
+
+<!-- ── HTML ── -->
+<hr class="section-divider">
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="tag-line reveal" style="font-size:clamp(16px,3vw,24px);"><span style="font-size:inherit; letter-spacing:-.01em; text-transform:none;">이호엽은 누구인가</span></div>
+    <h2 class="big-heading reveal reveal-delay-1">
+      성북구에서 살고,<br>성북구를 바꾸려 합니다
+    </h2>
+
+    <div class="about-top reveal reveal-delay-2">
+      <div class="photo-wrap">
+        <img src="../../assets/images/photo.jpg" alt="이호엽">
+      </div>
+
+      <div class="about-info">
+        <div class="party-badge">개혁신당</div>
+
+        <div class="profile-grid">
+          <div>
+            <div class="profile-item-label">나이</div>
+            <div class="profile-item-value">만 29세</div>
+          </div>
+          <div>
+            <div class="profile-item-label">학교</div>
+            <div class="profile-item-value">고려대학교</div>  <!-- 학교별로 수정 -->
+          </div>
+          <div>
+            <div class="profile-item-label">전공</div>
+            <div class="profile-item-value">경영학과</div>
+          </div>
+          <div>
+            <div class="profile-item-label">지역구</div>
+            <div class="profile-item-value">성북구</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="profile-item-label" style="margin-bottom:0.6rem;">당직</div>
+          <div class="position-list">
+            <div class="position-item">개혁신당 성북구 지역발전특위원회 부위원장</div>
+            <div class="position-item">개혁신당 서울시당 대변인</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="honest-box reveal">
+      <p>
+        화려한 스펙은 없습니다.<br>
+        <strong>공부 열심히 했고, 한 번 창업해봤고, 실패도 해봤습니다.</strong><br>
+        그게 전부예요. 그런데 그게 여러분과 제일 비슷한 사람이라는 뜻이기도 합니다.
+      </p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">고려대학교 경영학과 재학</div>  <!-- 학교별로 수정 -->
+          <div class="timeline-desc">성북구에서 살며 기숙사 부족, 높은 월세, 지역 인프라 부재를 직접 경험했습니다.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">캠퍼스타운 스타트업 창업</div>
+          <div class="timeline-desc">고려대 캠퍼스타운 프로그램을 통해 창업을 경험했습니다. 지역과 대학이 얼마나 단절되어 있는지 몸으로 배웠습니다.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">성북구 구의원 출마</div>
+          <div class="timeline-desc">20대가 한 명도 없는 구의회를 바꾸기 위해 직접 출마를 결심했습니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
