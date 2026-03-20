@@ -73,17 +73,9 @@
 </div>
 <div class="share-wrap">
   <div class="share-grid">
-    <button class="share-btn share-kakao" onclick="shareKakao()">
-      <span class="share-btn-icon"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.03 2 2 5.36 2 9.51c0 2.57 1.68 4.83 4.23 6.12l-1.08 4.02 4.72-3.1c.37.05.74.07 1.13.07 4.97 0 9-3.36 9-7.51S15.97 2 11 2z" fill="#191919"/></svg></span>
-      카카오톡으로 공유
-    </button>
-    <button class="share-btn share-link" onclick="copyLink()">
-      <span class="share-btn-icon"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M9 13a4.5 4.5 0 006.36.07l2-2a4.5 4.5 0 00-6.37-6.36L9.87 5.83" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 9a4.5 4.5 0 00-6.36-.07l-2 2a4.5 4.5 0 006.37 6.36L12.13 16.17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-      링크 복사
-    </button>
-    <button class="share-btn share-twitter" onclick="shareTwitter()">
-      <span class="share-btn-icon"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M3 3l5.5 7.5L3 17h2l4.5-5.5L14 17h3l-5.8-7.8L17 3h-2l-4.2 5.1L6 3H3z" fill="currentColor"/></svg></span>
-      X(트위터) 공유
+    <button class="share-btn share-kakao" onclick="sharePage()">
+      <span class="share-btn-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.03 2 2 5.36 2 9.51c0 2.57 1.68 4.83 4.23 6.12l-1.08 4.02 4.72-3.1c.37.05.74.07 1.13.07 4.97 0 9-3.36 9-7.51S15.97 2 11 2z" fill="#191919"/></svg></span>
+      공유하기
     </button>
   </div>
   <p class="share-copied" id="copy-msg" aria-live="polite"></p>
@@ -92,50 +84,22 @@
 function sharePage() {
   if (navigator.share) {
     navigator.share({
-      title: '한성대학교 공약 — 이호엽',
-      text: '2026 성북구의회 후보 이호엽의 한성대학교 공약을 확인해보세요.',
+      title: '이호엽 — 한성대학교 공약',
+      text: '구의회 안에 20대가 없으면, 20대를 위한 정책도 없습니다.',
       url: window.location.href
     });
   } else {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      alert('링크가 복사되었습니다.');
-    });
-  }
-}
-
-function shareKakao() {
-  if (window.Kakao && window.Kakao.Share) {
-    window.Kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
-        title: '한성대학교 공약 — 이호엽',
-        description: '2026 성북구의회 후보 이호엽의 한성대학교 공약을 확인해보세요.',
-        link: { mobileWebUrl: location.href, webUrl: location.href }
+    var isKakao = /KAKAOTALK/i.test(navigator.userAgent);
+    navigator.clipboard.writeText(window.location.href).then(function () {
+      var msg = document.getElementById('copy-msg');
+      if (isKakao) {
+        msg.textContent = '✓ 링크가 복사됐습니다. 카카오톡 채팅창에 붙여넣기 해서 공유하세요.';
+      } else {
+        msg.textContent = '✓ 링크가 복사됐습니다.';
       }
+      setTimeout(function () { msg.textContent = ''; }, 3500);
     });
-  } else { copyLink(); }
-}
-
-function copyLink() {
-  var msg = document.getElementById('copy-msg');
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(location.href).then(function () {
-      msg.textContent = '✓ 링크가 복사됐습니다.';
-      setTimeout(function () { msg.textContent = ''; }, 2800);
-    });
-  } else {
-    var el = document.createElement('textarea');
-    el.value = location.href;
-    el.style.cssText = 'position:fixed;opacity:0';
-    document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
-    msg.textContent = '✓ 링크가 복사됐습니다.';
-    setTimeout(function () { msg.textContent = ''; }, 2800);
   }
-}
-
-function shareTwitter() {
-  var text = '2026 성북구의회 후보 이호엽의 한성대학교 공약을 확인해보세요.';
-  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(location.href), '_blank', 'width=560,height=420');
 }
 </script>
 
