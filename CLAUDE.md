@@ -14,9 +14,9 @@
 - 구조 순서: hero → stats-strip → 문제 실태 → 타 사례 → 실행 공약 → slogan
 - 새 페이지 추가 시 반드시 bus/index.html을 구조 레퍼런스로 삼을 것
 
-### 2. 대학별 공약 `/universities/korea/`, `/universities/sungshin/`, `/universities/hansung/`
+### 2. 대학별 공약 `/ku/`, `/sungshin/`, `/hansung/`
 - 대상: 각 대학 재학생
-- 레퍼런스: `/universities/korea/index.html`
+- 레퍼런스: `/ku/index.html`
 - 테마 컬러: 학교별로 다름
   - 고려대: #981E32 (크림슨)
   - 성신여대: #6A3FA0 (보라/수정)

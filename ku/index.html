@@ -1230,9 +1230,9 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
 
 <!-- ── HEADER ── -->
 <header class="site-header">
-  <a href="../../" class="site-header-back">← 메인으로</a>
+  <a href="../" class="site-header-back">← 메인으로</a>
   <div class="site-header-center">
-    <a href="../../" class="site-header-name">이<span>호</span>엽</a>
+    <a href="../" class="site-header-name">이<span>호</span>엽</a>
     <div class="site-header-divider"></div>
     <div class="site-header-sub">고려대학교 공약</div>
   </div>
@@ -1432,7 +1432,10 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
     <div class="about-top reveal reveal-delay-2">
       <!-- 사진: 아래 img 태그 주석 해제 후 src에 사진 경로 입력 -->
       <div class="photo-wrap">
-        <img src="../../assets/images/photo.jpg" alt="이호엽">
+        <picture>
+          <source srcset="../assets/images/photo.webp" type="image/webp">
+          <img src="../assets/images/photo.jpg" alt="이호엽">
+        </picture>
       </div>
 
       <div class="about-info">
@@ -1582,7 +1585,7 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
         </button>
       </div>
       <p class="share-copied" id="copy-msg" aria-live="polite"></p>
-      <a href="../../" style="font-size:0.95rem; font-weight:600; padding:13px 36px; border-radius:100px; border:1px solid rgba(255,255,255,0.3); color:#fff; text-decoration:none; letter-spacing:.02em;">
+      <a href="../" style="font-size:0.95rem; font-weight:600; padding:13px 36px; border-radius:100px; border:1px solid rgba(255,255,255,0.3); color:#fff; text-decoration:none; letter-spacing:.02em;">
         ← 메인으로
       </a>
     </div>
@@ -1591,7 +1594,7 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
 
 <!-- BACK TO MAIN -->
 <div style="background: var(--dark2); border-top: 1px solid rgba(255,255,255,0.06); padding: 48px 40px; text-align: center;">
-  <a href="../../" style="display:inline-flex; align-items:center; gap:10px; background:var(--crimson); color:white; font-size:15px; font-weight:700; padding:16px 32px; border-radius:100px; text-decoration:none; letter-spacing:-0.02em; transition:transform 0.2s, box-shadow 0.2s;"
+  <a href="../" style="display:inline-flex; align-items:center; gap:10px; background:var(--crimson); color:white; font-size:15px; font-weight:700; padding:16px 32px; border-radius:100px; text-decoration:none; letter-spacing:-0.02em; transition:transform 0.2s, box-shadow 0.2s;"
     onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(139,0,0,0.4)'"
     onmouseout="this.style.transform='';this.style.boxShadow=''">
     ← 이호엽 메인으로 돌아가기
