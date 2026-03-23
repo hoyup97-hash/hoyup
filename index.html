@@ -1123,6 +1123,40 @@
   .footer-yellow { color: #FF6B00; }
 
   /* University pledge cards */
+  /* Pinpoint Cards */
+  .pinpoint-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 1024px) { .pinpoint-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px)  { .pinpoint-row { grid-template-columns: repeat(2, 1fr); } }
+
+  .pinpoint-card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px 20px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+    position: relative; overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .pinpoint-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background: var(--orange); transform: scaleX(0); transform-origin: left;
+    transition: transform .35s cubic-bezier(.76,0,.24,1);
+  }
+  .pinpoint-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.1); }
+  .pinpoint-card:hover::after { transform: scaleX(1); }
+  .pinpoint-icon { font-size: 32px; line-height: 1; }
+  .pinpoint-title { font-size: 15px; font-weight: 800; letter-spacing: -.02em; line-height: 1.3; }
+  .pinpoint-desc { font-size: 12px; color: var(--gray); line-height: 1.7; flex: 1; }
+  .pinpoint-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--orange); background: rgba(255,82,0,0.10);
+    padding: 3px 10px; border-radius: 40px; margin-top: auto;
+  }
+
   .univ-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
   @media (max-width: 700px) { .univ-row { grid-template-columns: repeat(3,1fr); gap: 8px; } }
 
@@ -1281,6 +1315,7 @@
   .reveal-d2 { transition-delay: .14s; }
   .reveal-d3 { transition-delay: .21s; }
   .reveal-d4 { transition-delay: .28s; }
+  .reveal-d5 { transition-delay: .35s; }
 
   /* ── FLOATING SHARE ── */
   #floatShare {
@@ -1298,6 +1333,81 @@
     transition: transform .2s ease;
   }
   #floatShare:hover { transform: scale(1.08); }
+
+  /* ── 핀포인트 모달 ── */
+  .pinpoint-card { cursor: pointer; }
+  .pp-more {
+    font-size: 11px; font-weight: 700; color: var(--orange);
+    letter-spacing: .04em; margin-top: 4px;
+  }
+
+  .pp-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .pp-overlay.open { opacity: 1; pointer-events: all; }
+
+  .pp-modal {
+    background: white; border-radius: 20px;
+    border-top: 4px solid var(--orange);
+    max-width: 480px; width: 100%;
+    max-height: 85svh; overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    transform: translateY(16px) scale(0.97);
+    transition: transform .28s cubic-bezier(.22,1,.36,1);
+    position: relative;
+  }
+  .pp-overlay.open .pp-modal { transform: translateY(0) scale(1); }
+
+  .pp-modal-header {
+    padding: 28px 28px 0;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  }
+  .pp-modal-icon { font-size: 36px; line-height: 1; flex-shrink: 0; }
+  .pp-modal-close {
+    background: none; border: none; cursor: pointer;
+    color: #aaa; padding: 4px; line-height: 1;
+    transition: color .15s;
+    flex-shrink: 0;
+  }
+  .pp-modal-close:hover { color: #333; }
+  .pp-modal-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--orange); background: rgba(255,82,0,0.10);
+    padding: 3px 10px; border-radius: 40px;
+    display: inline-block; margin: 14px 0 8px;
+  }
+  .pp-modal-title {
+    font-size: clamp(18px, 4vw, 22px); font-weight: 800;
+    letter-spacing: -.02em; line-height: 1.3;
+    color: #1C1C1C;
+  }
+  .pp-modal-body { padding: 16px 28px 32px; }
+  .pp-modal-desc {
+    font-size: 14px; color: #555; line-height: 1.85;
+    word-break: keep-all;
+  }
+  .pp-modal-items {
+    margin-top: 20px; display: flex; flex-direction: column; gap: 14px;
+    padding-top: 20px; border-top: 1px solid #f0f0f0;
+  }
+  .pp-modal-item { display: flex; gap: 12px; }
+  .pp-modal-item-num {
+    font-size: 10px; font-weight: 800; letter-spacing: .14em;
+    color: var(--orange); flex-shrink: 0; margin-top: 2px; width: 16px;
+  }
+  .pp-modal-item-title {
+    font-size: 14px; font-weight: 700; color: #1C1C1C;
+    line-height: 1.4; margin-bottom: 3px; word-break: keep-all;
+  }
+  .pp-modal-item-desc {
+    font-size: 12px; color: #888; line-height: 1.7; word-break: keep-all;
+  }
 </style>
 </head>
 <body>
@@ -1460,17 +1570,60 @@
     </div>
   </div>
 
+  <!-- Pinpoint Pledges -->
+  <div class="section-header reveal" style="margin-top:20px;">
+    <div class="sec-title">📌 핀포인트 공약!</div>
+    <div class="sec-tag">Pinpoint</div>
+  </div>
+  <div class="pinpoint-row">
+    <div class="pinpoint-card reveal reveal-d1" data-pp="0">
+      <div class="pinpoint-icon">🗑️</div>
+      <div class="pinpoint-title">쓰레기 불법투기 근절</div>
+      <div class="pinpoint-desc">골목 무인단속 카메라 확대 설치 + 과태료 집행 실질화로 주민 생활환경 개선</div>
+      <span class="pinpoint-badge">생활환경</span>
+      <span class="pp-more">자세히 보기 →</span>
+    </div>
+    <div class="pinpoint-card reveal reveal-d2" data-pp="1">
+      <div class="pinpoint-icon">🗑️</div>
+      <div class="pinpoint-title">0.6리터 음식물봉투 도입</div>
+      <div class="pinpoint-desc">1인 가구엔 1리터 봉투가 너무 큽니다. 송파구가 전국 최초 도입 — 성북구도 조례로 추진합니다</div>
+      <span class="pinpoint-badge">1인 가구</span>
+      <span class="pp-more">자세히 보기 →</span>
+    </div>
+    <div class="pinpoint-card reveal reveal-d3" data-pp="2">
+      <div class="pinpoint-icon">🅿️</div>
+      <div class="pinpoint-title">주차 공유 프로그램</div>
+      <div class="pinpoint-desc">낮 시간 비어있는 공공·민간 주차장을 주민에게 개방, 주차난 실질 해소</div>
+      <span class="pinpoint-badge">교통·주거</span>
+      <span class="pp-more">자세히 보기 →</span>
+    </div>
+    <div class="pinpoint-card reveal reveal-d4" data-pp="3">
+      <div class="pinpoint-icon">🏥</div>
+      <div class="pinpoint-title">야간·공휴일 병원 알림</div>
+      <div class="pinpoint-desc">지금 여는 근처 병원·약국 실시간 안내 앱 — 아플 때 헤매지 않아도 되는 성북구</div>
+      <span class="pinpoint-badge">의료 접근성</span>
+      <span class="pp-more">자세히 보기 →</span>
+    </div>
+    <div class="pinpoint-card reveal reveal-d5" data-pp="4">
+      <div class="pinpoint-icon">🌳</div>
+      <div class="pinpoint-title">성북천 야간 산책로 정비</div>
+      <div class="pinpoint-desc">조명·안전난간·벤치 전면 개선으로 저녁에도 편하게 걸을 수 있는 성북천</div>
+      <span class="pinpoint-badge">환경·여가</span>
+      <span class="pp-more">자세히 보기 →</span>
+    </div>
+  </div>
+
   <!-- University Pledges -->
   <div class="section-header reveal" style="margin-top:20px;">
     <div class="sec-title">대학별 공약</div>
     <div class="sec-tag">University</div>
   </div>
   <div class="univ-row">
-    <div class="univ-card univ-card-locked reveal reveal-d1" data-overlay="공개 예정입니다">
+    <a class="univ-card reveal reveal-d1" href="./ku/">
       <img class="univ-logo" src="./assets/logos/korea_univ_logo.svg" alt="고려대학교 로고">
       <div class="univ-name">고려대학교</div>
       <div class="univ-arrow">공약 보기 →</div>
-    </div>
+    </a>
     <div class="univ-card univ-card-locked reveal reveal-d2" data-overlay="공개 예정입니다">
       <img class="univ-logo" src="./assets/logos/sungshin_logo.png" alt="성신여자대학교 로고">
       <div class="univ-name">성신여자대학교</div>
@@ -1606,6 +1759,16 @@
   </div>
   <div class="card yt-section reveal">
     <div class="yt-grid">
+      <a class="yt-item" href="https://www.youtube.com/live/MooVFvd9D-o?si=ZlADBz6iepVtxtOb" target="_blank">
+        <div class="yt-thumb-wrap">
+          <img class="yt-thumb" src="https://img.youtube.com/vi/MooVFvd9D-o/maxresdefault.jpg" alt="철근소 출연 영상">
+          <div class="yt-play"><svg width="36" height="36" viewBox="0 0 36 36"><rect width="36" height="36" rx="8" fill="#FF0000"/><polygon points="14,10 28,18 14,26" fill="white"/></svg></div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-title">김철근이 소개하는 사람 | 철근소 이호엽 성북구의원(가) 예비 후보</div>
+          <div class="yt-meta">2026.03.23</div>
+        </div>
+      </a>
       <a class="yt-item" href="https://www.youtube.com/live/AwjFY_ltWQk?t=1053" target="_blank">
         <div class="yt-thumb-wrap">
           <img class="yt-thumb" src="https://img.youtube.com/vi/AwjFY_ltWQk/maxresdefault.jpg" alt="유튜브 출연 영상">
@@ -1736,12 +1899,13 @@
             <div class="sched-tl-time">14:00</div>
             <div class="sched-tl-title"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:3px;flex-shrink:0"><rect width="14" height="10" rx="2.5" fill="#FF0000"/><polygon points="5.5,2.5 10,5 5.5,7.5" fill="white"/></svg>철근소 출연</div>
           </div>
-          <div class="sched-tl-item">
+          <div class="sched-tl-item tl-now">
             <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">18:00 (예정)</div>
+            <div class="sched-tl-time">17:30 ~ 19:30 (예정)</div>
             <div class="sched-tl-title">퇴근길 인사</div>
+            <div class="sched-tl-place">성신여대입구역</div>
           </div>
-          <div class="sched-tl-item">
+          <div class="sched-tl-item tl-now">
             <div class="sched-tl-dot"></div>
             <div class="sched-tl-time">20:30 (예정)</div>
             <div class="sched-tl-title">공약 영상 촬영</div>
@@ -1759,7 +1923,7 @@
             <div class="sched-day-label">월 23</div>
             <div class="sched-day-events">
               <div class="sched-week-event"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:3px;flex-shrink:0"><rect width="14" height="10" rx="2.5" fill="#FF0000"/><polygon points="5.5,2.5 10,5 5.5,7.5" fill="white"/></svg>철근소 출연</div>
-              <div class="sched-week-event">퇴근길 인사</div>
+              <div class="sched-week-event">퇴근길 인사 17:30~19:30 · 성신여대입구역</div>
               <div class="sched-week-event">공약 영상 촬영</div>
             </div>
           </div>
@@ -2054,6 +2218,105 @@ function sharePage() {
   document.querySelector('.csm-close').addEventListener('click', function() {
     csm.classList.remove('open');
   });
+</script>
+<!-- 핀포인트 모달 -->
+<div class="pp-overlay" id="ppOverlay">
+  <div class="pp-modal" id="ppModal">
+    <div class="pp-modal-header">
+      <div>
+        <div class="pp-modal-icon" id="ppIcon"></div>
+        <div class="pp-modal-badge" id="ppBadge"></div>
+        <div class="pp-modal-title" id="ppTitle"></div>
+      </div>
+      <button class="pp-modal-close" id="ppClose" aria-label="닫기">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="pp-modal-body">
+      <div class="pp-modal-desc" id="ppDesc"></div>
+      <div class="pp-modal-items" id="ppItems"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const ppData = [
+  {
+    icon: '🗑️', badge: '생활환경', title: '쓰레기 불법투기 근절',
+    desc: '성북구 골목 곳곳에서 쓰레기 무단투기가 반복되고 있습니다. 단속은 산발적이고 과태료 집행은 흐지부지됩니다. 일상적인 생활환경 문제를 행정이 제대로 챙겨야 합니다.',
+    items: [
+      { num: '01', title: '무인단속 카메라 확대 설치', desc: '상습 투기 구간을 집중 조사하고 무인 카메라를 설치해 24시간 단속 체계를 구축합니다.' },
+      { num: '02', title: '과태료 집행 실질화', desc: '단속 후 흐지부지 되는 과태료 부과 프로세스를 개선해 실질적인 억제력을 갖춥니다.' },
+    ]
+  },
+  {
+    icon: '🗑️', badge: '1인 가구', title: '0.6리터 음식물봉투 도입',
+    desc: '1인 가구에게 기존 1리터 봉투는 채우는 데 며칠이 걸립니다. 그 사이 냄새나고, 다 채우지 않고 버리면 낭비입니다. 2025년 12월 송파구가 전국 최초로 0.6리터 봉투를 도입했습니다.',
+    items: [
+      { num: '01', title: '0.6리터 봉투 도입 조례 추진', desc: '음식물봉투 규격은 자치구 조례로 정합니다. 조례 발의 또는 구청장 촉구를 통해 안암동·종암동부터 시범 도입을 추진합니다.' },
+    ]
+  },
+  {
+    icon: '🅿️', badge: '교통·주거', title: '주차 공유 프로그램',
+    desc: '성북구는 주차 공간 부족이 오래된 숙제입니다. 낮 시간 비어 있는 공공기관·종교시설 주차장을 주민에게 개방해 실질적인 주차난 해소를 추진합니다.',
+    items: [
+      { num: '01', title: '공공·민간 주차장 낮 시간 개방', desc: '구청, 학교, 종교시설 등 낮 시간 유휴 주차장 현황을 파악하고 주민 개방 협약을 추진합니다.' },
+      { num: '02', title: '주차 정보 통합 안내', desc: '어디에 빈 주차 공간이 있는지 실시간으로 확인할 수 있도록 정보 제공 체계를 구축합니다.' },
+    ]
+  },
+  {
+    icon: '🏥', badge: '의료 접근성', title: '야간·공휴일 병원 알림',
+    desc: '갑자기 아플 때 문 연 병원을 찾아 헤매는 경험, 성북구 주민이라면 누구나 겪습니다. 지금 진료 중인 가까운 병원·약국을 바로 찾을 수 있는 안내 서비스를 구축합니다.',
+    items: [
+      { num: '01', title: '야간·공휴일 운영 의료기관 실시간 안내', desc: '구 공식 채널 및 앱을 통해 지금 열려 있는 근처 병원·약국을 실시간으로 안내합니다.' },
+    ]
+  },
+  {
+    icon: '🌳', badge: '환경·여가', title: '성북천 야간 산책로 정비',
+    desc: '성북천은 성북구의 핵심 녹지 공간이지만 야간 조명이 부족하고 안전 시설이 노후화되어 있습니다. 저녁에도 안심하고 걸을 수 있는 산책로를 만들겠습니다.',
+    items: [
+      { num: '01', title: '야간 조명 전면 개선', desc: '어두운 구간을 집중 점검하고 LED 조명을 확충해 야간 보행 안전을 확보합니다.' },
+      { num: '02', title: '안전난간·벤치 정비', desc: '노후화된 안전난간을 교체하고 쉬어갈 수 있는 벤치를 추가 설치합니다.' },
+    ]
+  },
+];
+
+(function () {
+  const overlay = document.getElementById('ppOverlay');
+  const modal = document.getElementById('ppModal');
+
+  function openModal(idx) {
+    const d = ppData[idx];
+    document.getElementById('ppIcon').textContent = d.icon;
+    document.getElementById('ppBadge').textContent = d.badge;
+    document.getElementById('ppTitle').textContent = d.title;
+    document.getElementById('ppDesc').textContent = d.desc;
+    document.getElementById('ppItems').innerHTML = d.items.map(it =>
+      `<div class="pp-modal-item">
+        <div class="pp-modal-item-num">${it.num}</div>
+        <div>
+          <div class="pp-modal-item-title">${it.title}</div>
+          <div class="pp-modal-item-desc">${it.desc}</div>
+        </div>
+      </div>`
+    ).join('');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.pinpoint-card[data-pp]').forEach(card => {
+    card.addEventListener('click', () => openModal(+card.dataset.pp));
+  });
+
+  document.getElementById('ppClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
 </script>
 </body>
 </html>

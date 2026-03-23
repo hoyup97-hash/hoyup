@@ -32,6 +32,16 @@
 
 ---
 
+## 일정 수정 규칙
+
+일정 관련 수정 요청이 오면 **반드시 두 파일을 동시에 수정**할 것:
+1. `/index.html` — 메인 페이지 일정 카드
+2. `/schedule/index.html` — 일정 전용 페이지 (`hoyup.kr/schedule`)
+
+두 파일의 일정 내용은 항상 동일하게 유지해야 한다.
+
+---
+
 ## 공통 규칙
 - 공통 스타일: `/assets/style.css`
 - 폰트: Pretendard (본문), Noto Serif KR (제목)

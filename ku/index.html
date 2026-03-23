@@ -38,6 +38,7 @@ body {
   background: var(--dark);
   color: #fff;
   overflow-x: hidden;
+  word-break: keep-all;
 }
 
 /* ── SCROLL REVEAL ── */
@@ -1219,6 +1220,216 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
   transition: opacity .3s ease, transform .3s ease;
 }
 #floatShare:hover { transform: scale(1.08); }
+
+/* ── 공약 아코디언 ── */
+.promise-accordion { margin-top: 3rem; display: flex; flex-direction: column; gap: 0.75rem; }
+
+.acc-item {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+.acc-item.open { border-color: var(--gold); }
+
+.acc-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.04);
+  transition: background 0.2s;
+  user-select: none;
+  width: 100%;
+  text-align: left;
+  border: none;
+}
+.acc-header:hover { background: rgba(255,255,255,0.07); }
+.acc-item.open .acc-header { background: rgba(201,168,76,0.07); }
+
+.acc-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.2);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2.2rem;
+  transition: color 0.2s;
+}
+.acc-item.open .acc-num { color: var(--gold-light); }
+
+.acc-header-text { flex: 1; }
+.acc-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.2rem;
+  transition: color 0.2s;
+}
+.acc-item.open .acc-label { color: var(--gold); }
+.acc-title {
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  font-weight: 700;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.4;
+  transition: color 0.2s;
+  word-break: keep-all;
+}
+.acc-item.open .acc-title { color: #fff; }
+.acc-teaser {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.28);
+  margin-top: 0.3rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.2s;
+}
+.acc-item.open .acc-teaser { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+
+@media (max-width: 600px) {
+  .promise-inner { padding: 0 1rem; }
+
+  .acc-header { padding: 1rem 1rem; gap: 0.75rem; }
+
+  .acc-num { font-size: 1.2rem; width: 1.6rem; }
+
+  .acc-teaser {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .acc-body-inner { padding: 0 1rem; }
+  .acc-item.open .acc-body-inner { padding: 0 1rem 1.5rem; }
+
+  .p-stats { gap: 1.25rem; }
+
+  .p-pledge-list { gap: 1rem; }
+  .p-pledge-item { gap: 0.75rem; }
+}
+
+.acc-arrow {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.25);
+  transition: transform 0.3s, color 0.2s;
+}
+.acc-item.open .acc-arrow { transform: rotate(180deg); color: var(--gold); }
+
+.acc-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(.4,0,.2,1);
+}
+.acc-item.open .acc-body { grid-template-rows: 1fr; }
+.acc-body-inner {
+  overflow: hidden;
+  padding: 0 1.5rem;
+}
+.acc-item.open .acc-body-inner { padding: 0 1.5rem 2rem; }
+
+/* 아코디언 내부 콘텐츠 */
+.p-panel-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.p-panel-title {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+  margin-bottom: 1.25rem;
+}
+.p-lead {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.85;
+  margin-bottom: 1rem;
+}
+.p-quote {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  padding: 0.8rem 1rem;
+  border-left: 2px solid var(--gold);
+  background: rgba(201,168,76,0.06);
+  border-radius: 0 4px 4px 0;
+}
+.p-pledge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 1.5rem;
+}
+.p-pledge-item { display: flex; gap: 1rem; }
+.p-pledge-num {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  color: var(--gold);
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  width: 1.4rem;
+}
+.p-pledge-body {}
+.p-pledge-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.p-pledge-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+.p-stats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 1.25rem 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.p-stat-item { display: flex; align-items: baseline; gap: 0.6rem; }
+.p-stat-n {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  line-height: 1;
+  white-space: nowrap;
+}
+.p-stat-l { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+.p-cite {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.22);
+  line-height: 1.9;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
 </style>
 </head>
 <body>
@@ -1270,7 +1481,7 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
 
 <!-- ── WHY ── -->
 <section class="why-section" id="why">
-  <div class="tag-line reveal"><span>왜 20대 구의원이 필요한가</span></div>
+  <div class="tag-line reveal"><span>왜 젊은 구의원이 필요한가</span></div>
   <h2 class="big-heading reveal reveal-delay-1">
     구의회에 우리의<br>목소리가 없었습니다
   </h2>
@@ -1283,11 +1494,11 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
     <div class="incident-year">12년</div>
     <div class="incident-label">결정적 사례</div>
     <div class="incident-text">
-      2013년부터 추진된 개운산 기숙사,<br>지금도 표류 중입니다.
+      2013년부터 추진된 개운산 기숙사,<br>성북구의원 22명 전원 반대
     </div>
     <p class="incident-body">
       고려대는 개운산 부지에 1,100명 규모의 기숙사 신축을 추진했습니다.
-      <strong><em style="font-size:1.1rem">구의회와 구청의 반대</em></strong>로 12년째 허가가 나지 않았고, 지금도 진행 중인 현재의 문제입니다.
+      <strong><em style="font-size:1.1rem">구의회와 구청의 반대</em></strong>로 "허가가 나지 않았고", 기숙사 부족은 지금도 진행 중인 현재의 문제입니다.
     </p>
   </div>
 </section>
@@ -1352,70 +1563,126 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
 <!-- ── PROMISE ── -->
 <section class="promise-section" id="promise">
   <div class="promise-inner">
-    <div class="tag-line reveal"><span>4대 공약</span></div>
+    <div class="tag-line reveal"><span>3대 공약</span></div>
     <h2 class="big-heading reveal reveal-delay-1">
       제가 하겠다고<br>약속하는 것들
     </h2>
 
-    <div class="promise-slider-outer">
-      <div class="promise-grid" id="promiseSlider">
+    <div class="promise-accordion">
 
-      <div class="promise-card promise-card--hero reveal reveal-delay-1">
-        <div class="p-num">01</div>
-        <div class="p-title">개운산 기숙사,<br>이번엔 직접 뚫겠습니다</div>
-        <p class="p-desc">
-          2014년 성북구의회가 기숙사 건립 철회 결의안을 채택했습니다.<br>
-          그 사이 안암동 월세는 66만원이 됐습니다.<br><br>
-          부지는 지금도 고려대 소유입니다.<br>
-          막고 있는 건 성북구청 허가 하나뿐입니다.
-        </p>
-        <div class="p-stats">
-          <div class="p-stat-item">
-            <span class="p-stat-n">10.8%</span>
-            <span class="p-stat-l">기숙사 수용률 서울 최하위</span>
-          </div>
-          <div class="p-stat-item">
-            <span class="p-stat-n">12년</span>
-            <span class="p-stat-l">부지만 있고 착공 못 한 기간</span>
+      <!-- 공약 01 -->
+      <div class="acc-item open">
+        <button class="acc-header">
+          <span class="acc-num">01</span>
+          <span class="acc-header-text">
+            <div class="acc-label">공약 01</div>
+            <div class="acc-title">고려대·20대의 편에 서겠습니다</div>
+            <div class="acc-teaser">기숙사 건립 막은 구의원 22명 — 저는 학생 편에 서겠습니다</div>
+          </span>
+          <span class="acc-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <p class="p-lead">2014년, 구의원 22명이 전원 찬성으로 기숙사 건립을 막았습니다. 단 한 명도 학생 편을 들지 않았습니다.</p>
+            <p class="p-quote">저는 그 한 명이 되겠습니다.</p>
+            <div class="p-pledge-list">
+              <div class="p-pledge-item">
+                <div class="p-pledge-num">01</div>
+                <div class="p-pledge-body">
+                  <div class="p-pledge-title">학생 주거 실태를 매년 의회 기록으로 남깁니다</div>
+                  <div class="p-pledge-desc">행정사무감사에서 안암·종암 학생 주거 현황을 공식 의제로 올리고, 구청장의 공식 답변을 기록으로 남깁니다.</div>
+                </div>
+              </div>
+              <div class="p-pledge-item">
+                <div class="p-pledge-num">02</div>
+                <div class="p-pledge-body">
+                  <div class="p-pledge-title">성북구에 공공기숙사 유치를 위해 끝까지 싸웁니다</div>
+                  <div class="p-pledge-desc">서울시·정부가 2030년까지 1,500호 추가 공급을 약속했습니다. 두 번째가 성북구에 오도록 목소리를 냅니다.</div>
+                </div>
+              </div>
+              <div class="p-pledge-item">
+                <div class="p-pledge-num">03</div>
+                <div class="p-pledge-body">
+                  <div class="p-pledge-title">학생 의견 청취 간담회를 정기 개최합니다</div>
+                  <div class="p-pledge-desc">총학생회부터 일반 학생까지 누구나 참여할 수 있는 간담회를 열어 목소리를 의회로 연결합니다.</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-cite">📋 성북구의회 제230회 본회의 2014.10.21 · 🔗 서울시 공식발표 2026.03.10 · 🔗 대학알리미 2025.03</div>
           </div>
         </div>
-        <button class="detail-btn" onclick="location.href='./gaewunsan/'">자세히 보기 →</button>
       </div>
 
-      <div class="promise-card reveal reveal-delay-2">
-        <div class="p-num">02</div>
-        <div class="p-title">성북구가 학생 발이 되어야 합니다</div>
-        <p class="p-desc">버스도 학교가 알아서 셔틀 만들어 굴립니다. 그 셔틀조차 주말엔 없습니다. 자정 넘으면 귀가 수단은 택시뿐입니다.<br><br>안암동 마을버스 신설을 구청에 직접 건의하겠습니다.</p>
+      <!-- 공약 02 -->
+      <div class="acc-item">
+        <button class="acc-header">
+          <span class="acc-num">02</span>
+          <span class="acc-header-text">
+            <div class="acc-label">공약 02</div>
+            <div class="acc-title">대학도시 성북, 말로 끝나지 않게 하겠습니다</div>
+            <div class="acc-teaser">캠퍼스타운 연 12억 투입 — 상생 실적을 의회에서 매년 공식 점검</div>
+          </span>
+          <span class="acc-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <p class="p-lead">캠퍼스타운이란 서울시·대학·자치구 3자 협력 청년 창업 육성 사업. 고려대는 2026년 재선정, 연 12억 원이 투입됩니다. 성북구 내 5개 대학 참여.</p>
+            <p class="p-quote">"고려대 쪽은 주민과 상생이 제대로 안 되고 있다. 서경대 쪽은 되는데, 왜 고려대 쪽은 안 보이냐."<br><small style="font-size:0.78rem; font-weight:400; opacity:.6;">📋 임현주 위원, 도시건설위원회 2024.02.19</small></p>
+            <p class="p-lead">2022년부터 2024년까지 3년 연속 같은 지적이 나왔습니다. 성북구청장도 2026년 3월 "대학도시 성북" 종합계획을 발표했습니다. 말로 끝나지 않는지 의회에서 챙기겠습니다.</p>
+            <div class="p-pledge-list">
+              <div class="p-pledge-item">
+                <div class="p-pledge-num">01</div>
+                <div class="p-pledge-body">
+                  <div class="p-pledge-title">대학-지역 상생 성과를 매년 의회에서 공식 점검합니다</div>
+                  <div class="p-pledge-desc">행정사무감사에서 캠퍼스타운 지역 상생 실적, T/F팀 운영 현황을 공식 안건으로 올립니다. 구청장이 대학에 제대로 요구하는지 의회 기록으로 남깁니다.</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-cite">📋 도시건설위원회 합본 (2022~2024) · 🔗 서울시 캠퍼스타운 2025.09.18 · 🔗 시정일보 2026.03.13</div>
+          </div>
+        </div>
       </div>
 
-      <div class="promise-card reveal reveal-delay-3">
-        <div class="p-num">03</div>
-        <div class="p-title">조심하는 건<br>내 몫이 아닙니다</div>
-        <p class="p-desc">카카오맵 켜고, 위치 공유하고, 이어폰 빼고 — 이게 매일 밤 귀갓길 루틴이 되어선 안 됩니다.<br><br>방범 인프라 실태를 행정감사로 공식 기록하고, CCTV·비상벨 취약 구간 정비 예산을 건의하겠습니다.</p>
+      <!-- 공약 03 -->
+      <div class="acc-item">
+        <button class="acc-header">
+          <span class="acc-num">03</span>
+          <span class="acc-header-text">
+            <div class="acc-label">공약 03</div>
+            <div class="acc-title">0.6리터 음식물봉투를 성북구에도 도입하겠습니다</div>
+            <div class="acc-teaser">송파구 이미 도입 — 1인 가구 많은 안암·종암동부터 조례 추진</div>
+          </span>
+          <span class="acc-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <p class="p-lead">1리터 음식물봉투는 혼자 살면 채우는 데 며칠이 걸립니다. 그 사이 냄새나고, 다 채우지 않고 버리면 낭비입니다.</p>
+            <p class="p-quote">2025년 12월, 전국 지자체 최초로 송파구가 0.6리터 봉투 시범 도입.<br>"주민 목소리를 구정에 반영한 사업"</p>
+            <div class="p-stats">
+              <div class="p-stat-item">
+                <span class="p-stat-n">0.6ℓ</span>
+                <span class="p-stat-l">송파구 도입 규격<br>(전국 최초)</span>
+              </div>
+              <div class="p-stat-item">
+                <span class="p-stat-n">50%</span>
+                <span class="p-stat-l">안암동·동선동<br>청년 인구 비율</span>
+              </div>
+            </div>
+            <div class="p-pledge-list">
+              <div class="p-pledge-item">
+                <div class="p-pledge-num">01</div>
+                <div class="p-pledge-body">
+                  <div class="p-pledge-title">0.6리터 봉투 도입 조례를 추진합니다</div>
+                  <div class="p-pledge-desc">음식물봉투 규격은 자치구 조례로 정합니다. 조례 발의 또는 구청장 촉구를 통해 안암동·종암동부터 시범 도입을 추진합니다.</div>
+                </div>
+              </div>
+            </div>
+            <div class="p-cite">🔗 아시아경제 외 2025.12.07 · 🔗 시정일보 2026.03.13</div>
+          </div>
+        </div>
       </div>
 
-      <div class="promise-card reveal reveal-delay-4">
-        <div class="p-num">04</div>
-        <div class="p-title">성북구가 우리에게<br>돌려줄 차례입니다</div>
-        <p class="p-desc">7년간 189개 팀이 이 동네에서 창업했고, 투자유치 837억이 이 동네에서 나왔습니다. 그런데 성북구가 학생들에게 돌려준 것은 사실상 없습니다.<br><br>캠퍼스타운 기업 정착 인센티브와 총학↔구청 정례 협의체 구성을 건의하겠습니다.</p>
-      </div>
-
-      <div class="promise-card reveal reveal-delay-4">
-        <div class="p-num">05</div>
-        <div class="p-title">음식물 쓰레기봉투,<br>혼자 살면 너무 큽니다</div>
-        <p class="p-desc">1인 가구에게 기존 봉투는 버리기도 전에 냄새가 납니다. 송파구가 이미 시범 운영 중인 0.6리터 소형 음식물 쓰레기봉투를 성북구에 도입하겠습니다.<br><br>안암·보문·동선동은 서울에서 1인 가구 비율이 가장 높은 동네 중 하나입니다. 작은 봉투 하나가 매일의 불편을 바꿉니다.</p>
-      </div>
-
-    </div><!-- /.promise-grid -->
-
-      <div class="promise-dots" id="promiseDots">
-        <button class="promise-dot active" data-idx="0"></button>
-        <button class="promise-dot" data-idx="1"></button>
-        <button class="promise-dot" data-idx="2"></button>
-        <button class="promise-dot" data-idx="3"></button>
-        <button class="promise-dot" data-idx="4"></button>
-      </div>
-    </div><!-- /.promise-slider-outer -->
+    </div><!-- /.promise-accordion -->
 
   </div>
 </section>
@@ -1525,14 +1792,14 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
       <div class="math-row">
         <div class="math-op">—</div>
         <div class="math-content">
-          <div class="math-num">5,485</div>
+          <div class="math-num">단 <span id="count-5485">0</span>표</div>
           <div class="math-label">2022년 성북구 가선거구 당선에 필요했던 표 수.<br><strong>이 숫자면 구의회에 들어갑니다.</strong></div>
         </div>
       </div>
       <div class="math-row">
         <div class="math-op">vs</div>
         <div class="math-content">
-          <div class="math-num">14,000+</div>
+          <div class="math-num">약 5,000+</div>
           <div class="math-label">안암·보문·동선동 일대에 거주하는<br><strong>고려대 재학생 추산 인원</strong></div>
         </div>
       </div>
@@ -1542,8 +1809,9 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
       <div class="math-result-inner">
         <div class="math-result-label">당선 가능성</div>
         <div class="math-result-text">
-          3인 선거구는 3등,<br>5인선거구는 5등만 하면 됩니다.<br>
-          이제 <em>우리가 직접 들어갈 차례</em>입니다.
+          3인 선거구는 3등,<br>5인 선거구는 5등만 하면 됩니다.<br>
+          이제 <em>우리가 직접 들어갈 차례</em>입니다.<br>
+          이호엽을 찍으면 이호엽이 됩니다.
         </div>
       </div>
     </div>
@@ -1595,18 +1863,7 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
 
 <!-- ── FOOTER ── -->
 
-<!-- DONATE MINI -->
-<div class="donate-mini">
-  <div class="donate-mini-inner">
-    <div class="donate-mini-eyebrow">정치 후원금</div>
-    <div class="donate-mini-headline">여러분의 후원이<br><span>성북을 바꿉니다</span></div>
-    <div class="donate-mini-limit">
-      <svg width="13" height="13" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M7.5 4.5v3.5l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-      개인 연간 한도 <strong style="color:#FF5200; font-weight:700;">500만 원</strong> 이내 · 세액공제 가능
-    </div>
-    <a href="https://givemoney.kr/politicians/88" target="_blank" class="donate-mini-btn">💳 온라인 후원하기</a>
-  </div>
-</div>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -1624,6 +1881,16 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
 </footer>
 
 <script>
+// 공약 아코디언
+document.querySelectorAll('.acc-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const item = header.closest('.acc-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
 const mathRows = document.querySelectorAll('.math-row, .math-result');
 const mathObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -1770,6 +2037,39 @@ function sharePage() {
     });
   }
 }
+
+// Count-up: 단 5,485표
+(function () {
+  const el = document.getElementById('count-5485');
+  if (!el) return;
+  let started = false;
+  const target = 5485;
+  const duration = 1800;
+
+  function easeOutExpo(t) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+  }
+
+  function startCount() {
+    if (started) return;
+    started = true;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const val = Math.floor(easeOutExpo(t) * target);
+      el.textContent = val.toLocaleString('ko-KR');
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString('ko-KR');
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const row = el.closest('.math-row');
+  const obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) { startCount(); obs.unobserve(row); }
+  }, { threshold: 0.3 });
+  obs.observe(row);
+})();
 </script>
 </body>
 </html>
