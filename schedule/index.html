@@ -71,21 +71,24 @@
   .sched-divider { background: rgba(0,0,0,0.06); width: 1px; margin: 24px 0; }
   @media (max-width: 600px) { .sched-divider { width: auto; height: 1px; margin: 0 24px; } }
 
-  .sched-today { padding: 24px 28px; }
-  .sched-panel-label { font-size: 11px; font-weight: 800; letter-spacing: .06em; color: var(--gray); text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .sched-today { padding: 28px 32px; }
+  .sched-panel-label { font-size: 11px; font-weight: 800; letter-spacing: .06em; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 8px; }
   .sched-panel-label span { font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: -.01em; text-transform: none; }
-  .sched-timeline { display: flex; flex-direction: column; position: relative; padding-left: 20px; }
-  .sched-timeline::before { content:''; position:absolute; left: 5px; top: 6px; bottom: 6px; width: 1.5px; background: rgba(0,0,0,0.08); }
-  .sched-tl-item { position: relative; display: flex; flex-direction: column; gap: 2px; padding-bottom: 22px; }
+  .sched-dday { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+  .sched-dday-num { font-size: 30px; font-weight: 900; color: var(--orange); letter-spacing: -.05em; line-height: 1; }
+  .sched-dday-sub { font-size: 10px; font-weight: 700; color: var(--gray); letter-spacing: .04em; text-transform: none; }
+  .sched-timeline { display: flex; flex-direction: column; position: relative; padding-left: 26px; }
+  .sched-timeline::before { content:''; position:absolute; left: 5px; top: 8px; bottom: 8px; width: 2px; background: rgba(0,0,0,0.07); border-radius: 2px; }
+  .sched-tl-item { position: relative; display: flex; flex-direction: column; gap: 3px; padding-bottom: 28px; }
   .sched-tl-item:last-child { padding-bottom: 0; }
-  .sched-tl-dot { position: absolute; left: -18px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: #ddd; border: 2px solid white; box-shadow: 0 0 0 1.5px #ddd; flex-shrink: 0; }
-  .sched-tl-item.tl-now .sched-tl-dot { background: var(--orange); box-shadow: 0 0 0 3px rgba(255,82,0,.18); }
+  .sched-tl-dot { position: absolute; left: -23px; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: #ddd; border: 2.5px solid white; box-shadow: 0 0 0 1.5px #ddd; flex-shrink: 0; }
+  .sched-tl-item.tl-now .sched-tl-dot { background: var(--orange); box-shadow: 0 0 0 4px rgba(255,82,0,.15); }
   .sched-tl-item.tl-done .sched-tl-dot { background: #e0e0e0; box-shadow: 0 0 0 1.5px #e0e0e0; }
-  .sched-tl-time { font-size: 11px; font-weight: 700; color: var(--gray); letter-spacing: .02em; }
+  .sched-tl-time { font-size: 12px; font-weight: 800; color: var(--gray); letter-spacing: .03em; }
   .sched-tl-item.tl-now .sched-tl-time { color: var(--orange); }
-  .sched-tl-title { font-size: 14px; font-weight: 700; letter-spacing: -.02em; line-height: 1.4; color: var(--black); }
+  .sched-tl-title { font-size: 18px; font-weight: 700; letter-spacing: -.03em; line-height: 1.35; color: var(--black); }
   .sched-tl-item.tl-done .sched-tl-title { color: #bbb; text-decoration: line-through; text-decoration-color: #ddd; }
-  .sched-tl-place { font-size: 11px; color: var(--gray); margin-top: 1px; }
+  .sched-tl-place { font-size: 12px; font-weight: 500; color: var(--gray); margin-top: 2px; letter-spacing: -.01em; }
   .sched-tl-item.tl-done .sched-tl-place { color: #ccc; }
 
   .sched-week { padding: 24px 24px; }
@@ -128,23 +131,35 @@
 
       <!-- 오늘 일정 -->
       <div class="sched-today">
-        <div class="sched-panel-label">오늘 일정 <span>3월 23일 월</span></div>
+        <div class="sched-panel-label">오늘 일정 <span>3월 24일 화</span>
+          <div class="sched-dday">
+            <div class="sched-dday-num">D-71</div>
+            <div class="sched-dday-sub">6월 3일까지</div>
+          </div>
+        </div>
         <div class="sched-timeline">
           <div class="sched-tl-item tl-now">
             <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">14:00</div>
-            <div class="sched-tl-title"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:3px;flex-shrink:0"><rect width="14" height="10" rx="2.5" fill="#FF0000"/><polygon points="5.5,2.5 10,5 5.5,7.5" fill="white"/></svg>철근소 출연</div>
-          </div>
-          <div class="sched-tl-item tl-now">
-            <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">17:30 ~ 19:30 (예정)</div>
-            <div class="sched-tl-title">퇴근길 인사</div>
+            <div class="sched-tl-time">07:30~</div>
+            <div class="sched-tl-title">출근길 인사</div>
             <div class="sched-tl-place">성신여대입구역</div>
           </div>
           <div class="sched-tl-item tl-now">
             <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">20:30 (예정)</div>
-            <div class="sched-tl-title">공약 영상 촬영</div>
+            <div class="sched-tl-time">10:00</div>
+            <div class="sched-tl-title">동선동 상권 인사</div>
+          </div>
+          <div class="sched-tl-item tl-now">
+            <div class="sched-tl-dot"></div>
+            <div class="sched-tl-time">13:30</div>
+            <div class="sched-tl-title">경로당 방문</div>
+            <div class="sched-tl-place">한신한진아파트</div>
+          </div>
+          <div class="sched-tl-item tl-now">
+            <div class="sched-tl-dot"></div>
+            <div class="sched-tl-time">17:30~</div>
+            <div class="sched-tl-title">퇴근길 인사</div>
+            <div class="sched-tl-place">성신여대입구역</div>
           </div>
         </div>
       </div>
@@ -155,7 +170,7 @@
       <div class="sched-week">
         <div class="sched-panel-label">주간 일정 <span>3월 23일 — 29일</span></div>
         <div class="sched-week-days">
-          <div class="sched-day-row week-today">
+          <div class="sched-day-row">
             <div class="sched-day-label">월 23</div>
             <div class="sched-day-events">
               <div class="sched-week-event"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:3px;flex-shrink:0"><rect width="14" height="10" rx="2.5" fill="#FF0000"/><polygon points="5.5,2.5 10,5 5.5,7.5" fill="white"/></svg>철근소 출연</div>
@@ -163,13 +178,13 @@
               <div class="sched-week-event">공약 영상 촬영</div>
             </div>
           </div>
-          <div class="sched-day-row">
+          <div class="sched-day-row week-today">
             <div class="sched-day-label">화 24</div>
             <div class="sched-day-events">
-              <div class="sched-week-event">성신여대입구역 출근길 인사</div>
-              <div class="sched-week-event">동선동 상권</div>
-              <div class="sched-week-event">성북천 거리인사</div>
-              <div class="sched-week-event">퇴근길 인사</div>
+              <div class="sched-week-event">07:30~ 성신여대입구역 출근길 인사</div>
+              <div class="sched-week-event">10:00 동선동 상권 인사</div>
+              <div class="sched-week-event">13:30 한신한진아파트 경로당 방문</div>
+              <div class="sched-week-event">17:30~ 성신여대입구역 퇴근길 인사</div>
             </div>
           </div>
           <div class="sched-day-row">
