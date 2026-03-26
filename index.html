@@ -658,14 +658,14 @@
   .sched-week-days { display: flex; flex-direction: column; gap: 2px; }
   .sched-day-row { display: flex; align-items: flex-start; gap: 12px; padding: 7px 6px; border-radius: 8px; transition: background .15s; }
   .sched-day-row:hover { background: var(--bg); }
-  .sched-day-label { font-size: 11px; font-weight: 800; min-width: 34px; padding-top: 1px; letter-spacing: .01em; color: #ccc; flex-shrink: 0; }
-  .sched-day-row.week-today .sched-day-label { color: var(--orange); }
+  .sched-day-label { font-size: 11px; font-weight: 800; min-width: 34px; padding-top: 1px; letter-spacing: .01em; color: var(--black); flex-shrink: 0; }
+
   .sched-day-row.week-sat .sched-day-label { color: #6699cc; }
   .sched-day-row.week-sun .sched-day-label { color: #cc6666; }
   .sched-day-events { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
   .sched-week-event { font-size: 11px; font-weight: 600; color: var(--black); letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px; }
   .sched-week-event::before { content:''; width: 5px; height: 5px; border-radius: 50%; background: rgba(0,0,0,0.15); flex-shrink: 0; }
-  .sched-day-row.week-today .sched-week-event::before { background: var(--orange); }
+
   .sched-week-time { font-size: 10px; color: var(--gray); font-weight: 500; flex-shrink: 0; }
   .sched-day-empty { font-size: 11px; color: #ddd; font-weight: 500; padding-top: 1px; }
   @media (max-width: 700px) {
@@ -1895,9 +1895,9 @@
 
       <!-- 오늘 일정 -->
       <div class="sched-today">
-        <div class="sched-panel-label">오늘 일정 <span>3월 26일 목</span>
+        <div class="sched-panel-label">오늘 일정 <span>3월 27일 금</span>
           <div class="sched-dday">
-            <div class="sched-dday-num">D-69</div>
+            <div class="sched-dday-num">D-68</div>
             <div class="sched-dday-sub">6월 3일까지</div>
           </div>
         </div>
@@ -1969,7 +1969,7 @@
               <div class="sched-week-event">17:30~ 한성대입구역 퇴근길 인사</div>
             </div>
           </div>
-          <div class="sched-day-row week-today">
+          <div class="sched-day-row">
             <div class="sched-day-label">목 26</div>
             <div class="sched-day-events">
               <div class="sched-week-event">07:30 성신여대입구역 출근길 인사</div>
