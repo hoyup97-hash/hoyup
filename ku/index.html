@@ -399,9 +399,10 @@ body {
   margin: 3rem 0;
   background: var(--crimson);
   border-radius: 6px;
-  padding: 2.5rem 2rem;
+  padding: 3rem 2.5rem;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 8px 40px rgba(152,30,50,0.35);
 }
 .incident::before {
   content: '';
@@ -433,14 +434,33 @@ body {
   font-weight: 700;
   position: relative;
 }
-.incident-text {
+.incident-num {
   font-family: 'Noto Serif KR', serif;
-  font-size: clamp(1.1rem, 3vw, 1.5rem);
-  font-weight: 700;
-  line-height: 1.6;
+  font-size: clamp(3.5rem, 13vw, 9rem);
+  font-weight: 900;
+  line-height: 0.9;
   color: #fff;
-  margin-bottom: 1rem;
+  letter-spacing: -0.04em;
   position: relative;
+  margin: 0.2rem 0 2rem;
+  white-space: nowrap;
+}
+.incident-verdict {
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--gold-light);
+  letter-spacing: 0.12em;
+  position: relative;
+  margin-bottom: 0.3rem;
+  margin-top: 0.3rem;
+}
+.incident-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  position: relative;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
 }
 .incident-body {
   font-size: 0.95rem;
@@ -1430,6 +1450,57 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
   padding-top: 1rem;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
+/* Handmade Section */
+.handmade-section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(40px, 8vw, 72px) clamp(24px, 5vw, 48px);
+  text-align: center;
+  position: relative;
+}
+.handmade-section::before {
+  content: '</>';
+  position: absolute;
+  right: clamp(16px, 4vw, 48px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(60px, 12vw, 100px);
+  font-weight: 900;
+  font-family: monospace;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.handmade-section .handmade-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #FF5200;
+  margin-bottom: 16px;
+}
+.handmade-section .handmade-headline {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1.3;
+  color: #fff;
+  margin: 0 0 16px;
+}
+.handmade-section .handmade-desc {
+  font-size: clamp(14px, 1.8vw, 16px);
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+  letter-spacing: -.01em;
+  margin: 0;
+}
+.handmade-section .handmade-desc strong {
+  color: #fff;
+  font-weight: 700;
+}
 </style>
 </head>
 <body>
@@ -1493,9 +1564,9 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
   <div class="incident reveal reveal-delay-3">
     <div class="incident-year">12년</div>
     <div class="incident-label">결정적 사례</div>
-    <div class="incident-text">
-      2013년부터 추진된 개운산 기숙사,<br>성북구의원 22명 전원 반대
-    </div>
+    <div class="incident-text">2014년 기숙사 건설 추진</div>
+    <div class="incident-verdict">성북구의원 22명</div>
+    <div class="incident-num">전원 반대</div>
     <p class="incident-body">
       고려대는 개운산 부지에 1,100명 규모의 기숙사 신축을 추진했습니다.
       <strong><em style="font-size:1.1rem">구의회와 구청의 반대</em></strong>로 "허가가 나지 않았고", 기숙사 부족은 지금도 진행 중인 현재의 문제입니다.
@@ -1506,6 +1577,7 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
 <!-- ── REALITY ── -->
 <section class="reality-section">
   <div class="reality-inner">
+    <div class="tag-line reveal"><span>기숙사 수용률</span></div>
     <div class="stat-compare reveal">
       <div class="stat-compare-item stat-compare-item--ours">
         <div class="stat-compare-mascot">🐯</div>
@@ -1851,6 +1923,13 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
     </div>
   </div>
 </section>
+
+<!-- Handmade -->
+<div class="handmade-section handmade-dark">
+  <div class="handmade-eyebrow">100% 직접 제작</div>
+  <h2 class="handmade-headline">이 홈페이지,<br>제가 직접 만들었습니다.</h2>
+  <p class="handmade-desc">디자인부터 코딩까지, <strong>외주 없이 혼자 제작</strong>했습니다.<br>선거 홍보물 하나도 직접 기획하고 실행하는 후보,<br>성북의 일도 그렇게 하겠습니다.</p>
+</div>
 
 <!-- BACK TO MAIN -->
 <div style="background: var(--dark2); border-top: 1px solid rgba(255,255,255,0.06); padding: 48px 40px; text-align: center;">

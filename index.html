@@ -626,53 +626,6 @@
     cursor: default;
   }
 
-  /* Schedule card */
-  .sched-wrap { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; }
-  @media (max-width: 700px) { .sched-wrap { grid-template-columns: 1fr; } }
-  .sched-divider { background: rgba(0,0,0,0.06); width: 1px; margin: 24px 0; }
-  @media (max-width: 700px) { .sched-divider { width: auto; height: 1px; margin: 0 24px; } }
-
-  /* 오늘 일정 — 타임라인 */
-  .sched-today { padding: 28px 32px; }
-  .sched-panel-label { font-size: 11px; font-weight: 800; letter-spacing: .06em; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 8px; }
-  .sched-panel-label span { font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: -.01em; text-transform: none; }
-  .sched-dday { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
-  .sched-dday-num { font-size: 30px; font-weight: 900; color: var(--orange); letter-spacing: -.05em; line-height: 1; }
-  .sched-dday-sub { font-size: 10px; font-weight: 700; color: var(--gray); letter-spacing: .04em; text-transform: none; }
-  .sched-timeline { display: flex; flex-direction: column; position: relative; padding-left: 26px; }
-  .sched-timeline::before { content:''; position:absolute; left: 5px; top: 8px; bottom: 8px; width: 2px; background: rgba(0,0,0,0.07); border-radius: 2px; }
-  .sched-tl-item { position: relative; display: flex; flex-direction: column; gap: 3px; padding-bottom: 28px; }
-  .sched-tl-item:last-child { padding-bottom: 0; }
-  .sched-tl-dot { position: absolute; left: -23px; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: #ddd; border: 2.5px solid white; box-shadow: 0 0 0 1.5px #ddd; flex-shrink: 0; }
-  .sched-tl-item.tl-now .sched-tl-dot { background: var(--orange); box-shadow: 0 0 0 4px rgba(255,82,0,.15); }
-  .sched-tl-item.tl-done .sched-tl-dot { background: #e0e0e0; box-shadow: 0 0 0 1.5px #e0e0e0; }
-  .sched-tl-time { font-size: 12px; font-weight: 800; color: var(--gray); letter-spacing: .03em; }
-  .sched-tl-item.tl-now .sched-tl-time { color: var(--orange); }
-  .sched-tl-title { font-size: 18px; font-weight: 700; letter-spacing: -.03em; line-height: 1.35; color: var(--black); }
-  .sched-tl-item.tl-done .sched-tl-title { color: #bbb; text-decoration: line-through; text-decoration-color: #ddd; }
-  .sched-tl-place { font-size: 12px; font-weight: 500; color: var(--gray); margin-top: 2px; letter-spacing: -.01em; }
-  .sched-tl-item.tl-done .sched-tl-place { color: #ccc; }
-
-  /* 이번주 일정 — 컴팩트 */
-  .sched-week { padding: 24px 24px; }
-  .sched-week-days { display: flex; flex-direction: column; gap: 2px; }
-  .sched-day-row { display: flex; align-items: flex-start; gap: 12px; padding: 7px 6px; border-radius: 8px; transition: background .15s; }
-  .sched-day-row:hover { background: var(--bg); }
-  .sched-day-label { font-size: 11px; font-weight: 800; min-width: 34px; padding-top: 1px; letter-spacing: .01em; color: var(--black); flex-shrink: 0; }
-
-  .sched-day-row.week-sat .sched-day-label { color: #6699cc; }
-  .sched-day-row.week-sun .sched-day-label { color: #cc6666; }
-  .sched-day-events { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
-  .sched-week-event { font-size: 11px; font-weight: 600; color: var(--black); letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px; }
-  .sched-week-event::before { content:''; width: 5px; height: 5px; border-radius: 50%; background: rgba(0,0,0,0.15); flex-shrink: 0; }
-
-  .sched-week-time { font-size: 10px; color: var(--gray); font-weight: 500; flex-shrink: 0; }
-  .sched-day-empty { font-size: 11px; color: #ddd; font-weight: 500; padding-top: 1px; }
-  @media (max-width: 700px) {
-    .sched-today { padding: 22px 20px; }
-    .sched-week { padding: 20px 20px; }
-  }
-
   /* Connect card */
   .card-connect { display: grid; grid-template-columns: 1fr 1.4fr; }
   @media (max-width: 700px) { .card-connect { grid-template-columns: 1fr; } }
@@ -1004,6 +957,37 @@
   .sc-ico { font-size: 24px; }
   .sc-name { font-size: 12px; font-weight: 700; }
   .sc-handle { font-size: 11px; color: var(--gray); }
+
+  /* Handmade Section */
+  .handmade-banner {
+    border: 1.5px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius);
+    padding: clamp(32px, 6vw, 52px) clamp(24px, 5vw, 48px);
+    background: var(--bg);
+    position: relative; overflow: hidden;
+  }
+  .handmade-banner::before {
+    content: '</>';
+    position: absolute; right: 32px; top: 50%; transform: translateY(-50%);
+    font-size: clamp(60px, 12vw, 100px);
+    font-weight: 900; font-family: monospace;
+    color: rgba(0,0,0,0.04); line-height: 1;
+    pointer-events: none;
+  }
+  .handmade-eyebrow {
+    font-size: 11px; font-weight: 800; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--orange); margin-bottom: 16px;
+  }
+  .handmade-headline {
+    font-size: clamp(22px, 4vw, 34px); font-weight: 900;
+    letter-spacing: -.03em; line-height: 1.3;
+    color: var(--black); margin: 0 0 16px;
+  }
+  .handmade-desc {
+    font-size: clamp(14px, 1.8vw, 16px); font-weight: 500;
+    color: #555; line-height: 1.8; letter-spacing: -.01em; margin: 0;
+  }
+  .handmade-desc strong { color: var(--black); font-weight: 700; }
 
   /* Donate Section */
   .donate-banner {
@@ -1885,129 +1869,19 @@
     </a>
   </div>
 
-  <!-- Schedule -->
+  <!-- Handmade -->
   <div class="section-header reveal" style="margin-top:20px;">
-    <div class="sec-title">일정</div>
-    <div class="sec-tag">Schedule</div>
+    <div class="sec-title">직접 만든 선거운동</div>
+    <div class="sec-tag">Handmade</div>
   </div>
-  <div class="card reveal" style="overflow:hidden;">
-    <div class="sched-wrap">
-
-      <!-- 오늘 일정 -->
-      <div class="sched-today">
-        <div class="sched-panel-label">오늘 일정 <span>3월 27일 금</span>
-          <div class="sched-dday">
-            <div class="sched-dday-num">D-68</div>
-            <div class="sched-dday-sub">6월 3일까지</div>
-          </div>
-        </div>
-        <div class="sched-timeline">
-          <div class="sched-tl-item tl-now">
-            <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">07:30</div>
-            <div class="sched-tl-title">출근길 인사</div>
-            <div class="sched-tl-place">성신여대입구역</div>
-          </div>
-          <div class="sched-tl-item tl-now">
-            <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">10:00</div>
-            <div class="sched-tl-title">보문동 상가 방문</div>
-          </div>
-          <div class="sched-tl-item tl-now">
-            <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">13:00</div>
-            <div class="sched-tl-title">안암동 상가 방문</div>
-          </div>
-          <div class="sched-tl-item tl-now">
-            <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">15:00</div>
-            <div class="sched-tl-title">노인정 방문</div>
-            <div class="sched-tl-place">동선동</div>
-          </div>
-          <div class="sched-tl-item tl-now">
-            <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">17:30</div>
-            <div class="sched-tl-title">퇴근길 인사</div>
-            <div class="sched-tl-place">성신여대입구역</div>
-          </div>
-          <div class="sched-tl-item tl-now">
-            <div class="sched-tl-dot"></div>
-            <div class="sched-tl-time">20:30</div>
-            <div class="sched-tl-title">공약 영상 촬영</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sched-divider"></div>
-
-      <!-- 이번주 일정 -->
-      <div class="sched-week">
-        <div class="sched-panel-label">주간 일정 <span>3월 23일 — 29일</span></div>
-        <div class="sched-week-days">
-          <div class="sched-day-row">
-            <div class="sched-day-label">월 23</div>
-            <div class="sched-day-events">
-              <div class="sched-week-event"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" style="display:inline-block;vertical-align:middle;margin-right:3px;flex-shrink:0"><rect width="14" height="10" rx="2.5" fill="#FF0000"/><polygon points="5.5,2.5 10,5 5.5,7.5" fill="white"/></svg>철근소 출연</div>
-              <div class="sched-week-event">퇴근길 인사 17:30~19:30 · 한성대입구역</div>
-              <div class="sched-week-event">공약 영상 촬영</div>
-            </div>
-          </div>
-          <div class="sched-day-row">
-            <div class="sched-day-label">화 24</div>
-            <div class="sched-day-events">
-              <div class="sched-week-event">07:30~ 한성대입구역 출근길 인사</div>
-              <div class="sched-week-event">10:00 동선동 상권 인사</div>
-              <div class="sched-week-event">13:30 한신한진아파트 경로당 방문</div>
-              <div class="sched-week-event">17:30~ 한성대입구역 퇴근길 인사</div>
-            </div>
-          </div>
-          <div class="sched-day-row">
-            <div class="sched-day-label">수 25</div>
-            <div class="sched-day-events">
-              <div class="sched-week-event">10:00 동선동 상권 인사</div>
-              <div class="sched-week-event">13:00 돈암동/동선동 경로당 방문</div>
-              <div class="sched-week-event">17:30~ 한성대입구역 퇴근길 인사</div>
-            </div>
-          </div>
-          <div class="sched-day-row">
-            <div class="sched-day-label">목 26</div>
-            <div class="sched-day-events">
-              <div class="sched-week-event">07:30 성신여대입구역 출근길 인사</div>
-              <div class="sched-week-event">10:00 보문동 상가 방문</div>
-              <div class="sched-week-event">13:00 안암동 상가 방문</div>
-              <div class="sched-week-event">15:00 동선동 노인정 방문</div>
-              <div class="sched-week-event">17:30 성신여대입구역 퇴근길 인사</div>
-              <div class="sched-week-event">20:30 공약 영상 촬영</div>
-            </div>
-          </div>
-          <div class="sched-day-row">
-            <div class="sched-day-label">금 27</div>
-            <div class="sched-day-events">
-              <div class="sched-week-event">07:30 출근길 인사 (장소 미정)</div>
-              <div class="sched-week-event">10:00 보문동 상권 방문</div>
-              <div class="sched-week-event">13:00 보문동·안암동 노인정 방문</div>
-              <div class="sched-week-event">17:30 성신여대입구역 퇴근길 인사</div>
-              <div class="sched-week-event">20:30 공약 영상 촬영</div>
-            </div>
-          </div>
-          <div class="sched-day-row week-sat">
-            <div class="sched-day-label">토 28</div>
-            <div class="sched-day-events">
-              <div class="sched-week-event">08:50 성북구 걷기대회 참가</div>
-            </div>
-          </div>
-          <div class="sched-day-row week-sun">
-            <div class="sched-day-label">일 29</div>
-            <div class="sched-day-events">
-              <div class="sched-week-event">09:00 행사 참여</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p style="font-size:11px;font-weight:700;color:var(--orange);text-align:center;padding:10px 24px 14px;line-height:1.5;background:rgba(255,82,0,0.06);border-top:1px solid rgba(255,82,0,0.12);letter-spacing:-.01em;">⚠ 자세한 일정은 후보자 사정으로 인해 변경될 수 있습니다.</p>
-
-    </div>
+  <div class="handmade-banner reveal">
+    <div class="handmade-eyebrow">100% 직접 제작</div>
+    <h2 class="handmade-headline">이 홈페이지,<br>제가 직접 만들었습니다.</h2>
+    <p class="handmade-desc">
+      디자인부터 코딩까지, <strong>외주 없이 혼자 제작</strong>했습니다.<br>
+      선거 홍보물 하나도 직접 기획하고 실행하는 후보,<br>
+      성북의 일도 그렇게 하겠습니다.
+    </p>
   </div>
 
   <!-- Donate -->
