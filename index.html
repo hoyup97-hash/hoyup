@@ -38,29 +38,6 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
     overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* ── CURSOR ── */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--orange);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%,-50%);
-    transition: width .15s, height .15s;
-  }
-  .cursor-ring {
-    width: 34px; height: 34px;
-    border: 1.5px solid rgba(255,82,0,.45);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%,-50%);
-    transition: width .18s, height .18s;
   }
 
   /* ── SITE NAV ── */
@@ -71,7 +48,7 @@
     height: 52px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 clamp(16px, 5vw, 48px);
     background: rgba(248,248,248,0.88);
     backdrop-filter: blur(16px);
@@ -92,6 +69,8 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--gray);
+    position: absolute;
+    right: clamp(16px, 5vw, 48px);
   }
 
   /* ── TICKER ── */
@@ -264,7 +243,7 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700; font-size: 13px; letter-spacing: .04em;
     padding: 14px 28px; border-radius: 50px;
-    border: none; cursor: none; text-decoration: none;
+    border: none; cursor: pointer; text-decoration: none;
     transition: opacity .2s, transform .2s;
   }
   .btn-primary:hover { opacity: .88; transform: translateY(-2px); }
@@ -276,7 +255,7 @@
     font-weight: 500; font-size: 13px; letter-spacing: .04em;
     padding: 14px 28px; border-radius: 50px;
     border: 1px solid rgba(0,0,0,.1);
-    cursor: none; text-decoration: none;
+    cursor: pointer; text-decoration: none;
     transition: border-color .2s, color .2s, transform .2s;
   }
   .btn-ghost:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
@@ -497,7 +476,7 @@
     border-radius: 20px;
     border-left: 4px solid #FF5200;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
-    cursor: none;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
     transition: transform .3s ease, box-shadow .3s ease;
@@ -649,7 +628,7 @@
     padding: 14px 18px;
     background: var(--bg); border-radius: 12px;
     text-decoration: none; color: var(--black);
-    cursor: none;
+    cursor: pointer;
     transition: background .2s, transform .2s;
   }
   .social-row:hover { background: var(--orange-pale); transform: translateX(4px); }
@@ -912,7 +891,7 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    cursor: none;
+    cursor: pointer;
     transition: transform .25s ease, box-shadow .25s ease;
     position: relative;
     overflow: hidden;
@@ -950,7 +929,7 @@
     gap: 8px; padding: 18px 12px;
     background: var(--bg); border-radius: 14px;
     text-decoration: none; color: var(--black);
-    cursor: none; transition: background .2s, transform .2s;
+    cursor: pointer; transition: background .2s, transform .2s;
     text-align: center;
   }
   .social-compact:hover { background: var(--orange-pale); transform: translateY(-3px); }
@@ -1035,7 +1014,7 @@
     background: var(--orange); color: white;
     border: none; border-radius: 12px;
     padding: 16px 28px; font-size: 15px; font-weight: 700;
-    text-decoration: none; cursor: none;
+    text-decoration: none; cursor: pointer;
     transition: background .2s, transform .2s, box-shadow .2s;
     font-family: 'Pretendard', sans-serif;
     box-shadow: 0 4px 20px rgba(255,82,0,.4);
@@ -1046,7 +1025,7 @@
     background: transparent; color: white;
     border: 1.5px solid rgba(255,255,255,.3); border-radius: 12px;
     padding: 16px 28px; font-size: 15px; font-weight: 700;
-    cursor: none; font-family: 'Pretendard', sans-serif;
+    cursor: pointer; font-family: 'Pretendard', sans-serif;
     transition: border-color .2s, background .2s, transform .2s;
   }
   .donate-btn-secondary:hover { border-color: white; background: rgba(255,255,255,.07); transform: translateY(-2px); }
@@ -1151,7 +1130,7 @@
     background: white; border-radius: var(--radius);
     padding: 22px 20px; box-shadow: var(--card-shadow);
     text-decoration: none; color: var(--black);
-    cursor: none; position: relative; overflow: hidden;
+    cursor: pointer; position: relative; overflow: hidden;
     transition: transform .3s ease, box-shadow .3s ease;
     display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center;
   }
@@ -1244,7 +1223,7 @@
     background: white; border-radius: 12px;
     padding: 14px 12px; box-shadow: var(--card-shadow);
     text-decoration: none; color: var(--black);
-    cursor: none;
+    cursor: pointer;
     display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
     border: 1.5px solid transparent;
     transition: border-color .22s, background .22s, transform .22s, box-shadow .22s;
@@ -1399,8 +1378,6 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="ring"></div>
 
 <button id="floatShare" onclick="sharePage()" aria-label="이 페이지 공유하기">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
@@ -1932,20 +1909,6 @@
 </footer>
 
 <script>
-  const cur = document.getElementById('cursor');
-  const rng = document.getElementById('ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-  (function loop(){
-    cur.style.left=mx+'px'; cur.style.top=my+'px';
-    rx+=(mx-rx)*.11; ry+=(my-ry)*.11;
-    rng.style.left=rx+'px'; rng.style.top=ry+'px';
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('a,button,.pledge-card,.univ-card,.apt-card').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';rng.style.width='48px';rng.style.height='48px';});
-    el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';rng.style.width='34px';rng.style.height='34px';});
-  });
 
   // News
   const newsAddBtn = document.getElementById('newsAddBtn');
@@ -2225,5 +2188,6 @@ const ppData = [
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 })();
 </script>
+<script src="./assets/nav.js"></script>
 </body>
 </html>

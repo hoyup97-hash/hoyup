@@ -1,3 +1,4 @@
 .claude/
 settings_local.json
 *.local.json
+/crime/
