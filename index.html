@@ -24,7 +24,7 @@
     --orange: #FF5200;
     --orange-pale: #FFF0E8;
     --gray: #A0A0A0;
-    --card-shadow: 0 2px 24px rgba(0,0,0,0.07);
+    --card-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04), 0 8px 20px rgba(0,0,0,0.06), 0 24px 40px rgba(0,0,0,0.06);
     --radius: 20px;
   }
 
@@ -334,7 +334,7 @@
   }
 
   /* About */
-  .card { background: white; border-radius: var(--radius); box-shadow: var(--card-shadow); overflow: hidden; }
+  .card { background: linear-gradient(155deg, #ffffff 0%, #fafaf8 100%); border-radius: var(--radius); box-shadow: var(--card-shadow); overflow: hidden; }
 
   .card-about { display: grid; grid-template-columns: 1fr 1fr; }
   @media (max-width: 700px) { .card-about { grid-template-columns: 1fr; } }
@@ -464,22 +464,26 @@
 
   .pledge-row {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(2,1fr);
     gap: 20px;
   }
-  @media (max-width: 900px) { .pledge-row { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 500px) { .pledge-row { grid-template-columns: 1fr; } }
 
   .pledge-card {
-    background: white;
+    text-decoration: none;
+    background: linear-gradient(155deg, #ffffff 0%, #fafaf8 100%);
     padding: 40px 32px 36px;
     border-radius: 20px;
     border-left: 4px solid #FF5200;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.05),
+      0 2px 4px rgba(0,0,0,0.04),
+      0 8px 20px rgba(0,0,0,0.06),
+      0 28px 48px rgba(0,0,0,0.07);
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: transform .3s ease, box-shadow .3s ease;
+    transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1);
     display: flex;
     flex-direction: column;
   }
@@ -488,11 +492,23 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(to right, rgba(255,82,0,0.3), transparent);
+    background: linear-gradient(to right, rgba(255,82,0,0.45), transparent 55%);
+  }
+  .pledge-card::after {
+    content: '';
+    position: absolute;
+    top: -60px; left: -30px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(255,82,0,0.07) 0%, transparent 68%);
+    pointer-events: none;
   }
   .pledge-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 48px rgba(255,82,0,0.14), 0 0 0 1px rgba(255,82,0,0.08);
+    transform: translateY(-9px);
+    box-shadow:
+      0 0 0 1px rgba(255,82,0,0.12),
+      0 4px 8px rgba(0,0,0,0.05),
+      0 16px 32px rgba(0,0,0,0.08),
+      0 36px 64px rgba(255,82,0,0.11);
   }
   .pledge-card-locked {
     pointer-events: none;
@@ -1092,27 +1108,45 @@
   /* Pinpoint Cards */
   .pinpoint-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
   }
-  @media (max-width: 1024px) { .pinpoint-row { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 600px)  { .pinpoint-row { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) { .pinpoint-row { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .pinpoint-row { grid-template-columns: 1fr; } }
 
   .pinpoint-card {
-    background: white;
+    background: linear-gradient(155deg, #ffffff 0%, #fafaf8 100%);
     border-radius: 18px;
     padding: 28px 20px 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.05),
+      0 2px 4px rgba(0,0,0,0.04),
+      0 8px 18px rgba(0,0,0,0.05);
     display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
     position: relative; overflow: hidden;
-    transition: transform .3s ease, box-shadow .3s ease;
+    transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1);
+  }
+  .pinpoint-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.2));
+    pointer-events: none;
   }
   .pinpoint-card::after {
     content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
     background: var(--orange); transform: scaleX(0); transform-origin: left;
-    transition: transform .35s cubic-bezier(.76,0,.24,1);
+    transition: transform .4s cubic-bezier(.76,0,.24,1);
   }
-  .pinpoint-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.1); }
+  .pinpoint-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+      0 0 0 1px rgba(255,82,0,0.09),
+      0 4px 8px rgba(0,0,0,0.05),
+      0 16px 36px rgba(0,0,0,0.09),
+      0 28px 48px rgba(255,82,0,0.07);
+  }
   .pinpoint-card:hover::after { transform: scaleX(1); }
   .pinpoint-icon { font-size: 32px; line-height: 1; }
   .pinpoint-title { font-size: 15px; font-weight: 800; letter-spacing: -.02em; line-height: 1.3; }
@@ -1127,19 +1161,31 @@
   @media (max-width: 700px) { .univ-row { grid-template-columns: repeat(3,1fr); gap: 8px; } }
 
   .univ-card {
-    background: white; border-radius: var(--radius);
-    padding: 22px 20px; box-shadow: var(--card-shadow);
+    background: linear-gradient(155deg, #ffffff 0%, #fafaf8 100%);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.05),
+      0 2px 4px rgba(0,0,0,0.04),
+      0 8px 18px rgba(0,0,0,0.05);
     text-decoration: none; color: var(--black);
     cursor: pointer; position: relative; overflow: hidden;
-    transition: transform .3s ease, box-shadow .3s ease;
+    transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1);
     display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center;
   }
   .univ-card::after {
     content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
     background: var(--orange); transform: scaleX(0); transform-origin: left;
-    transition: transform .35s cubic-bezier(.76,0,.24,1);
+    transition: transform .4s cubic-bezier(.76,0,.24,1);
   }
-  .univ-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.11); }
+  .univ-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 0 0 1px rgba(255,82,0,0.09),
+      0 4px 8px rgba(0,0,0,0.05),
+      0 16px 36px rgba(0,0,0,0.09),
+      0 28px 52px rgba(255,82,0,0.07);
+  }
   .univ-card:hover::after { transform: scaleX(1); }
   .univ-card:hover .univ-arrow { color: var(--orange); }
   .univ-card-soon { opacity: 0.45; pointer-events: none; }
@@ -1273,6 +1319,165 @@
     font-weight: 600;
   }
 
+  /* ── 공약 제안 ── */
+  .proposal-item {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 16px 18px;
+    background: var(--bg);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .proposal-item:hover { background: var(--orange-pale); }
+  .proposal-item-header { display: flex; align-items: center; gap: 10px; }
+  .proposal-item-title { font-size: 14px; font-weight: 700; flex: 1; letter-spacing: -.01em; }
+  .proposal-item-like {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 12px; font-weight: 700; color: var(--orange);
+    background: rgba(255,82,0,0.09); padding: 3px 10px; border-radius: 40px;
+    border: none; cursor: pointer; transition: background .2s;
+    flex-shrink: 0;
+  }
+  .proposal-item-like:hover { background: rgba(255,82,0,0.18); }
+  .proposal-section-label { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; }
+  .proposal-tab {
+    flex: 1; padding: 10px; border: none; border-radius: 12px;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    background: var(--bg); color: var(--gray);
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: background .2s, color .2s;
+  }
+  .proposal-tab.active { background: var(--black); color: white; }
+  .proposal-empty { text-align: center; padding: 40px 0; font-size: 13px; color: var(--gray); }
+  .proposal-submit-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--black); color: white;
+    border: none; border-radius: 100px;
+    padding: 13px 28px; font-size: 14px; font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer; transition: background .2s, transform .2s;
+  }
+  .proposal-submit-btn:hover { background: var(--orange); transform: translateY(-2px); }
+
+  /* 공약 제안 모달 */
+  .proposal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none; transition: opacity .25s ease;
+  }
+  .proposal-overlay.open { opacity: 1; pointer-events: all; }
+  .proposal-modal {
+    background: white; border-radius: 20px;
+    border-top: 4px solid var(--orange);
+    max-width: 480px; width: 100%;
+    max-height: 90svh; overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0,0,0,.18);
+    transform: translateY(16px) scale(.97);
+    transition: transform .28s cubic-bezier(.22,1,.36,1);
+  }
+  .proposal-overlay.open .proposal-modal { transform: translateY(0) scale(1); }
+  .proposal-modal-header {
+    padding: 24px 24px 0;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .proposal-modal-title { font-size: 17px; font-weight: 800; letter-spacing: -.02em; }
+  .proposal-modal-close {
+    background: none; border: none; cursor: pointer;
+    color: #aaa; font-size: 20px; padding: 4px; line-height: 1;
+    transition: color .15s;
+  }
+  .proposal-modal-close:hover { color: #333; }
+  .proposal-modal-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .proposal-field { display: flex; flex-direction: column; gap: 6px; }
+  .proposal-label { font-size: 12px; font-weight: 700; color: var(--black); letter-spacing: .02em; }
+  .proposal-label span { color: var(--gray); font-weight: 400; }
+  .proposal-input, .proposal-textarea {
+    background: var(--bg); border: 1.5px solid transparent;
+    border-radius: 12px; padding: 12px 14px;
+    font-size: 13px; font-family: 'Noto Sans KR', sans-serif;
+    color: var(--black); outline: none; transition: border-color .2s;
+    width: 100%;
+  }
+  .proposal-input:focus, .proposal-textarea:focus { border-color: var(--orange); background: white; }
+  .proposal-textarea { resize: vertical; min-height: 100px; line-height: 1.7; }
+  .proposal-modal-foot { padding: 0 24px 24px; display: flex; gap: 10px; }
+  .proposal-send-btn {
+    flex: 1; background: var(--orange); color: white;
+    border: none; border-radius: 100px; padding: 13px;
+    font-size: 14px; font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
+    transition: background .2s;
+  }
+  .proposal-send-btn:hover { background: #e04800; }
+  .proposal-cancel-btn {
+    flex: 1; background: var(--bg); color: var(--black);
+    border: none; border-radius: 100px; padding: 13px;
+    font-size: 14px; font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
+  }
+
+  /* 제안 상세 모달 */
+  .proposal-detail-content { padding: 16px 24px 8px; }
+  .proposal-detail-body { font-size: 14px; color: #444; line-height: 1.85; word-break: keep-all; }
+  .proposal-detail-location { font-size: 12px; color: var(--gray); margin-top: 10px; }
+  .proposal-delete-row { padding: 12px 24px 20px; border-top: 1px solid #f0f0f0; margin-top: 12px; display: flex; gap: 8px; align-items: center; }
+  .proposal-delete-input {
+    flex: 1; background: var(--bg); border: 1.5px solid transparent;
+    border-radius: 10px; padding: 10px 14px; font-size: 13px;
+    font-family: 'Noto Sans KR', sans-serif; color: var(--black); outline: none;
+    transition: border-color .2s;
+  }
+  .proposal-delete-input:focus { border-color: #e00; background: white; }
+  .proposal-delete-btn {
+    background: #fee; color: #c00; border: none; border-radius: 10px;
+    padding: 10px 16px; font-size: 13px; font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
+    white-space: nowrap; transition: background .2s;
+  }
+  .proposal-delete-btn:hover { background: #fcc; }
+
+  /* ── 실시간 위치 ── */
+  .location-iframe-wrap {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+    background: var(--bg2);
+  }
+  .location-iframe-wrap iframe {
+    display: block;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .location-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--bg2);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .location-placeholder-icon { font-size: 36px; opacity: 0.4; }
+  .location-placeholder-text {
+    font-size: 13px; color: var(--gray);
+    font-weight: 500; letter-spacing: 0.02em;
+  }
+  .location-caption {
+    padding: 10px 20px 14px;
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  /* Anchor 스크롤 오프셋 (고정 nav 높이 보정) */
+  #pledges, #pinpoint, #pledge10, #universities, #donate { scroll-margin-top: 68px; }
+
   /* Animations */
   @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
   .reveal { opacity:0; transform:translateY(32px); transition: opacity .75s ease, transform .75s ease; }
@@ -1299,6 +1504,190 @@
     transition: transform .2s ease;
   }
   #floatShare:hover { transform: scale(1.08); }
+
+  /* ── 10대 공약 ── */
+  .pledge10-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 768px) { .pledge10-row { grid-template-columns: 1fr; } }
+
+  .pledge10-card {
+    background: linear-gradient(155deg, #ffffff 0%, #fafaf8 100%);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--orange);
+    padding: 24px 22px 20px;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.05),
+      0 2px 4px rgba(0,0,0,0.04),
+      0 8px 18px rgba(0,0,0,0.05);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1);
+  }
+  .pledge10-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, rgba(255,82,0,0.35), transparent 50%);
+    pointer-events: none;
+  }
+  .pledge10-card::after {
+    content: '';
+    position: absolute;
+    top: -50px; left: -20px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(255,82,0,0.06) 0%, transparent 68%);
+    pointer-events: none;
+  }
+  .pledge10-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+      0 0 0 1px rgba(255,82,0,0.10),
+      0 4px 8px rgba(0,0,0,0.05),
+      0 16px 32px rgba(0,0,0,0.08),
+      0 28px 52px rgba(255,82,0,0.09);
+  }
+  .pledge10-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .pledge10-num {
+    font-size: 26px;
+    font-weight: 900;
+    color: rgba(255,82,0,0.22);
+    letter-spacing: -.04em;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .pledge10-icon {
+    font-size: 26px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .pledge10-title {
+    font-size: clamp(14px, 1.6vw, 17px);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.3;
+    flex: 1;
+  }
+  .pledge10-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--orange);
+    background: rgba(255,82,0,0.10);
+    padding: 3px 10px;
+    border-radius: 40px;
+    width: fit-content;
+  }
+  .pledge10-hint {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: .04em;
+    margin-top: 4px;
+  }
+
+  /* 10대 공약 모달 */
+  .p10-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .p10-overlay.open { opacity: 1; pointer-events: all; }
+
+  .p10-modal {
+    background: white; border-radius: 20px;
+    border-top: 4px solid var(--orange);
+    max-width: 520px; width: 100%;
+    max-height: 85svh; overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    transform: translateY(16px) scale(0.97);
+    transition: transform .28s cubic-bezier(.22,1,.36,1);
+    position: relative;
+  }
+  .p10-overlay.open .p10-modal { transform: translateY(0) scale(1); }
+
+  .p10-modal-header {
+    padding: 28px 28px 0;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  }
+  .p10-modal-close {
+    background: none; border: none; cursor: pointer;
+    color: #aaa; padding: 4px; line-height: 1;
+    transition: color .15s;
+    flex-shrink: 0;
+  }
+  .p10-modal-close:hover { color: #333; }
+  .p10-modal-num {
+    font-size: 12px; font-weight: 700; color: rgba(255,82,0,0.5);
+    letter-spacing: .12em; margin-bottom: 4px;
+  }
+  .p10-modal-icon { font-size: 36px; line-height: 1; margin-bottom: 8px; }
+  .p10-modal-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--orange); background: rgba(255,82,0,0.10);
+    padding: 3px 10px; border-radius: 40px;
+    display: inline-block; margin: 10px 0 8px;
+  }
+  .p10-modal-title {
+    font-size: clamp(18px, 4vw, 22px); font-weight: 800;
+    letter-spacing: -.02em; line-height: 1.3; color: #1C1C1C;
+  }
+  .p10-modal-body { padding: 16px 28px 16px; }
+  .p10-section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 8px; margin-top: 20px;
+  }
+  .p10-modal-desc {
+    font-size: 14px; color: #555; line-height: 1.85; word-break: keep-all;
+  }
+  .p10-modal-list {
+    list-style: none; display: flex; flex-direction: column; gap: 10px;
+    padding: 0; margin: 0;
+  }
+  .p10-modal-list li {
+    display: flex; gap: 10px; font-size: 13px; color: #444; line-height: 1.7;
+    word-break: keep-all;
+  }
+  .p10-modal-list li::before {
+    content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; margin-top: 2px;
+  }
+  .p10-effect {
+    font-size: 14px; color: #555; line-height: 1.85; word-break: keep-all;
+  }
+  .p10-modal-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 28px 20px;
+    border-top: 1px solid #f0f0f0;
+    gap: 12px;
+  }
+  .p10-nav-btn {
+    flex: 1; background: var(--bg); border: none; border-radius: 100px;
+    padding: 11px 16px; font-size: 13px; font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer; color: var(--black);
+    transition: background .2s, color .2s;
+    display: flex; align-items: center; gap: 6px; justify-content: center;
+  }
+  .p10-nav-btn:hover { background: var(--orange-pale); color: var(--orange); }
+  .p10-nav-btn:disabled { opacity: 0.3; pointer-events: none; }
+  .p10-nav-counter {
+    font-size: 12px; font-weight: 700; color: var(--gray); white-space: nowrap;
+  }
 
   /* ── 핀포인트 모달 ── */
   .pinpoint-card { cursor: pointer; }
@@ -1483,7 +1872,7 @@
 <div class="cards-wrap">
 
   <!-- Pledges -->
-  <div class="section-header reveal" style="margin-top:20px;">
+  <div id="pledges" class="section-header reveal" style="margin-top:20px;">
     <div class="sec-title">핵심 공약</div>
     <div class="sec-tag">Pledges</div>
   </div>
@@ -1514,28 +1903,10 @@
       <div class="pledge-desc">재정자립도 서울 하위권인 성북구, 상품권 할인 보조엔 올해 80억 이상 지출 예정 — 성북 재정 공개 및 우선순위 재편</div>
       <span class="pledge-more">자세히 보기 →</span>
     </a>
-    <div class="pledge-card pledge-card-locked reveal reveal-d3" data-overlay="공개 예정입니다">
-      <div class="pledge-header">
-        <div class="pledge-num">03</div>
-        <div class="pledge-title">퇴근할 때까지,<br>성북이 같이 봅니다</div>
-        <div class="pledge-icon">🌱</div>
-      </div>
-      <div class="pledge-desc">오후 돌봄 공백 제로 — 학교가 끝나도 부모가 퇴근할 때까지 아이가 안전한 성북구</div>
-      <span class="pledge-soon">공개 예정입니다</span>
-    </div>
-    <div class="pledge-card pledge-card-locked reveal reveal-d4" data-overlay="공개 예정입니다">
-      <div class="pledge-header">
-        <div class="pledge-num">04</div>
-        <div class="pledge-title">성북에서 공부했으면,<br>성북에서 시작하세요</div>
-        <div class="pledge-icon">🎓</div>
-      </div>
-      <div class="pledge-desc">서울에서 대학이 가장 많은 동네, 근데 왜 청년이 제일 먼저 떠날까요 — 청년 정착 지원 패키지</div>
-      <span class="pledge-soon">공개 예정입니다</span>
-    </div>
   </div>
 
   <!-- Pinpoint Pledges -->
-  <div class="section-header reveal" style="margin-top:20px;">
+  <div id="pinpoint" class="section-header reveal" style="margin-top:20px;">
     <div class="sec-title">📌 핀포인트 공약!</div>
     <div class="sec-tag">Pinpoint</div>
   </div>
@@ -1568,17 +1939,108 @@
       <span class="pinpoint-badge">의료 접근성</span>
       <span class="pp-more">자세히 보기 →</span>
     </div>
-    <div class="pinpoint-card reveal reveal-d5" data-pp="4">
-      <div class="pinpoint-icon">🌳</div>
-      <div class="pinpoint-title">성북천 야간 산책로 정비</div>
-      <div class="pinpoint-desc">조명·안전난간·벤치 전면 개선으로 저녁에도 편하게 걸을 수 있는 성북천</div>
-      <span class="pinpoint-badge">환경·여가</span>
-      <span class="pp-more">자세히 보기 →</span>
+  </div>
+
+  <!-- 10대 공약 -->
+  <div id="pledge10" class="section-header reveal" style="margin-top:20px;">
+    <div class="sec-title">10대 공약</div>
+    <div class="sec-tag">Pledges 10</div>
+  </div>
+  <div class="pledge10-row">
+    <div class="pledge10-card reveal reveal-d1" data-p10="0">
+      <div class="pledge10-header">
+        <div class="pledge10-num">01</div>
+        <div class="pledge10-icon">🔦</div>
+        <div class="pledge10-title">우리 동네 안심 골목길 프로젝트</div>
+      </div>
+      <span class="pledge10-tag">생활안전·CCTV·조명</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d2" data-p10="1">
+      <div class="pledge10-header">
+        <div class="pledge10-num">02</div>
+        <div class="pledge10-icon">🚶</div>
+        <div class="pledge10-title">걷기 좋은 성북, 보행환경 개선</div>
+      </div>
+      <span class="pledge10-tag">보행·교통·어린이보호구역</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d3" data-p10="2">
+      <div class="pledge10-header">
+        <div class="pledge10-num">03</div>
+        <div class="pledge10-icon">👶</div>
+        <div class="pledge10-title">아이 키우기 좋은 성북, 공보육·돌봄 강화</div>
+      </div>
+      <span class="pledge10-tag">보육·돌봄·맞벌이</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d4" data-p10="3">
+      <div class="pledge10-header">
+        <div class="pledge10-num">04</div>
+        <div class="pledge10-icon">🧓</div>
+        <div class="pledge10-title">어르신이 건강하고 활기찬 성북</div>
+      </div>
+      <span class="pledge10-tag">노인복지·경로당·치매예방</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d1" data-p10="4">
+      <div class="pledge10-header">
+        <div class="pledge10-num">05</div>
+        <div class="pledge10-icon">🏘️</div>
+        <div class="pledge10-title">낡은 동네에 새 숨결, 주거환경·도시재생</div>
+      </div>
+      <span class="pledge10-tag">노후주택·빈집·골목정비</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d2" data-p10="5">
+      <div class="pledge10-header">
+        <div class="pledge10-num">06</div>
+        <div class="pledge10-icon">🏪</div>
+        <div class="pledge10-title">전통시장 살리고, 소상공인 지키는 성북</div>
+      </div>
+      <span class="pledge10-tag">전통시장·소상공인·지역상권</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d3" data-p10="6">
+      <div class="pledge10-header">
+        <div class="pledge10-num">07</div>
+        <div class="pledge10-icon">🌳</div>
+        <div class="pledge10-title">집 앞에서 쉬는 공원, 녹지 늘리는 성북</div>
+      </div>
+      <span class="pledge10-tag">공원·녹지·산책로</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d4" data-p10="7">
+      <div class="pledge10-header">
+        <div class="pledge10-num">08</div>
+        <div class="pledge10-icon">📚</div>
+        <div class="pledge10-title">청소년이 머물 곳 있는 성북</div>
+      </div>
+      <span class="pledge10-tag">청소년·활동공간·진로</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d1" data-p10="8">
+      <div class="pledge10-header">
+        <div class="pledge10-num">09</div>
+        <div class="pledge10-icon">♿</div>
+        <div class="pledge10-title">누구나 불편 없이 다니는 성북</div>
+      </div>
+      <span class="pledge10-tag">장애인·교통약자·무장애</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
+    </div>
+    <div class="pledge10-card reveal reveal-d2" data-p10="9">
+      <div class="pledge10-header">
+        <div class="pledge10-num">10</div>
+        <div class="pledge10-icon">🗳️</div>
+        <div class="pledge10-title">주민이 참여하고, 구의회가 투명한 성북</div>
+      </div>
+      <span class="pledge10-tag">주민참여·투명행정·소통</span>
+      <span class="pledge10-hint">자세히 보기 →</span>
     </div>
   </div>
 
   <!-- University Pledges -->
-  <div class="section-header reveal" style="margin-top:20px;">
+  <div id="universities" class="section-header reveal" style="margin-top:20px;">
     <div class="sec-title">대학별 공약</div>
     <div class="sec-tag">University</div>
   </div>
@@ -1600,7 +2062,8 @@
     </div>
   </div>
 
-  <!-- Apartment Pledges -->
+  <!-- Apartment Pledges (hidden until 2026-05-15 — div#apt-section-hidden 제거하면 복원) -->
+  <div id="apt-section-hidden" style="display:none;">
   <div class="section-header reveal" style="margin-top:20px;">
     <div class="sec-title">아파트별 공약</div>
     <div class="sec-tag">Apartment</div>
@@ -1714,6 +2177,54 @@
       <div class="apt-arrow">공개 예정</div>
     </div>
     <div class="apt-no-result" id="aptNoResult">검색 결과가 없습니다 🔍</div>
+  </div>
+  </div><!-- /apt-section-hidden -->
+
+  <!-- 실시간 위치 -->
+  <div class="section-header reveal" style="margin-top:20px;">
+    <div class="sec-title">실시간 유세 위치</div>
+    <div class="sec-tag">Live</div>
+  </div>
+  <div class="card reveal" style="padding:0;overflow:hidden;">
+    <div class="location-iframe-wrap">
+      <!-- URL 정해지면 src="" 안에 넣으면 됨 -->
+      <iframe
+        id="locationFrame"
+        src=""
+        width="100%"
+        height="450"
+        frameborder="0"
+        allowfullscreen
+        loading="lazy"
+        title="이호엽 후보 실시간 유세 위치"
+      ></iframe>
+      <div class="location-placeholder" id="locationPlaceholder">
+        <div class="location-placeholder-icon">📍</div>
+        <div class="location-placeholder-text">선거운동 기간 중 위치가 표시됩니다</div>
+      </div>
+    </div>
+    <div class="location-caption">선거운동 기간 중 실시간 위치가 표시됩니다</div>
+  </div>
+
+  <!-- 공약 제안 -->
+  <div class="section-header reveal" style="margin-top:20px;">
+    <div class="sec-title">공약 제안</div>
+    <div class="sec-tag">Proposals</div>
+  </div>
+
+  <!-- 인기 제안 목록 -->
+  <div class="card reveal" style="padding:24px 24px 16px;">
+    <div class="proposal-section-label">🏆 BEST 제안</div>
+    <div id="proposalBestList">
+      <div class="proposal-empty">제보해주세요!</div>
+    </div>
+    <div class="proposal-section-label" style="margin-top:20px;">🕐 실시간 제안</div>
+    <div id="proposalLiveList">
+      <div class="proposal-empty">제보해주세요!</div>
+    </div>
+    <div style="text-align:center; margin-top:20px;">
+      <button class="proposal-submit-btn" id="openProposalModal">✏️ 공약 제안하기</button>
+    </div>
   </div>
 
   <!-- YouTube -->
@@ -1862,7 +2373,7 @@
   </div>
 
   <!-- Donate -->
-  <div class="section-header reveal" style="margin-top:20px;">
+  <div id="donate" class="section-header reveal" style="margin-top:20px;">
     <div class="sec-title">후원하기</div>
     <div class="sec-tag">Donate</div>
   </div>
@@ -2056,6 +2567,15 @@
     document.getElementById('comingSoonModal').classList.add('open');
   }
 
+// 실시간 위치 iframe: src 있으면 placeholder 숨김
+(function() {
+  const frame = document.getElementById('locationFrame');
+  const placeholder = document.getElementById('locationPlaceholder');
+  if (frame && frame.src && frame.src !== window.location.href) {
+    placeholder.style.display = 'none';
+  }
+})();
+
 function sharePage() {
   if (navigator.share) {
     navigator.share({
@@ -2089,6 +2609,61 @@ function sharePage() {
     csm.classList.remove('open');
   });
 </script>
+<!-- 공약 제안 작성 모달 -->
+<div class="proposal-overlay" id="proposalOverlay">
+  <div class="proposal-modal">
+    <div class="proposal-modal-header">
+      <div class="proposal-modal-title">✏️ 공약 제안하기</div>
+      <button class="proposal-modal-close" id="proposalModalClose">✕</button>
+    </div>
+    <div class="proposal-modal-body">
+      <div class="proposal-field">
+        <div class="proposal-label">제목 <span>*필수</span></div>
+        <input class="proposal-input" id="pTitle" type="text" placeholder="제안하실 공약을 한 줄로 요약해주세요">
+      </div>
+      <div class="proposal-field">
+        <div class="proposal-label">닉네임 <span>(선택 — 미입력 시 "익명"으로 표시)</span></div>
+        <input class="proposal-input" id="pNick" type="text" placeholder="예: 안암동 주민">
+      </div>
+      <div class="proposal-field">
+        <div class="proposal-label">내용 <span>*필수</span></div>
+        <textarea class="proposal-textarea" id="pBody" placeholder="어떤 공약이 필요한지 자세히 적어주세요"></textarea>
+      </div>
+      <div class="proposal-field">
+        <div class="proposal-label">위치 <span>(선택 — 예: 안암동, 종암동)</span></div>
+        <input class="proposal-input" id="pLocation" type="text" placeholder="해당되는 동네나 장소">
+      </div>
+      <div class="proposal-field">
+        <div class="proposal-label">비밀번호 <span>*나중에 삭제할 때 필요</span></div>
+        <input class="proposal-input" id="pPw" type="password" placeholder="숫자 4자리 이상">
+      </div>
+    </div>
+    <div class="proposal-modal-foot">
+      <button class="proposal-cancel-btn" id="proposalCancelBtn">취소</button>
+      <button class="proposal-send-btn" id="proposalSendBtn">제출하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 공약 제안 상세 모달 -->
+<div class="proposal-overlay" id="proposalDetailOverlay">
+  <div class="proposal-modal">
+    <div class="proposal-modal-header">
+      <div class="proposal-modal-title" id="pdTitle"></div>
+      <button class="proposal-modal-close" id="proposalDetailClose">✕</button>
+    </div>
+    <div class="proposal-detail-content">
+      <div class="proposal-item-meta" id="pdMeta"></div>
+      <div class="proposal-detail-body" id="pdBody"></div>
+      <div class="proposal-detail-location" id="pdLocation"></div>
+    </div>
+    <div class="proposal-delete-row">
+      <input class="proposal-delete-input" id="pdPwInput" type="password" placeholder="작성 시 비밀번호 입력 후 삭제">
+      <button class="proposal-delete-btn" id="pdDeleteBtn">삭제</button>
+    </div>
+  </div>
+</div>
+
 <!-- 핀포인트 모달 -->
 <div class="pp-overlay" id="ppOverlay">
   <div class="pp-modal" id="ppModal">
@@ -2141,14 +2716,6 @@ const ppData = [
       { num: '01', title: '야간·공휴일 운영 의료기관 실시간 안내', desc: '구 공식 채널 및 앱을 통해 지금 열려 있는 근처 병원·약국을 실시간으로 안내합니다.' },
     ]
   },
-  {
-    icon: '🌳', badge: '환경·여가', title: '성북천 야간 산책로 정비',
-    desc: '성북천은 성북구의 핵심 녹지 공간이지만 야간 조명이 부족하고 안전 시설이 노후화되어 있습니다. 저녁에도 안심하고 걸을 수 있는 산책로를 만들겠습니다.',
-    items: [
-      { num: '01', title: '야간 조명 전면 개선', desc: '어두운 구간을 집중 점검하고 LED 조명을 확충해 야간 보행 안전을 확보합니다.' },
-      { num: '02', title: '안전난간·벤치 정비', desc: '노후화된 안전난간을 교체하고 쉬어갈 수 있는 벤치를 추가 설치합니다.' },
-    ]
-  },
 ];
 
 (function () {
@@ -2186,8 +2753,400 @@ const ppData = [
   document.getElementById('ppClose').addEventListener('click', closeModal);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  window.openPinpoint = openModal;
 })();
 </script>
 <script src="./assets/nav.js"></script>
+
+<!-- Firebase + 공약 제안 -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, increment, orderBy, query, limit, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBJn_tUM3jb5LM2z2GJtIUhlGx8AIf37Z0",
+  authDomain: "hoyup-proposals.firebaseapp.com",
+  projectId: "hoyup-proposals",
+  storageBucket: "hoyup-proposals.firebasestorage.app",
+  messagingSenderId: "278731270685",
+  appId: "1:278731270685:web:fa33656fbc1d0173d934f4",
+  measurementId: "G-Z3FV93W1NH"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ── 유틸 ──
+async function hashPw(pw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function timeAgo(ts) {
+  if (!ts) return '';
+  const diff = Math.floor((Date.now() - ts.toMillis()) / 1000);
+  if (diff < 60) return '방금 전';
+  if (diff < 3600) return Math.floor(diff/60) + '분 전';
+  if (diff < 86400) return Math.floor(diff/3600) + '시간 전';
+  return Math.floor(diff/86400) + '일 전';
+}
+
+// ── 목록 로드 ──
+const bestListEl = document.getElementById('proposalBestList');
+const liveListEl = document.getElementById('proposalLiveList');
+let bestCache = [];
+let liveCache = [];
+
+function renderList(container, cache) {
+  if (cache.length === 0) {
+    container.innerHTML = '<div class="proposal-empty">제보해주세요!</div>';
+    return;
+  }
+  container.innerHTML = cache.map((p, i) => `
+    <div class="proposal-item" data-idx="${i}" data-list="${container.id}">
+      <div class="proposal-item-header">
+        <div class="proposal-item-title">${p.title}</div>
+        <button class="proposal-item-like" data-id="${p.id}">❤️ ${p.likes || 0}</button>
+      </div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.proposal-item-like').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      await updateDoc(doc(db, 'proposals', btn.dataset.id), { likes: increment(1) });
+      loadProposals();
+    });
+  });
+
+  container.querySelectorAll('.proposal-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const listId = el.dataset.list;
+      const cache = listId === 'proposalBestList' ? bestCache : liveCache;
+      openDetail(cache[+el.dataset.idx]);
+    });
+  });
+}
+
+// ── 작성 모달 ──
+const overlay = document.getElementById('proposalOverlay');
+function openModal() { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+document.getElementById('openProposalModal').addEventListener('click', openModal);
+document.getElementById('proposalModalClose').addEventListener('click', closeModal);
+document.getElementById('proposalCancelBtn').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+document.getElementById('proposalSendBtn').addEventListener('click', async () => {
+  const title = document.getElementById('pTitle').value.trim();
+  const nick  = document.getElementById('pNick').value.trim();
+  const body  = document.getElementById('pBody').value.trim();
+  const loc   = document.getElementById('pLocation').value.trim();
+  const pw    = document.getElementById('pPw').value;
+
+  if (!title) { document.getElementById('pTitle').focus(); return; }
+  if (!nick) nick = '익명';
+  if (!body)  { document.getElementById('pBody').focus(); return; }
+  if (!pw || pw.length < 4) { document.getElementById('pPw').focus(); return; }
+
+  const sendBtn = document.getElementById('proposalSendBtn');
+  sendBtn.textContent = '제출 중...'; sendBtn.disabled = true;
+
+  try {
+    const pwHash = await hashPw(pw);
+    await addDoc(collection(db, 'proposals'), {
+      title, nickname: nick, body, location: loc,
+      pwHash, likes: 0, createdAt: serverTimestamp()
+    });
+    ['pTitle','pNick','pBody','pLocation','pPw'].forEach(id => document.getElementById(id).value = '');
+    closeModal();
+    loadProposals();
+  } catch(e) {
+    alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+  } finally {
+    sendBtn.textContent = '제출하기'; sendBtn.disabled = false;
+  }
+});
+
+// ── 상세 모달 ──
+const detailOverlay = document.getElementById('proposalDetailOverlay');
+let currentDetailId = null;
+
+function openDetail(p) {
+  currentDetailId = p.id;
+  document.getElementById('pdTitle').textContent = p.title;
+  document.getElementById('pdMeta').innerHTML = `<span>${p.nickname}</span>${p.location ? `<span>📍 ${p.location}</span>` : ''}<span>${timeAgo(p.createdAt)}</span>`;
+  document.getElementById('pdBody').textContent = p.body;
+  document.getElementById('pdPwInput').value = '';
+  detailOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail() { detailOverlay.classList.remove('open'); document.body.style.overflow = ''; currentDetailId = null; }
+
+document.getElementById('proposalDetailClose').addEventListener('click', closeDetail);
+detailOverlay.addEventListener('click', e => { if (e.target === detailOverlay) closeDetail(); });
+
+document.getElementById('pdDeleteBtn').addEventListener('click', async () => {
+  const pw = document.getElementById('pdPwInput').value;
+  if (!pw) { document.getElementById('pdPwInput').focus(); return; }
+
+  const pwHash = await hashPw(pw);
+  const p = proposalsCache.find(x => x.id === currentDetailId);
+  if (!p || p.pwHash !== pwHash) {
+    document.getElementById('pdPwInput').value = '';
+    document.getElementById('pdPwInput').placeholder = '비밀번호가 틀렸습니다';
+    return;
+  }
+  await deleteDoc(doc(db, 'proposals', currentDetailId));
+  closeDetail();
+  loadProposals();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeDetail(); }
+});
+
+// ── 두 목록 동시 로드 ──
+async function loadProposals() {
+  const [bestSnap, liveSnap] = await Promise.all([
+    getDocs(query(collection(db, 'proposals'), orderBy('likes', 'desc'), limit(5))),
+    getDocs(query(collection(db, 'proposals'), orderBy('createdAt', 'desc'), limit(5)))
+  ]);
+  bestCache = [];
+  liveCache = [];
+  bestSnap.forEach(d => bestCache.push({ id: d.id, ...d.data() }));
+  liveSnap.forEach(d => liveCache.push({ id: d.id, ...d.data() }));
+  renderList(bestListEl, bestCache);
+  renderList(liveListEl, liveCache);
+}
+
+// ── 더미 정리 & 시드 (1회) ──
+async function migrateData() {
+  // 기존 더미 삭제
+  const dummySnap = await getDocs(query(collection(db, 'proposals'), where('pwHash', '==', 'dummy')));
+  await Promise.all(dummySnap.docs.map(d => deleteDoc(doc(db, 'proposals', d.id))));
+
+  // 시드 항목이 이미 있으면 스킵
+  const seedSnap = await getDocs(query(collection(db, 'proposals'), where('pwHash', '==', 'seed_v1'), limit(1)));
+  if (!seedSnap.empty) return;
+
+  await addDoc(collection(db, 'proposals'), {
+    title: '성북01마을버스 배차 해결해주세요',
+    nickname: '한신한진주민',
+    body: '출퇴근 시간대 배차 간격이 너무 길어서 불편합니다. 특히 아침 8시~9시, 저녁 6시~7시 배차를 늘려주세요.',
+    location: '돈암동',
+    likes: 3,
+    pwHash: 'seed_v1',
+    createdAt: new Date(Date.now() - 30 * 24 * 3600 * 1000)
+  });
+}
+
+// 초기 로드
+migrateData().then(() => loadProposals());
+</script>
+
+<!-- 10대 공약 모달 -->
+<div class="p10-overlay" id="p10Overlay">
+  <div class="p10-modal" id="p10Modal">
+    <div class="p10-modal-header">
+      <div>
+        <div class="p10-modal-num" id="p10NumLabel"></div>
+        <div class="p10-modal-icon" id="p10Icon"></div>
+        <div class="p10-modal-badge" id="p10Badge"></div>
+        <div class="p10-modal-title" id="p10Title"></div>
+      </div>
+      <button class="p10-modal-close" id="p10Close" aria-label="닫기">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="p10-modal-body">
+      <div class="p10-section-label">왜 필요한가</div>
+      <div class="p10-modal-desc" id="p10Why"></div>
+      <div class="p10-section-label" style="margin-top:20px;">이렇게 하겠습니다</div>
+      <ul class="p10-modal-list" id="p10How"></ul>
+      <div class="p10-section-label" style="margin-top:20px;">기대효과</div>
+      <div class="p10-effect" id="p10Effect"></div>
+    </div>
+    <div class="p10-modal-nav">
+      <button class="p10-nav-btn" id="p10Prev">← 이전</button>
+      <span class="p10-nav-counter" id="p10Counter">1 / 10</span>
+      <button class="p10-nav-btn" id="p10Next">다음 →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const p10Data = [
+  {
+    num: '01', icon: '🔦', tag: '생활안전·CCTV·조명',
+    title: '우리 동네 안심 골목길 프로젝트',
+    why: '성북구에는 좁은 골목길과 경사진 주택가가 많지만, CCTV 사각지대와 조명이 부족한 구간이 여전히 존재합니다. 야간 귀가 시 여성·어르신·학생들의 불안감이 높습니다.',
+    how: [
+      '주민 신고 기반 "안전 사각지대 지도" 만들어 CCTV·비상벨 우선 설치 구간 선정',
+      '노후 보안등 LED 교체 및 사각지대 보안등 신규 설치 연차별 확대',
+      '1인가구·여성 밀집 지역 중심 안심귀가 스카우트 연계 강화',
+      '구의회 차원에서 안전 인프라 예산 편성 현황을 매년 점검·공개',
+    ],
+    effect: '골목길 체감 안전도 향상, 야간 범죄 예방, 취약계층의 보행 불안 해소'
+  },
+  {
+    num: '02', icon: '🚶', tag: '보행·교통·어린이보호구역',
+    title: '걷기 좋은 성북, 보행환경 개선',
+    why: '좁은 이면도로에 불법주정차 차량이 상시 점거하면서 보행자, 특히 유모차·휠체어 이용자가 차도로 내몰리는 상황이 반복됩니다.',
+    how: [
+      '어린이보호구역 내 과속단속카메라·노란신호등 확충 현황 점검 및 미설치 구간 조례 반영 촉구',
+      '주택가 이면도로 보행우선구역 지정 확대 요구',
+      '불법주정차 주민신고 활성화 및 단속 실효성 점검',
+      '통학로 중심 "안전한 보행길" 시범사업 제안',
+    ],
+    effect: '보행자 교통사고 감소, 교통약자 이동권 보장, 주택가 생활도로 쾌적성 향상'
+  },
+  {
+    num: '03', icon: '👶', tag: '보육·돌봄·맞벌이',
+    title: '아이 키우기 좋은 성북, 공보육·돌봄 강화',
+    why: '맞벌이 가구가 늘면서 긴급돌봄·야간돌봄 수요는 커지는데, 국공립 어린이집 비율은 여전히 부족하고 돌봄 공백 시간대가 존재합니다.',
+    how: [
+      '국공립 어린이집 확충 계획의 연도별 이행 현황을 구의회에서 정기 점검',
+      '초등 돌봄교실 확대 및 운영시간 연장(저녁 8시까지) 공동 건의',
+      '동 단위 긴급돌봄 거점 확보 추진',
+      '돌봄 종사자 처우 개선을 위한 구 차원 지원 조례 정비',
+    ],
+    effect: '양육 부담 경감, 돌봄 사각지대 해소, 저출생 대응 생활 인프라 구축'
+  },
+  {
+    num: '04', icon: '🧓', tag: '노인복지·경로당·치매예방',
+    title: '어르신이 건강하고 활기찬 성북',
+    why: '성북구는 고령인구 비율이 꾸준히 늘고 있으며, 독거노인 가구도 증가 추세입니다. 경로당 프로그램은 단순 여가 위주에 머물러 있고, 어르신 일자리 수요에 비해 공급이 부족합니다.',
+    how: [
+      '경로당 프로그램 다양화 (건강관리·디지털교육·세대교류) 예산 확대 요구',
+      '어르신 공공일자리 확충 현황 점검 및 참여형 일자리 발굴 제안',
+      '독거노인 정기 안부 확인 체계 강화',
+      '치매안심센터 접근성 개선 및 찾아가는 치매 조기검진 확대 건의',
+    ],
+    effect: '어르신 사회참여 확대, 독거노인 고독사 예방, 치매 조기발견율 향상'
+  },
+  {
+    num: '05', icon: '🏘️', tag: '노후주택·빈집·골목정비',
+    title: '낡은 동네에 새 숨결, 주거환경·도시재생',
+    why: '성북구에는 준공 30년 이상 노후 주택이 밀집한 지역이 많습니다. 골목 하수도·상수도 노후화, 빈집 방치로 인한 안전·위생 문제가 반복 지적됩니다.',
+    how: [
+      '노후 주거지 소규모 정비(집수리, 골목 포장, 배수시설 개선) 예산 확대를 구의회에서 지속 요구',
+      '방치 빈집 실태조사 및 "빈집 활용 조례" 정비',
+      '도시재생사업 주민 참여 확대 및 사업 진행 상황 투명 공개 요구',
+      '주거환경개선 주민 불편 접수 → 구의회 현장 확인 → 행정 시정 요구 체계 구축',
+    ],
+    effect: '주민 체감 주거환경 개선, 빈집 안전 문제 해소, 원주민 정주 여건 향상'
+  },
+  {
+    num: '06', icon: '🏪', tag: '전통시장·소상공인·지역상권',
+    title: '전통시장 살리고, 소상공인 지키는 성북',
+    why: '성북구 내 전통시장과 골목상권은 대형마트·온라인쇼핑 확산, 소비패턴 변화로 매출이 줄고 있습니다. 시장 시설은 노후화되어 있고, 소상공인들은 경영 지원 정보조차 제때 받지 못하는 경우가 많습니다.',
+    how: [
+      '전통시장 시설 현대화(아케이드, 화재안전설비, 공용화장실) 예산 집행 현황 점검',
+      '소상공인 경영안정자금·컨설팅 지원사업 접근성 개선',
+      '지역화폐(사랑상품권) 활성화 및 전통시장 연계 할인 행사 지원 확대',
+      '골목상권 상생 협의체 구성 지원',
+    ],
+    effect: '전통시장 이용객 증가, 소상공인 폐업률 감소, 지역 내 소비 순환 활성화'
+  },
+  {
+    num: '07', icon: '🌳', tag: '공원·녹지·산책로',
+    title: '집 앞에서 쉬는 공원, 녹지 늘리는 성북',
+    why: '성북구는 북한산·성북천 등 자연환경이 풍부하지만, 정작 주민들이 일상에서 걸어서 이용할 수 있는 생활권 소공원과 쉼터는 부족합니다.',
+    how: [
+      '도보 10분 내 생활권 소공원 조성 계획 수립 촉구',
+      '기존 공원·쉼터 시설물 정비 현황 점검 및 예산 확보 요구',
+      '성북천·산책로 연결 보행 네트워크 확충 제안',
+      '주민 참여형 마을정원·옥상텃밭 조성 지원 조례 정비',
+    ],
+    effect: '주민 여가·건강 증진, 도시 열섬 완화, 동네 만족도 및 정주 의향 제고'
+  },
+  {
+    num: '08', icon: '📚', tag: '청소년·활동공간·진로',
+    title: '청소년이 머물 곳 있는 성북',
+    why: '청소년들은 학교가 끝나면 갈 곳이 마땅치 않습니다. 기존 청소년 시설도 접근성이 떨어지거나 프로그램이 획일적이라는 지적이 있습니다.',
+    how: [
+      '동 단위 청소년 자율학습·문화공간("청소년 아지트") 확충 제안',
+      '청소년 수련관·센터 프로그램 다양화 및 운영시간 연장 건의',
+      '학교 주변 유해환경 실태 점검 — 행정사무감사 시 정기 안건화',
+      '청소년 참여위원회 활성화 — 지역 정책에 청소년 목소리 반영',
+    ],
+    effect: '청소년 활동 선택지 확대, 학교 밖 안전망 강화, 청소년 시민참여 경험 확대'
+  },
+  {
+    num: '09', icon: '♿', tag: '장애인·교통약자·무장애',
+    title: '누구나 불편 없이 다니는 성북',
+    why: '성북구 곳곳에는 경사가 급한 보도, 단차가 있는 횡단보도, 엘리베이터 없는 지하철 출입구 등 교통약자에게 장벽이 되는 구간이 남아 있습니다.',
+    how: [
+      '주요 보행구간 무장애(Barrier-Free) 실태 전수 점검 및 개선 우선순위 도출',
+      '횡단보도 턱 낮춤, 점자블록 정비, 음향신호기 설치 확대 예산 확보 요구',
+      '장애인콜택시 대기시간 단축 및 이동 서비스 확충을 시·구 차원에서 건의',
+      '공공시설 장애인 편의시설 적정 설치 여부 구의회 차원 정기 모니터링',
+    ],
+    effect: '교통약자 이동 자유 확보, 보행 사고 위험 감소, 장애인 사회참여 기반 강화'
+  },
+  {
+    num: '10', icon: '🗳️', tag: '주민참여·투명행정·소통',
+    title: '주민이 참여하고, 구의회가 투명한 성북',
+    why: '구의회가 무슨 일을 하는지, 우리 동네 예산이 어디에 쓰이는지 알기 어렵다는 주민 목소리가 많습니다. 주민참여예산제가 있지만 실제 참여율은 낮습니다.',
+    how: [
+      '의정활동 보고서를 SNS·뉴스레터로 정기 공개 — 월간 리포트 발행',
+      '주민참여예산제 활성화를 위한 동 단위 설명회·워크숍 정례화 제안',
+      '구의회 회의록·감사 결과를 주민이 쉽게 열람할 수 있도록 시스템 개선 건의',
+      '분기별 "주민과의 대화" 개최 — 현장 민원 직접 청취 후 구의회 안건 반영',
+    ],
+    effect: '주민-구의회 신뢰 회복, 예산 집행 투명성 강화, 풀뿌리 민주주의 실현'
+  },
+];
+
+(function () {
+  const overlay = document.getElementById('p10Overlay');
+  const total = p10Data.length;
+  let curIdx = 0;
+
+  function renderModal(idx) {
+    const d = p10Data[idx];
+    document.getElementById('p10NumLabel').textContent = d.num + ' / ' + String(total).padStart(2, '0');
+    document.getElementById('p10Icon').textContent = d.icon;
+    document.getElementById('p10Badge').textContent = d.tag;
+    document.getElementById('p10Title').textContent = d.title;
+    document.getElementById('p10Why').textContent = d.why;
+    document.getElementById('p10How').innerHTML = d.how.map(h => `<li>${h}</li>`).join('');
+    document.getElementById('p10Effect').textContent = d.effect;
+    document.getElementById('p10Counter').textContent = (idx + 1) + ' / ' + total;
+    document.getElementById('p10Prev').disabled = idx === 0;
+    document.getElementById('p10Next').disabled = idx === total - 1;
+    overlay.querySelector('.p10-modal').scrollTop = 0;
+  }
+
+  function openModal(idx) {
+    curIdx = idx;
+    renderModal(curIdx);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.pledge10-card[data-p10]').forEach(card => {
+    card.addEventListener('click', () => openModal(+card.dataset.p10));
+  });
+
+  document.getElementById('p10Close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.getElementById('p10Prev').addEventListener('click', () => { if (curIdx > 0) { curIdx--; renderModal(curIdx); } });
+  document.getElementById('p10Next').addEventListener('click', () => { if (curIdx < total - 1) { curIdx++; renderModal(curIdx); } });
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft' && curIdx > 0) { curIdx--; renderModal(curIdx); }
+    if (e.key === 'ArrowRight' && curIdx < total - 1) { curIdx++; renderModal(curIdx); }
+  });
+  window.openPledge10 = openModal;
+})();
+</script>
 </body>
 </html>
