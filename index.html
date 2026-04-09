@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root {
     --bg: #F8F8F8;
@@ -464,9 +465,10 @@
 
   .pledge-row {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(3,1fr);
     gap: 20px;
   }
+  @media (max-width: 900px) { .pledge-row { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 500px) { .pledge-row { grid-template-columns: 1fr; } }
 
   .pledge-card {
@@ -1335,11 +1337,12 @@
   .proposal-item-like {
     display: flex; align-items: center; gap: 4px;
     font-size: 12px; font-weight: 700; color: var(--orange);
-    background: rgba(255,82,0,0.09); padding: 3px 10px; border-radius: 40px;
-    border: none; cursor: pointer; transition: background .2s;
+    background: #fff; padding: 4px 12px; border-radius: 40px;
+    border: 1.5px solid var(--orange); cursor: pointer; transition: background .2s, color .2s, opacity .2s;
     flex-shrink: 0;
   }
-  .proposal-item-like:hover { background: rgba(255,82,0,0.18); }
+  .proposal-item-like:hover:not(:disabled) { background: rgba(255,82,0,0.08); }
+  .proposal-item-like:disabled { opacity: 0.45; cursor: default; border-color: #ccc; color: #999; }
   .proposal-section-label { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--gray); margin-bottom: 10px; }
   .proposal-tab {
     flex: 1; padding: 10px; border: none; border-radius: 12px;
@@ -1440,39 +1443,77 @@
   .proposal-delete-btn:hover { background: #fcc; }
 
   /* ── 실시간 위치 ── */
-  .location-iframe-wrap {
-    position: relative;
+  /* ── LIVE LOCATION ── */
+  .loc-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px 0;
+  }
+  .loc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .loc-badge.live {
+    background: #FF52001A;
+    color: var(--orange);
+  }
+  .loc-badge.live::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--orange);
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  .loc-badge.offline {
+    background: var(--bg2);
+    color: var(--gray);
+  }
+  .loc-updated {
+    font-size: 11px;
+    color: var(--gray);
+    margin-left: auto;
+    letter-spacing: 0.03em;
+  }
+  #locMap {
     width: 100%;
-    border-radius: var(--radius) var(--radius) 0 0;
-    overflow: hidden;
+    height: 380px;
+    margin-top: 12px;
+    border-radius: 0;
     background: var(--bg2);
   }
-  .location-iframe-wrap iframe {
-    display: block;
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
-  .location-placeholder {
-    position: absolute;
-    inset: 0;
+  .loc-offline-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
+    height: 380px;
+    margin-top: 12px;
     background: var(--bg2);
-    border-radius: var(--radius) var(--radius) 0 0;
+    color: var(--gray);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
-  .location-placeholder-icon { font-size: 36px; opacity: 0.4; }
-  .location-placeholder-text {
-    font-size: 13px; color: var(--gray);
-    font-weight: 500; letter-spacing: 0.02em;
-  }
-  .location-caption {
+  .loc-offline-icon { font-size: 36px; opacity: 0.4; }
+  .loc-caption {
     padding: 10px 20px 14px;
     font-size: 11px;
     color: var(--gray);
     letter-spacing: 0.04em;
     text-align: center;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
   }
 
   /* Anchor 스크롤 오프셋 (고정 nav 높이 보정) */
@@ -1877,9 +1918,22 @@
     <div class="sec-tag">Pledges</div>
   </div>
   <div class="pledge-row">
-    <a href="./bus/" class="pledge-card pledge-card-featured reveal reveal-d1" style="text-decoration:none;color:inherit;">
+    <a href="./trip/" class="pledge-card pledge-card-featured reveal reveal-d1" style="text-decoration:none;color:inherit;">
       <div class="pledge-header">
         <div class="pledge-num">01</div>
+        <div class="pledge-title">외유성 출장 근절</div>
+        <div class="pledge-icon">✈️</div>
+      </div>
+      <div class="pledge-badges">
+        <span class="pledge-badge">355억 세금 낭비</span>
+        <span class="pledge-badge">77.3% 수사의뢰</span>
+      </div>
+      <div class="pledge-desc">임기 4년 해외출장 0회 서약 — 조례로 심사위 외부 전환, 비용 전면 공개</div>
+      <span class="pledge-more">자세히 보기 →</span>
+    </a>
+    <a href="./bus/" class="pledge-card reveal reveal-d2" style="text-decoration:none;color:inherit;">
+      <div class="pledge-header">
+        <div class="pledge-num">02</div>
         <div class="pledge-title">막힘없는 마을버스</div>
         <div class="pledge-icon">🚌</div>
       </div>
@@ -1890,9 +1944,9 @@
       <div class="pledge-desc">출퇴근 지옥 해결, 배차간격 정상화로 일상의 이동을 편하게</div>
       <span class="pledge-more">자세히 보기 →</span>
     </a>
-    <a class="pledge-card reveal reveal-d2" href="./tax/">
+    <a class="pledge-card reveal reveal-d3" href="./tax/">
       <div class="pledge-header">
-        <div class="pledge-num">02</div>
+        <div class="pledge-num">03</div>
         <div class="pledge-title">세금 낭비 제로</div>
         <div class="pledge-icon">🏛️</div>
       </div>
@@ -2186,24 +2240,16 @@
     <div class="sec-tag">Live</div>
   </div>
   <div class="card reveal" style="padding:0;overflow:hidden;">
-    <div class="location-iframe-wrap">
-      <!-- URL 정해지면 src="" 안에 넣으면 됨 -->
-      <iframe
-        id="locationFrame"
-        src=""
-        width="100%"
-        height="450"
-        frameborder="0"
-        allowfullscreen
-        loading="lazy"
-        title="이호엽 후보 실시간 유세 위치"
-      ></iframe>
-      <div class="location-placeholder" id="locationPlaceholder">
-        <div class="location-placeholder-icon">📍</div>
-        <div class="location-placeholder-text">선거운동 기간 중 위치가 표시됩니다</div>
-      </div>
+    <div class="loc-status-bar">
+      <div class="loc-badge offline" id="locBadge">현재 유세 중이 아닙니다</div>
+      <div class="loc-updated" id="locUpdated"></div>
     </div>
-    <div class="location-caption">선거운동 기간 중 실시간 위치가 표시됩니다</div>
+    <div id="locMap" style="display:none;"></div>
+    <div class="loc-offline-panel" id="locOffline">
+      <div class="loc-offline-icon">📍</div>
+      <div>선거운동 기간 중 위치가 표시됩니다</div>
+    </div>
+    <div class="loc-caption" id="locCaption">선거운동 기간 중 실시간 위치가 표시됩니다</div>
   </div>
 
   <!-- 공약 제안 -->
@@ -2810,10 +2856,22 @@ function renderList(container, cache) {
     </div>
   `).join('');
 
+  const likedSet = JSON.parse(localStorage.getItem('likedProposals') || '[]');
   container.querySelectorAll('.proposal-item-like').forEach(btn => {
+    const id = btn.dataset.id;
+    if (likedSet.includes(id)) {
+      btn.disabled = true;
+      btn.title = '이미 좋아요를 눌렀습니다';
+    }
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
-      await updateDoc(doc(db, 'proposals', btn.dataset.id), { likes: increment(1) });
+      if (btn.disabled) return;
+      btn.disabled = true;
+      const liked = JSON.parse(localStorage.getItem('likedProposals') || '[]');
+      if (liked.includes(id)) return;
+      liked.push(id);
+      localStorage.setItem('likedProposals', JSON.stringify(liked));
+      await updateDoc(doc(db, 'proposals', id), { likes: increment(1) });
       loadProposals();
     });
   });
@@ -3146,6 +3204,117 @@ const p10Data = [
     if (e.key === 'ArrowRight' && curIdx < total - 1) { curIdx++; renderModal(curIdx); }
   });
   window.openPledge10 = openModal;
+})();
+</script>
+
+<!-- ── LIVE LOCATION: Firebase compat + Leaflet ── -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+(function () {
+  const STALE_MS   = 30 * 60 * 1000;
+  const REFRESH_MS = 120 * 1000;
+
+  const LOC_CONFIG = {
+    apiKey:            "AIzaSyBJn_tUM3jb5LM2z2GJtIUhlGx8AIf37Z0",
+    authDomain:        "hoyup-proposals.firebaseapp.com",
+    projectId:         "hoyup-proposals",
+    storageBucket:     "hoyup-proposals.firebasestorage.app",
+    messagingSenderId: "278731270685",
+    appId:             "1:278731270685:web:fa33656fbc1d0173d934f4"
+  };
+
+  // 앱 이름 충돌 방지 (modular SDK 와 별개로 'loc' 이름으로 초기화)
+  const locApp = firebase.apps.find(a => a.name === 'loc')
+    || firebase.initializeApp(LOC_CONFIG, 'loc');
+  const db = firebase.firestore(locApp);
+
+  const elBadge   = document.getElementById('locBadge');
+  const elUpdated = document.getElementById('locUpdated');
+  const elMap     = document.getElementById('locMap');
+  const elOffline = document.getElementById('locOffline');
+  const elCaption = document.getElementById('locCaption');
+
+  let leafletMap = null;
+  let marker     = null;
+
+  function timeAgoKo(ms) {
+    const sec = Math.floor(ms / 1000);
+    if (sec < 60)  return sec + '초 전 업데이트';
+    const min = Math.floor(sec / 60);
+    if (min < 60)  return min + '분 전 업데이트';
+    return Math.floor(min / 60) + '시간 전 업데이트';
+  }
+
+  function showOffline() {
+    elBadge.className     = 'loc-badge offline';
+    elBadge.textContent   = '현재 유세 중이 아닙니다';
+    elUpdated.textContent = '';
+    elMap.style.display     = 'none';
+    elOffline.style.display = '';
+    elCaption.textContent   = '선거운동 기간 중 실시간 위치가 표시됩니다';
+  }
+
+  function showLive(lat, lng, ts) {
+    elBadge.className     = 'loc-badge live';
+    elBadge.textContent   = '이호엽 후보가 현재 유세 중입니다';
+    elUpdated.textContent = timeAgoKo(Date.now() - ts);
+    elOffline.style.display = 'none';
+    elMap.style.display     = '';
+    elCaption.textContent   = '2분마다 자동 갱신됩니다';
+
+    if (!leafletMap) {
+      leafletMap = L.map('locMap', { zoomControl: true, scrollWheelZoom: false })
+        .setView([lat, lng], 16);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(leafletMap);
+      const icon = L.divIcon({
+        className: '',
+        html: '<div style="width:36px;height:36px;background:#F26B1D;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);"></div>',
+        iconSize: [36, 36],
+        iconAnchor: [18, 36]
+      });
+      marker = L.marker([lat, lng], { icon })
+        .addTo(leafletMap)
+        .bindPopup('<b>이호엽 후보</b><br>현재 이 위치에서 유세 중입니다')
+        .openPopup();
+    } else {
+      marker.setLatLng([lat, lng]);
+      leafletMap.setView([lat, lng], leafletMap.getZoom());
+    }
+    setTimeout(() => leafletMap.invalidateSize(), 150);
+  }
+
+  async function fetchLocation() {
+    try {
+      const snap = await db.collection('locations')
+        .orderBy('recorded_at', 'desc')
+        .limit(1)
+        .get();
+
+      if (snap.empty) { showOffline(); return; }
+
+      const data = snap.docs[0].data();
+      const ts   = data.recorded_at?.toMillis
+        ? data.recorded_at.toMillis()
+        : Number(data.recorded_at);
+
+      if (!data.lat || !data.lng || (Date.now() - ts) > STALE_MS) {
+        showOffline();
+      } else {
+        showLive(data.lat, data.lng, ts);
+      }
+    } catch (e) {
+      console.warn('[location] Firestore error:', e);
+      showOffline();
+    }
+  }
+
+  fetchLocation();
+  setInterval(fetchLocation, REFRESH_MS);
 })();
 </script>
 </body>

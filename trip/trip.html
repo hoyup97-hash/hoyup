@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>세금으로 해외여행? 못 가게 하겠습니다 — 이호엽</title>
+<meta name="description" content="전국 지방의회 77.3% 경찰 수사 중. 외유성 출장 근절 공약 — 성북구의회 후보 이호엽">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --text: #f0f0f0;
+  --text-muted: #888;
+  --text-dim: #555;
+  --accent: #ff4444;
+  --accent-glow: rgba(255, 68, 68, 0.15);
+  --accent-orange: #ff8c00;
+  --border: #222;
+  --border-light: #333;
+  --radius: 12px;
+  --font: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===== TICKER ===== */
+.ticker-wrap {
+  background: var(--accent);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  position: relative;
+}
+.ticker {
+  display: inline-flex;
+  animation: ticker 30s linear infinite;
+}
+.ticker span {
+  display: inline-block;
+  padding: 0 2.5em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== NAV ===== */
+.nav {
+  padding: 1.2em 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav a:hover { color: var(--text); }
+.nav .name {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.nav .badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  padding: 0.3em 0.8em;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* ===== HERO ===== */
+.hero {
+  text-align: center;
+  padding: 6em 2em 4em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.hero .label {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.3em 1em;
+  border-radius: 20px;
+  margin-bottom: 2em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.3em;
+}
+.hero h1 .red { color: var(--accent); }
+.hero .sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5em;
+  line-height: 1.8;
+}
+.hero-buttons {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-buttons a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.8em 1.8em;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+}
+.btn-primary:hover { background: #e03030; }
+.btn-secondary {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+.btn-secondary:hover { color: var(--text); border-color: var(--text-muted); }
+
+/* ===== SECTION COMMON ===== */
+section { padding: 5em 2em; }
+.section-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  margin-bottom: 0.8em;
+}
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+.section-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 640px;
+  line-height: 1.8;
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ===== STATS GRID ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2em;
+  margin-top: 3em;
+}
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2em 1.5em;
+  text-align: center;
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+}
+.stat-card .icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.8em;
+  display: block;
+}
+.stat-card .number {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.stat-card .unit {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.stat-card .desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.6em;
+  line-height: 1.5;
+}
+.stat-card .source {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-top: 0.8em;
+}
+
+/* ===== CAUSE SECTION ===== */
+.cause-section {
+  background: linear-gradient(180deg, var(--bg) 0%, #0f0f0f 100%);
+}
+.cause-list {
+  margin-top: 2.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cause-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5em;
+  padding: 1.8em 0;
+  border-bottom: 1px solid var(--border);
+}
+.cause-item:last-child { border-bottom: none; }
+.cause-num {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--accent);
+  min-width: 2em;
+  text-align: center;
+  padding-top: 0.1em;
+}
+.cause-text h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.3em;
+}
+.cause-text p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ===== CYCLE ===== */
+.cycle-box {
+  margin-top: 3em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5em;
+  text-align: center;
+}
+.cycle-arrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8em;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.cycle-step {
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+.cycle-arrow { color: var(--accent); font-size: 1.2rem; }
+.cycle-box .note {
+  margin-top: 1.5em;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== PLEDGE SECTION ===== */
+.pledge-section {
+  background: var(--bg);
+}
+.pledge-grid {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+.pledge-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2em 2em;
+  display: flex;
+  gap: 1.5em;
+  align-items: flex-start;
+  transition: border-color 0.3s;
+}
+.pledge-card:hover { border-color: var(--accent); }
+.pledge-no {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--accent);
+  min-width: 2.5em;
+  text-align: center;
+  line-height: 1.2;
+}
+.pledge-no small {
+  display: block;
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  font-weight: 500;
+  margin-top: 0.3em;
+}
+.pledge-content h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+}
+.pledge-content p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.pledge-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--accent-orange);
+  border: 1px solid rgba(255,140,0,0.3);
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  margin-top: 0.8em;
+  font-weight: 500;
+}
+
+/* ===== OATH SECTION ===== */
+.oath-section {
+  text-align: center;
+  padding: 5em 2em;
+  position: relative;
+}
+.oath-box {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 3em 2.5em;
+  box-shadow: 0 0 60px var(--accent-glow);
+}
+.oath-box .oath-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5em;
+  font-weight: 700;
+}
+.oath-box h2 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 0.2em;
+  letter-spacing: -0.03em;
+}
+.oath-box h2 .big-zero {
+  font-size: 1.3em;
+  color: var(--accent);
+}
+.oath-box .oath-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: 1em;
+  line-height: 1.8;
+}
+.oath-box .oath-end {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--text);
+  margin-top: 1.5em;
+}
+.oath-box .oath-name {
+  margin-top: 2em;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* ===== SOURCES ===== */
+.sources-section {
+  background: #080808;
+  border-top: 1px solid var(--border);
+}
+.sources-section .section-title { font-size: 1.3rem; }
+.source-list {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.source-item {
+  display: flex;
+  gap: 1em;
+  align-items: flex-start;
+  padding: 1em 1.2em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.source-item .s-icon {
+  min-width: 1.5em;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.source-item .s-body { color: var(--text-muted); }
+.source-item .s-body strong { color: var(--text); font-weight: 700; }
+.source-item .s-body a {
+  color: var(--accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+.source-item .s-body a:hover { text-decoration: underline; }
+
+/* ===== SHARE ===== */
+.share-section {
+  text-align: center;
+  padding: 4em 2em;
+  border-top: 1px solid var(--border);
+}
+.share-section p {
+  color: var(--text-muted);
+  margin-bottom: 1.5em;
+  font-size: 0.95rem;
+}
+.share-btn {
+  display: inline-block;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text);
+  padding: 0.8em 2em;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 3em 2em;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+.footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.footer a:hover { color: var(--text); }
+.footer .donate-box {
+  margin-top: 2em;
+  padding: 1.5em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: inline-block;
+}
+.footer .donate-box a {
+  display: inline-block;
+  margin-top: 0.8em;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6em 1.5em;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero { padding: 4em 1.5em 3em; }
+  section { padding: 3.5em 1.5em; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8em; }
+  .stat-card { padding: 1.5em 1em; }
+  .stat-card .number { font-size: 1.6rem; }
+  .pledge-card { flex-direction: column; gap: 0.8em; }
+  .pledge-no { min-width: auto; }
+  .cause-item { flex-direction: column; gap: 0.5em; }
+  .oath-box { padding: 2em 1.5em; }
+  .cycle-arrows { flex-direction: column; gap: 0.5em; }
+  .cycle-arrow { transform: rotate(90deg); }
+  .source-item { flex-direction: column; gap: 0.5em; }
+  .nav { padding: 1em 1.2em; }
+}
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>355억 세금 해외여행</span>
+    <span>77.3% 수사의뢰</span>
+    <span>항공권 조작 405건</span>
+    <span>셀프심사 79건</span>
+    <span>보고서 비용 공개율 16%</span>
+    <span>3년간 915건 출장</span>
+    <span>18억 빼돌림</span>
+    <span>처벌 0원</span>
+    <span>355억 세금 해외여행</span>
+    <span>77.3% 수사의뢰</span>
+    <span>항공권 조작 405건</span>
+    <span>셀프심사 79건</span>
+    <span>보고서 비용 공개율 16%</span>
+    <span>3년간 915건 출장</span>
+    <span>18억 빼돌림</span>
+    <span>처벌 0원</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="https://hoyup.kr/" class="name">← 메인으로</a>
+  <div>
+    <a href="https://hoyup.kr/" class="name">이호엽</a>
+    <span class="badge">성북구의회 후보</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="label">2026 지방선거 · 외유성 출장 근절 공약</span>
+  <h1>
+    <span class="red">세금으로 해외여행?</span><br>
+    못 가게 하겠습니다.
+  </h1>
+  <p class="sub">
+    전국 지방의회 77.3%가 경찰 수사를 받고 있습니다.<br>
+    3년간 355억 원의 세금이 의원들의 해외여행에 쓰였습니다.<br>
+    조례와 감시로 직접 막겠습니다.
+  </p>
+  <div class="hero-buttons">
+    <a href="#pledge" class="btn-primary">5가지 실행 공약 보기 →</a>
+    <a href="#oath" class="btn-secondary">본인 서약 확인</a>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="container">
+  <p class="section-label">핵심 지표 — 출처: 국민권익위·행안부·경실련</p>
+  <h2 class="section-title">숫자가 말해줍니다</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card fade-in">
+      <span class="icon">💰</span>
+      <div class="number">355<span class="unit">억</span></div>
+      <p class="desc">3년간 지방의회<br>해외출장 지출 총액</p>
+      <p class="source">국민권익위 2024.12.16.</p>
+    </div>
+    <div class="stat-card fade-in">
+      <span class="icon">🚔</span>
+      <div class="number">77.3<span class="unit">%</span></div>
+      <p class="desc">경찰 수사의뢰된<br>지방의회 비율 (188/243곳)</p>
+      <p class="source">경향신문 2025.09.10.</p>
+    </div>
+    <div class="stat-card fade-in">
+      <span class="icon">✈️</span>
+      <div class="number">405<span class="unit">건</span></div>
+      <p class="desc">항공권 위변조 적발<br>전체의 44.2%</p>
+      <p class="source">국민권익위 2024.12.16.</p>
+    </div>
+    <div class="stat-card fade-in">
+      <span class="icon">📋</span>
+      <div class="number">16<span class="unit">%</span></div>
+      <p class="desc">출장보고서<br>비용 포함 공개율</p>
+      <p class="source">경실련 2026.03.31.</p>
+    </div>
+    <div class="stat-card fade-in">
+      <span class="icon">🤦</span>
+      <div class="number">79<span class="unit">건</span></div>
+      <p class="desc">자기 출장을<br>자기가 심사한 건수</p>
+      <p class="source">국민권익위 2024.12.16.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY REPEATING -->
+<section class="cause-section container" id="cause">
+  <p class="section-label">구조적 원인</p>
+  <h2 class="section-title">왜 해마다 반복됩니까</h2>
+  <p class="section-desc">
+    매년 뉴스에 나오고, 매년 지적받고, 매년 똑같이 반복됩니다.<br>
+    문제는 개인이 아니라 <strong>구조</strong>입니다.
+  </p>
+
+  <div class="cause-list">
+    <div class="cause-item fade-in">
+      <div class="cause-num">01</div>
+      <div class="cause-text">
+        <h4>의원이 자기 출장을 자기가 심사합니다</h4>
+        <p>공무국외출장심사위원회에 의원이 참여하고, 자기 출장을 자기가 심사한 경우도 79건. 동료 눈치 보느라 공정한 심사는 불가능합니다.</p>
+      </div>
+    </div>
+    <div class="cause-item fade-in">
+      <div class="cause-num">02</div>
+      <div class="cause-text">
+        <h4>지적해도 출장은 그대로 통과됩니다</h4>
+        <p>심사위가 일정의 외유성을 지적하면서도 출장 자체는 의결하는 행태가 반복됩니다. 지적은 형식, 통과는 자동.</p>
+      </div>
+    </div>
+    <div class="cause-item fade-in">
+      <div class="cause-num">03</div>
+      <div class="cause-text">
+        <h4>보고서에 비용을 안 써도 됩니다</h4>
+        <p>경실련 조사 결과, 출장보고서에 비용을 포함해 공개한 비율은 16%. 얼마를 어디에 썼는지 확인 자체가 불가능합니다.</p>
+      </div>
+    </div>
+    <div class="cause-item fade-in">
+      <div class="cause-num">04</div>
+      <div class="cause-text">
+        <h4>감시·견제할 장치가 없습니다</h4>
+        <p>지방의회를 외부에서 감시하거나 견제할 장치 자체가 없습니다. 윤리특별위원회를 여는 것도 의원들 스스로의 권한입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cycle-box fade-in">
+    <div class="cycle-arrows">
+      <span class="cycle-step">뉴스 보도</span>
+      <span class="cycle-arrow">→</span>
+      <span class="cycle-step">여론 분노</span>
+      <span class="cycle-arrow">→</span>
+      <span class="cycle-step">"개선하겠다"</span>
+      <span class="cycle-arrow">→</span>
+      <span class="cycle-step">다시 출장</span>
+      <span class="cycle-arrow">→</span>
+      <span class="cycle-step" style="border-color:var(--accent); color:var(--accent);">반복</span>
+    </div>
+    <p class="note">국민권익위 조사관: "모범적인 사례가 한 군데도 없었다"<br><span style="font-size:0.75rem">— MBC 뉴스데스크 2025.10.28.</span></p>
+  </div>
+</section>
+
+<!-- PLEDGE -->
+<section class="pledge-section container" id="pledge">
+  <p class="section-label">5가지 실행 공약</p>
+  <h2 class="section-title">이호엽의 실행 계획</h2>
+  <p class="section-desc">
+    선언이 아닙니다. 구의원 권한으로 실행 가능한 것만 담았습니다.<br>
+    조례 발의·예산 심의·행정사무감사, 세 가지 무기를 씁니다.
+  </p>
+
+  <div class="pledge-grid">
+    <div class="pledge-card fade-in">
+      <div class="pledge-no">01<small>입법</small></div>
+      <div class="pledge-content">
+        <h3>출장심사위원회 100% 외부위원 전환</h3>
+        <p>의원이 자기 출장을 자기가 심사하는 구조를 끊습니다. 심사위원을 시민단체 대표·외부 전문가·주민으로 전원 교체하는 조례를 발의합니다. 국민권익위도 동일한 방향을 권고했습니다.</p>
+        <span class="pledge-tag">조례 발의 — 구의원 권한</span>
+      </div>
+    </div>
+
+    <div class="pledge-card fade-in">
+      <div class="pledge-no">02<small>투명성</small></div>
+      <div class="pledge-content">
+        <h3>출장 계획서·결과보고서 비용 포함 전면 공개</h3>
+        <p>출장 전 학습 목적·방문 기관을 사전 공개하고, 출장 후 비용 내역을 포함한 결과보고서를 의회 홈페이지에 의무 게시합니다. 현재 비용 포함 공개율 16%를 100%로 끌어올립니다.</p>
+        <span class="pledge-tag">조례 발의 — 구의원 권한</span>
+      </div>
+    </div>
+
+    <div class="pledge-card fade-in">
+      <div class="pledge-no">03<small>기준</small></div>
+      <div class="pledge-content">
+        <h3>관광지 일정 원천 배제, 1일 1기관 실질 방문 의무화</h3>
+        <p>공무 목적과 무관한 관광지 방문을 일정에서 배제합니다. 하루 최소 1개 기관을 실질적으로 방문하고, 면담자·면담 내용을 보고서에 기록하도록 의무화합니다.</p>
+        <span class="pledge-tag">조례 발의 + 행감 확인 — 구의원 권한</span>
+      </div>
+    </div>
+
+    <div class="pledge-card fade-in">
+      <div class="pledge-no">04<small>제재</small></div>
+      <div class="pledge-content">
+        <h3>성과 미달·외유성 확인 시 비용 환수</h3>
+        <p>심사위가 출장을 외유성 또는 성과 미달로 판단하면, 참여 의원 전체의 출장 비용을 환수하는 조항을 조례에 신설합니다. 행안부의 '원 스트라이크 아웃제' 권고와 같은 방향입니다.</p>
+        <span class="pledge-tag">조례 발의 — 구의원 권한</span>
+      </div>
+    </div>
+
+    <div class="pledge-card fade-in">
+      <div class="pledge-no">05<small>감시</small></div>
+      <div class="pledge-content">
+        <h3>출장 결과 본회의 보고 의무화</h3>
+        <p>해외출장을 다녀온 의원은 본회의에서 직접 성과를 보고하게 합니다. 보고서만 제출하고 끝나는 게 아니라, 동료 의원과 주민 앞에서 설명하도록 합니다.</p>
+        <span class="pledge-tag">의회 운영 규칙 개정 — 구의원 권한</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OATH -->
+<section class="oath-section" id="oath">
+  <div class="oath-box fade-in">
+    <div class="oath-label">이호엽 본인 서약</div>
+    <h2>
+      임기 4년,<br>해외출장 <span class="big-zero">0회.</span>
+    </h2>
+    <p class="oath-sub">
+      그 예산은 성북구 마을버스와 돌봄에 쓰겠습니다.
+    </p>
+    <p class="oath-end">세금으로 관광 안 합니다. 끝.</p>
+    <p class="oath-name">성북구의회 가선거구 후보 · 이호엽</p>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="sources-section container" id="sources">
+  <p class="section-label">근거 자료</p>
+  <h3 class="section-title">이 공약은 데이터에 기반합니다</h3>
+  <p class="section-desc" style="margin-bottom:0.5em;">아래 모든 수치와 사실은 정부 발표·시민단체 조사·언론 보도에서 가져왔습니다.</p>
+
+  <div class="source-list">
+    <div class="source-item">
+      <span class="s-icon">🔗</span>
+      <div class="s-body">
+        <strong>국민권익위원회</strong> — 지방의회 국외출장 실태점검 결과 발표, 2024.12.16.<br>
+        243개 지방의회 전수점검 / 915건·355억 지출 / 항공권 조작 405건 / 셀프심사 79건<br>
+        <a href="https://www.korea.kr/news/policyNewsView.do?newsId=148937518" target="_blank">정책브리핑 원문 →</a>
+      </div>
+    </div>
+    <div class="source-item">
+      <span class="s-icon">🔗</span>
+      <div class="s-body">
+        <strong>경향신문</strong> — "지방의회 188곳 항공권 부풀리기로 예산 빼돌려", 2025.09.10.<br>
+        전국 243곳 중 188곳(77.3%) 경찰 수사의뢰 확인<br>
+        <a href="https://www.khan.co.kr/article/202509100600111" target="_blank">기사 원문 →</a>
+      </div>
+    </div>
+    <div class="source-item">
+      <span class="s-icon">🔗</span>
+      <div class="s-body">
+        <strong>행정안전부</strong> — 지방의원 임기만료 전 외유성 출장 방지 대책, 2025.11.26.<br>
+        임기 1년 전 외유성 연수 원칙 금지 / 심사위 시민단체 포함 / 재정 페널티 검토<br>
+        <a href="https://www.korea.kr/news/policyNewsView.do?newsId=148955433" target="_blank">정책브리핑 원문 →</a>
+      </div>
+    </div>
+    <div class="source-item">
+      <span class="s-icon">🔗</span>
+      <div class="s-body">
+        <strong>경실련</strong> — 전국 17개 광역의회 해외출장 실태조사 결과, 2026.03.31.<br>
+        558건·128억 / 의원 96% 참여 / 보고서 비용 포함 공개율 16%<br>
+        <a href="https://ccej.or.kr/posts/WLt50X2" target="_blank">경실련 원문 →</a>
+      </div>
+    </div>
+    <div class="source-item">
+      <span class="s-icon">🔗</span>
+      <div class="s-body">
+        <strong>MBC 뉴스데스크</strong> — "외유성 지방의회 해외 출장 이제는 끝내야", 2025.10.28.<br>
+        권익위 조사관 "모범적인 사례가 한 군데도 없었다" / 원 스트라이크 아웃제 제안<br>
+        <a href="https://imnews.imbc.com/replay/2025/nwdesk/article/6769756_36799.html" target="_blank">MBC 원문 →</a>
+      </div>
+    </div>
+    <div class="source-item">
+      <span class="s-icon">🔗</span>
+      <div class="s-body">
+        <strong>cfoi (정보공개센터)</strong> — "매번 반복해서 터지는 지방의회 해외연수 문제", 2025.09.03.<br>
+        243개 중 236개(97%) 감사 대상 / 수사의뢰 87곳 이상<br>
+        <a href="https://cfoi.or.kr/18498" target="_blank">원문 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARE -->
+<div class="share-section">
+  <p>이 공약이 필요하다고 생각하신다면, 주변에 알려주세요.</p>
+  <button class="share-btn" onclick="shareOrCopy()">공유하기</button>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="donate-box">
+    <div style="font-weight:700; font-size:0.9rem; color:var(--text);">정치 후원금</div>
+    <div style="color:var(--text-muted); margin-top:0.3em; font-size:0.8rem;">
+      여러분의 후원이 성북을 바꿉니다<br>
+      개인 연간 한도 <strong>500만 원</strong> 이내 · 세액공제 가능
+    </div>
+    <a href="https://givemoney.kr/politicians/88" target="_blank">💳 온라인 후원하기</a>
+  </div>
+
+  <p style="margin-top:2em;">
+    <a href="https://hoyup.kr/">← 이호엽 메인으로 돌아가기</a>
+  </p>
+  <p style="margin-top:1.5em;">
+    <strong>이호엽</strong><br>
+    성북구의회 가선거구 후보<br>
+    외유성 출장 근절 공약
+  </p>
+  <p style="margin-top:1em;">
+    2026 지방선거 · 성북구의회 가선거구<br>
+    이 페이지는 외유성 출장 근절 공약 안내를 위해 이호엽 후보 본인이 직접 제작하였습니다.
+  </p>
+  <p style="margin-top:1em;">© 2026 이호엽. 직접 만들었고, 직접 지킵니다.</p>
+</footer>
+
+<script>
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Share
+function shareOrCopy() {
+  const data = {
+    title: '세금으로 해외여행? 못 가게 하겠습니다 — 이호엽',
+    text: '전국 지방의회 77.3%가 경찰 수사 중. 355억 세금 해외여행, 이호엽이 끝내겠습니다.',
+    url: window.location.href
+  };
+  if (navigator.share) {
+    navigator.share(data);
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('링크가 복사되었습니다!');
+    });
+  }
+}
+</script>
+</body>
+</html>
