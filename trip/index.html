@@ -216,11 +216,11 @@ nav {
 }
 .hero h1 {
   font-family: 'Noto Serif KR', serif;
-  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 900;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-  margin-bottom: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin-bottom: 32px;
   opacity: 0;
   animation: fadeUp 0.7s 0.25s forwards;
 }
@@ -280,7 +280,18 @@ nav {
 .scroll-arrow svg { width: 28px; height: 28px; display: block; }
 
 /* ── STATS ── */
-.stats-section { background: var(--gray-50); }
+.stats-section {
+  background: #111;
+}
+.stats-section .section-label {
+  color: rgba(255,255,255,0.45);
+}
+.stats-section .section-label::before {
+  background: rgba(255,255,255,0.25);
+}
+.stats-section .section-title {
+  color: #fff;
+}
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -288,17 +299,21 @@ nav {
   margin-top: 40px;
 }
 .stat-card {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
+  background: rgba(255,255,255,0.06);
+  border: none;
   border-radius: var(--radius-sm);
   padding: 28px 20px;
   text-align: center;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: none;
+  transition: background 0.3s, transform 0.2s;
 }
 .stat-card:hover {
-  border-color: var(--orange);
-  box-shadow: var(--shadow-sm);
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+  box-shadow: none;
 }
+.stat-card .desc { color: rgba(255,255,255,0.55); }
+.stat-card .source { color: rgba(255,255,255,0.28); }
 .stat-card .icon { font-size: 1.5rem; margin-bottom: 12px; display: block; }
 .stat-card .number {
   font-family: 'Noto Serif KR', serif;
@@ -322,19 +337,32 @@ nav {
 }
 
 /* ── CAUSE ── */
-.cause-section { background: var(--white); }
+.cause-section {
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.03);
+}
 .cause-list {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 12px;
 }
 .cause-item {
   display: flex;
   align-items: flex-start;
   gap: 24px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--gray-200);
+  padding: 24px 28px;
+  background: var(--white);
+  border: none;
+  border-left: 4px solid var(--orange);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.cause-item:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  transform: translateX(4px);
 }
 .cause-item:last-child { border-bottom: none; }
 .cause-num {
@@ -395,7 +423,11 @@ nav {
 }
 
 /* ── PLEDGE ── */
-.pledge-section { background: var(--gray-50); }
+.pledge-section {
+  background: linear-gradient(180deg, var(--gray-100) 0%, var(--gray-50) 100%);
+  border-top: 1px solid var(--gray-200);
+  box-shadow: inset 0 4px 24px rgba(0,0,0,0.04);
+}
 .pledge-grid {
   margin-top: 40px;
   display: flex;
@@ -404,17 +436,18 @@ nav {
 }
 .pledge-card {
   background: var(--white);
-  border: 1px solid var(--gray-200);
+  border: none;
   border-radius: var(--radius-sm);
   padding: 28px;
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.3s, transform 0.2s;
 }
 .pledge-card:hover {
-  border-color: var(--orange);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
 }
 .pledge-no {
   font-family: 'Noto Serif KR', serif;
@@ -464,6 +497,8 @@ nav {
   background: var(--white);
   text-align: center;
   padding: 80px 24px;
+  border-top: 1px solid var(--gray-200);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.03);
 }
 .oath-box {
   max-width: 680px;
@@ -513,7 +548,11 @@ nav {
 }
 
 /* ── SOURCES ── */
-.sources-section { background: var(--gray-50); }
+.sources-section {
+  background: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+  box-shadow: inset 0 4px 24px rgba(0,0,0,0.04);
+}
 .source-list {
   margin-top: 32px;
   display: flex;
@@ -526,10 +565,16 @@ nav {
   align-items: flex-start;
   padding: 16px 20px;
   background: var(--white);
-  border: 1px solid var(--gray-200);
+  border: none;
   border-radius: var(--radius-sm);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
   font-size: 13px;
   line-height: 1.6;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.source-item:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+  transform: translateY(-1px);
 }
 .source-item .s-icon { min-width: 1.5em; text-align: center; }
 .source-item .s-body { color: var(--gray-600); }
@@ -686,7 +731,7 @@ footer {
 <!-- NAV -->
 <nav>
   <a href="https://hoyup.kr/" class="nav-logo">
-    이<span>호엽</span>
+    <span style="white-space:nowrap;">이<span style="color:var(--orange);">호엽</span></span>
     <span class="nav-logo-sub">성북구의회 후보</span>
   </a>
   <a href="https://hoyup.kr/" class="nav-back">← 메인으로</a>
@@ -722,35 +767,35 @@ footer {
 <section class="stats-section">
   <div class="container">
     <div class="section-label">핵심 지표 — 출처: 국민권익위·행안부·경실련</div>
-    <h2 class="section-title">숫자가 말해줍니다</h2>
+    <h2 class="section-title">숫자가 말해주는 FACT</h2>
     <div class="stats-grid">
       <div class="stat-card fade-in">
         <span class="icon">💰</span>
-        <div class="number">355<span class="unit">억</span></div>
+        <div class="number"><span class="countup" data-target="355" data-decimal="0">0</span><span class="unit">억</span></div>
         <p class="desc">3년간 지방의회<br>해외출장 지출 총액</p>
         <p class="source">국민권익위 2024.12.16.</p>
       </div>
       <div class="stat-card fade-in">
         <span class="icon">🚔</span>
-        <div class="number">77.3<span class="unit">%</span></div>
+        <div class="number"><span class="countup" data-target="77.3" data-decimal="1">0</span><span class="unit">%</span></div>
         <p class="desc">경찰 수사의뢰된<br>지방의회 비율 (188/243곳)</p>
         <p class="source">경향신문 2025.09.10.</p>
       </div>
       <div class="stat-card fade-in">
         <span class="icon">✈️</span>
-        <div class="number">405<span class="unit">건</span></div>
+        <div class="number"><span class="countup" data-target="405" data-decimal="0">0</span><span class="unit">건</span></div>
         <p class="desc">항공권 위변조 적발<br>전체의 44.2%</p>
         <p class="source">국민권익위 2024.12.16.</p>
       </div>
       <div class="stat-card fade-in">
         <span class="icon">📋</span>
-        <div class="number">16<span class="unit">%</span></div>
+        <div class="number"><span class="countup" data-target="16" data-decimal="0">0</span><span class="unit">%</span></div>
         <p class="desc">출장보고서<br>비용 포함 공개율</p>
         <p class="source">경실련 2026.03.31.</p>
       </div>
       <div class="stat-card fade-in">
         <span class="icon">🤦</span>
-        <div class="number">79<span class="unit">건</span></div>
+        <div class="number"><span class="countup" data-target="79" data-decimal="0">0</span><span class="unit">건</span></div>
         <p class="desc">자기 출장을<br>자기가 심사한 건수</p>
         <p class="source">국민권익위 2024.12.16.</p>
       </div>
@@ -762,7 +807,7 @@ footer {
 <section class="cause-section" id="cause">
   <div class="container">
     <div class="section-label">구조적 원인</div>
-    <h2 class="section-title">왜 해마다 반복됩니까</h2>
+    <h2 class="section-title">해마다 반복되는 이유</h2>
     <p class="section-desc">
       매년 뉴스에 나오고, 매년 지적받고, 매년 똑같이 반복됩니다.<br>
       문제는 개인이 아니라 <strong>구조</strong>입니다.
@@ -984,6 +1029,27 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+const countupObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseFloat(el.dataset.target);
+    const decimal = parseInt(el.dataset.decimal) || 0;
+    const duration = 1600;
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = (target * ease).toFixed(decimal);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target.toFixed(decimal);
+    }
+    requestAnimationFrame(step);
+    countupObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.countup').forEach(el => countupObserver.observe(el));
 
 function shareOrCopy() {
   const data = {

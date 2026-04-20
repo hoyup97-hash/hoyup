@@ -836,6 +836,11 @@
   .news-item-title { font-size: 14px; font-weight: 600; line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .news-item-date { font-size: 11px; color: var(--gray); margin-top: 4px; }
   .news-item-arrow { font-size: 16px; color: #ccc; flex-shrink: 0; }
+  .news-item-thumb {
+    width: 72px; height: 56px; flex-shrink: 0;
+    border-radius: 8px; object-fit: cover;
+    order: -1;
+  }
   .news-item:hover .news-item-arrow { color: var(--orange); }
   .news-del {
     position: absolute; top: 10px; right: 10px;
@@ -2371,12 +2376,22 @@
     <div class="sec-tag">News</div>
   </div>
   <div class="card news-card reveal">
-    <div class="news-empty" id="newsEmpty">
+    <div class="news-empty" id="newsEmpty" style="display:none;">
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="4" y="8" width="28" height="20" rx="3" stroke="#ccc" stroke-width="2"/><path d="M9 14h18M9 19h12" stroke="#ccc" stroke-width="2" stroke-linecap="round"/></svg>
       <p>등록된 기사가 없습니다</p>
       <span>아래 버튼으로 기사를 추가해주세요</span>
     </div>
-    <div class="news-list" id="newsList"></div>
+    <div class="news-list" id="newsList">
+      <a class="news-item" href="https://vibetimes.co.kr/news/qa-cmn4jo45y03g114davdurx0pf-1774352729104" target="_blank" rel="noopener">
+        <img class="news-item-thumb" src="https://vibetimes-prd.s3.ap-northeast-2.amazonaws.com/qa-uploads/cmmt7bewf003m3hm7b3zv6urh/bf2155eefe6461e7.jpg" alt="기사 썸네일">
+        <div class="news-item-left">
+          <div class="news-item-source">VibeTimes</div>
+          <div class="news-item-title">이호엽, 성북의 젊은 엔진으로 미래를 코딩하다</div>
+          <div class="news-item-date">2026.04.10</div>
+        </div>
+        <div class="news-item-arrow">→</div>
+      </a>
+    </div>
     <div class="news-add-row">
       <button class="news-add-btn" id="newsAddBtn">+ 기사 추가하기</button>
     </div>
