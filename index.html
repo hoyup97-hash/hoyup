@@ -2931,7 +2931,7 @@ overlay.addEventListener('click', e => { if (e.target === overlay) closeModal();
 
 document.getElementById('proposalSendBtn').addEventListener('click', async () => {
   const title = document.getElementById('pTitle').value.trim();
-  const nick  = document.getElementById('pNick').value.trim();
+  let nick    = document.getElementById('pNick').value.trim();
   const body  = document.getElementById('pBody').value.trim();
   const loc   = document.getElementById('pLocation').value.trim();
   const pw    = document.getElementById('pPw').value;
@@ -2983,7 +2983,7 @@ document.getElementById('pdDeleteBtn').addEventListener('click', async () => {
   if (!pw) { document.getElementById('pdPwInput').focus(); return; }
 
   const pwHash = await hashPw(pw);
-  const p = proposalsCache.find(x => x.id === currentDetailId);
+  const p = [...bestCache, ...liveCache].find(x => x.id === currentDetailId);
   if (!p || p.pwHash !== pwHash) {
     document.getElementById('pdPwInput').value = '';
     document.getElementById('pdPwInput').placeholder = '비밀번호가 틀렸습니다';
