@@ -1439,6 +1439,7 @@
     transition: background .2s;
   }
   .proposal-send-btn:hover { background: #e04800; }
+  .proposal-error { font-size: 12px; color: #e00; margin-top: 4px; min-height: 16px; }
   .proposal-cancel-btn {
     flex: 1; background: var(--bg); color: var(--black);
     border: none; border-radius: 100px; padding: 13px;
@@ -2700,6 +2701,7 @@ function sharePage() {
       <div class="proposal-field">
         <div class="proposal-label">제목 <span>*필수</span></div>
         <input class="proposal-input" id="pTitle" type="text" placeholder="제안하실 공약을 한 줄로 요약해주세요">
+        <span class="proposal-error" id="pTitleErr"></span>
       </div>
       <div class="proposal-field">
         <div class="proposal-label">닉네임 <span>(선택 — 미입력 시 "익명"으로 표시)</span></div>
@@ -2708,6 +2710,7 @@ function sharePage() {
       <div class="proposal-field">
         <div class="proposal-label">내용 <span>*필수</span></div>
         <textarea class="proposal-textarea" id="pBody" placeholder="어떤 공약이 필요한지 자세히 적어주세요"></textarea>
+        <span class="proposal-error" id="pBodyErr"></span>
       </div>
       <div class="proposal-field">
         <div class="proposal-label">위치 <span>(선택 — 예: 안암동, 종암동)</span></div>
@@ -2716,6 +2719,7 @@ function sharePage() {
       <div class="proposal-field">
         <div class="proposal-label">비밀번호 <span>*나중에 삭제할 때 필요</span></div>
         <input class="proposal-input" id="pPw" type="password" placeholder="숫자 4자리 이상">
+        <span class="proposal-error" id="pPwErr"></span>
       </div>
     </div>
     <div class="proposal-modal-foot">
@@ -2922,7 +2926,10 @@ function renderList(container, cache) {
 // ── 작성 모달 ──
 const overlay = document.getElementById('proposalOverlay');
 function openModal() { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+function closeModal() {
+  overlay.classList.remove('open'); document.body.style.overflow = '';
+  ['pTitleErr','pBodyErr','pPwErr'].forEach(id => document.getElementById(id).textContent = '');
+}
 
 document.getElementById('openProposalModal').addEventListener('click', openModal);
 document.getElementById('proposalModalClose').addEventListener('click', closeModal);
@@ -2936,10 +2943,17 @@ document.getElementById('proposalSendBtn').addEventListener('click', async () =>
   const loc   = document.getElementById('pLocation').value.trim();
   const pw    = document.getElementById('pPw').value;
 
-  if (!title) { document.getElementById('pTitle').focus(); return; }
+  document.getElementById('pTitleErr').textContent = '';
+  document.getElementById('pBodyErr').textContent = '';
+  document.getElementById('pPwErr').textContent = '';
+
+  let valid = true;
+  if (!title) { document.getElementById('pTitleErr').textContent = '제목을 입력해주세요.'; document.getElementById('pTitle').focus(); valid = false; }
+  if (!body)  { document.getElementById('pBodyErr').textContent = '내용을 입력해주세요.'; if (valid) document.getElementById('pBody').focus(); valid = false; }
+  if (!pw || pw.length < 4) { document.getElementById('pPwErr').textContent = '비밀번호를 4자리 이상 입력해주세요.'; if (valid) document.getElementById('pPw').focus(); valid = false; }
+  if (!valid) return;
+
   if (!nick) nick = '익명';
-  if (!body)  { document.getElementById('pBody').focus(); return; }
-  if (!pw || pw.length < 4) { document.getElementById('pPw').focus(); return; }
 
   const sendBtn = document.getElementById('proposalSendBtn');
   sendBtn.textContent = '제출 중...'; sendBtn.disabled = true;
