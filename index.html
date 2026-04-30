@@ -626,6 +626,50 @@
     transition: background .2s, transform .15s;
   }
   .pledge-more:hover { background: #e04800; transform: translateY(-1px); }
+
+  /* [MOBILE SLIDER] 핵심 공약 — 복원 시 이 블록 삭제
+     원본: grid 3col / 2col(≤900) / 1col(≤500) */
+  @media (max-width: 768px) {
+    .pledge-row {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 16px;
+      padding: 4px 0 16px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .pledge-row::-webkit-scrollbar { display: none; }
+    .pledge-card {
+      flex: 0 0 90%;
+      scroll-snap-align: start;
+    }
+    .pledge-card.reveal { opacity: 1; transform: none; }
+  }
+
+  .pledge-dots { display: none; }
+  @media (max-width: 768px) {
+    .pledge-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .pledge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+      transition: background .25s, transform .25s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .pledge-dot.active {
+      background: var(--orange);
+      transform: scale(1.35);
+    }
+  }
+
   .pledge-soon {
     display: flex;
     align-items: center;
@@ -896,6 +940,49 @@
   .yt-section { padding: 24px 28px; }
   .yt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 16px; }
   @media (max-width: 500px) { .yt-grid { grid-template-columns: 1fr; } }
+
+  /* [MOBILE SLIDER] 유튜브 — 복원 시 이 블록 삭제
+     원본: grid 2col / 1col(≤500), margin-bottom:16px */
+  @media (max-width: 768px) {
+    .yt-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 14px;
+      margin-bottom: 0;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .yt-grid::-webkit-scrollbar { display: none; }
+    .yt-item {
+      flex: 0 0 85%;
+      scroll-snap-align: start;
+    }
+  }
+
+  .yt-dots { display: none; }
+  @media (max-width: 768px) {
+    .yt-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .yt-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+      transition: background .25s, transform .25s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .yt-dot.active {
+      background: #FF0000;
+      transform: scale(1.35);
+    }
+  }
   .yt-item { display: block; text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; background: var(--bg); transition: transform .2s, box-shadow .2s; position: relative; }
   .yt-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
   .yt-thumb-wrap { position: relative; width: 100%; padding-top: 56.25%; background: #e8e8e8; overflow: hidden; }
@@ -1174,6 +1261,28 @@
       0 28px 48px rgba(255,82,0,0.07);
   }
   .pinpoint-card:hover::after { transform: scaleX(1); }
+
+  /* [MOBILE SLIDER] 핀포인트 공약 — 복원 시 이 블록 삭제
+     원본: grid 4col / 2col(≤900) / 1col(≤500), reveal 애니메이션 그대로 */
+  @media (max-width: 768px) {
+    .pinpoint-row {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 14px;
+      padding: 4px 0 16px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .pinpoint-row::-webkit-scrollbar { display: none; }
+    .pinpoint-card {
+      flex: 0 0 calc((100vw - 74px) / 2);
+      scroll-snap-align: start;
+    }
+    .pinpoint-card.reveal { opacity: 1; transform: none; }
+  }
+
   .pinpoint-icon { font-size: 32px; line-height: 1; }
   .pinpoint-title { font-size: 15px; font-weight: 800; letter-spacing: -.02em; line-height: 1.3; }
   .pinpoint-desc { font-size: 12px; color: var(--gray); line-height: 1.7; flex: 1; }
@@ -1386,6 +1495,35 @@
     cursor: pointer; transition: background .2s, transform .2s;
   }
   .proposal-submit-btn:hover { background: var(--orange); transform: translateY(-2px); }
+
+  .proposal-tabs { display: none; }
+  @media (max-width: 768px) {
+    .proposal-tabs {
+      display: flex;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      margin-bottom: 16px;
+    }
+    .proposal-tab {
+      flex: 1;
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--gray);
+      cursor: pointer;
+      letter-spacing: -.01em;
+      margin-bottom: -1px;
+      transition: color .2s, border-color .2s;
+    }
+    .proposal-tab.active {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+    .proposal-section-label { display: none; }
+    #panelLive { margin-top: 0; }
+  }
 
   /* 공약 제안 모달 */
   .proposal-overlay {
@@ -1620,13 +1758,85 @@
       0 16px 32px rgba(0,0,0,0.08),
       0 28px 52px rgba(255,82,0,0.09);
   }
+
+  /* [MOBILE SLIDER] 10대 공약 — 복원 시 이 블록 삭제
+     원본: grid 2col / 1col(≤768), reveal 애니메이션 그대로 */
+  @media (max-width: 768px) {
+    .pledge10-row {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 14px;
+      padding: 4px 0 16px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .pledge10-row::-webkit-scrollbar { display: none; }
+    .pledge10-card {
+      flex: 0 0 calc((100vw - 74px) / 2);
+      scroll-snap-align: start;
+    }
+    .pledge10-card.reveal { opacity: 1; transform: none; }
+  }
+
+  /* 슬라이더 dots */
+  .pledge10-dots {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .pledge10-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .pledge10-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+      transition: background .25s, transform .25s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .pledge10-dot.active {
+      background: var(--orange);
+      transform: scale(1.35);
+    }
+  }
+
+  .pinpoint-dots { display: none; }
+  @media (max-width: 768px) {
+    .pinpoint-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .pinpoint-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+      transition: background .25s, transform .25s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .pinpoint-dot.active {
+      background: var(--orange);
+      transform: scale(1.35);
+    }
+  }
+
   .pledge10-header {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 6px 10px;
+    margin-bottom: 4px;
   }
   .pledge10-num {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 900;
     color: rgba(255,82,0,0.22);
     letter-spacing: -.04em;
@@ -1634,16 +1844,17 @@
     line-height: 1;
   }
   .pledge10-icon {
-    font-size: 26px;
+    font-size: 24px;
     line-height: 1;
     flex-shrink: 0;
   }
   .pledge10-title {
-    font-size: clamp(14px, 1.6vw, 17px);
+    width: 100%;
+    text-align: center;
+    font-size: clamp(13px, 1.5vw, 16px);
     font-weight: 800;
     letter-spacing: -.02em;
-    line-height: 1.3;
-    flex: 1;
+    line-height: 1.4;
   }
   .pledge10-tag {
     font-size: 10px;
@@ -1654,6 +1865,7 @@
     padding: 3px 10px;
     border-radius: 40px;
     width: fit-content;
+    align-self: center;
   }
   .pledge10-hint {
     font-size: 11px;
@@ -1661,6 +1873,7 @@
     color: var(--orange);
     letter-spacing: .04em;
     margin-top: 4px;
+    align-self: center;
   }
 
   /* 10대 공약 모달 */
@@ -1864,7 +2077,7 @@
   </div>
 </div>
 
-<!-- Problem Section -->
+<!-- [HIDDEN] Problem + Bridge 섹션 — 복원 시 주석 해제
 <section class="problem-section">
   <div class="problem-inner reveal">
     <div class="problem-eyebrow-label">2026 지방선거 예비후보자 중 전과자</div>
@@ -1881,8 +2094,6 @@
   </div>
 </section>
 
-<!-- BRIDGE -->
-<!-- BRIDGE -->
 <section style="background: linear-gradient(to bottom, #000000 0%, #F8F8F8 100%); text-align:center; padding: 80px 24px 100px; overflow:hidden; width:100%;">
   <div class="reveal">
     <div style="font-size:clamp(13px,2vw,16px); color:#555; letter-spacing:.18em; text-transform:uppercase; margin-bottom:20px;">The Choice</div>
@@ -1892,6 +2103,7 @@
     <div style="width:1px; height:60px; background:linear-gradient(to bottom, rgba(255,255,255,.4), rgba(28,28,28,.2)); margin:36px auto 0;"></div>
   </div>
 </section>
+-->
 
 <!-- HERO -->
 <section class="hero">
@@ -1920,6 +2132,9 @@
           </div>
           <div class="tl-item">
             <div class="tl-txt">🎓 고려대학교 경영학과 졸업</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-txt">(전) 에그테크 스타트업 대표</div>
           </div>
           <div class="tl-item">
             <div class="tl-txt">(현) 개혁신당 성북구 지역발전특별위원회 부위원장</div>
@@ -1983,6 +2198,7 @@
       <span class="pledge-more">자세히 보기 →</span>
     </a>
   </div>
+  <div class="pledge-dots"></div>
 
   <!-- Pinpoint Pledges -->
   <div id="pinpoint" class="section-header reveal" style="margin-top:20px;">
@@ -2019,6 +2235,7 @@
       <span class="pp-more">자세히 보기 →</span>
     </div>
   </div>
+  <div class="pinpoint-dots"></div>
 
   <!-- 10대 공약 -->
   <div id="pledge10" class="section-header reveal" style="margin-top:20px;">
@@ -2117,6 +2334,7 @@
       <span class="pledge10-hint">자세히 보기 →</span>
     </div>
   </div>
+  <div class="pledge10-dots"></div>
 
   <!-- University Pledges -->
   <div id="universities" class="section-header reveal" style="margin-top:20px;">
@@ -2129,11 +2347,11 @@
       <div class="univ-name">고려대학교</div>
       <div class="univ-arrow">공약 보기 →</div>
     </a>
-    <div class="univ-card univ-card-locked reveal reveal-d2" data-overlay="공개 예정입니다">
+    <a class="univ-card reveal reveal-d2" href="./sungshin/">
       <img class="univ-logo" src="./assets/logos/sungshin_logo.png" alt="성신여자대학교 로고">
       <div class="univ-name">성신여자대학교</div>
-      <div class="univ-arrow">공개 예정입니다</div>
-    </div>
+      <div class="univ-arrow">공약 보기 →</div>
+    </a>
     <div class="univ-card univ-card-locked reveal reveal-d3" data-overlay="공개 예정입니다">
       <img class="univ-logo" src="./assets/logos/hansung_logo.jpeg" alt="한성대학교 로고">
       <div class="univ-name">한성대학교</div>
@@ -2141,8 +2359,7 @@
     </div>
   </div>
 
-  <!-- Apartment Pledges (hidden until 2026-05-15 — div#apt-section-hidden 제거하면 복원) -->
-  <div id="apt-section-hidden" style="display:none;">
+  <!-- Apartment Pledges -->
   <div class="section-header reveal" style="margin-top:20px;">
     <div class="sec-title">아파트별 공약</div>
     <div class="sec-tag">Apartment</div>
@@ -2257,7 +2474,6 @@
     </div>
     <div class="apt-no-result" id="aptNoResult">검색 결과가 없습니다 🔍</div>
   </div>
-  </div><!-- /apt-section-hidden -->
 
   <!-- 실시간 위치 -->
   <div class="section-header reveal" style="margin-top:20px;">
@@ -2285,13 +2501,21 @@
 
   <!-- 인기 제안 목록 -->
   <div class="card reveal" style="padding:24px 24px 16px;">
-    <div class="proposal-section-label">🏆 BEST 제안</div>
-    <div id="proposalBestList">
-      <div class="proposal-empty">제보해주세요!</div>
+    <div class="proposal-tabs">
+      <button class="proposal-tab active" data-tab="best">🏆 BEST</button>
+      <button class="proposal-tab" data-tab="live">🕐 실시간</button>
     </div>
-    <div class="proposal-section-label" style="margin-top:20px;">🕐 실시간 제안</div>
-    <div id="proposalLiveList">
-      <div class="proposal-empty">제보해주세요!</div>
+    <div id="panelBest">
+      <div class="proposal-section-label">🏆 BEST 제안</div>
+      <div id="proposalBestList">
+        <div class="proposal-empty">제보해주세요!</div>
+      </div>
+    </div>
+    <div id="panelLive">
+      <div class="proposal-section-label" style="margin-top:20px;">🕐 실시간 제안</div>
+      <div id="proposalLiveList">
+        <div class="proposal-empty">제보해주세요!</div>
+      </div>
     </div>
     <div style="text-align:center; margin-top:20px;">
       <button class="proposal-submit-btn" id="openProposalModal">✏️ 공약 제안하기</button>
@@ -2305,6 +2529,16 @@
   </div>
   <div class="card yt-section reveal">
     <div class="yt-grid">
+      <a class="yt-item" href="https://www.youtube.com/live/MPlO4QthBik?si=gKcVgLxJWk8k0A9X&t=452" target="_blank">
+        <div class="yt-thumb-wrap">
+          <img class="yt-thumb" src="https://img.youtube.com/vi/MPlO4QthBik/maxresdefault.jpg" alt="금요비대위 출연 영상">
+          <div class="yt-play"><svg width="36" height="36" viewBox="0 0 36 36"><rect width="36" height="36" rx="8" fill="#FF0000"/><polygon points="14,10 28,18 14,26" fill="white"/></svg></div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-title">[금요비대위-화요일 13:30 LIVE] '장예찬vs조갑제' 부산북갑 분석‥'장특공제+전세값 폭등'‧한예종 광주(?)…'야생토론'</div>
+          <div class="yt-meta"></div>
+        </div>
+      </a>
       <a class="yt-item" href="https://www.youtube.com/live/MooVFvd9D-o?si=ZlADBz6iepVtxtOb" target="_blank">
         <div class="yt-thumb-wrap">
           <img class="yt-thumb" src="https://img.youtube.com/vi/MooVFvd9D-o/maxresdefault.jpg" alt="철근소 출연 영상">
@@ -2326,6 +2560,7 @@
         </div>
       </a>
     </div>
+    <div class="yt-dots"></div>
   </div>
 
   <!-- Activity Photos -->
@@ -3150,7 +3385,7 @@ const p10Data = [
     how: [
       '전통시장 시설 현대화(아케이드, 화재안전설비, 공용화장실) 예산 집행 현황 점검',
       '소상공인 경영안정자금·컨설팅 지원사업 접근성 개선',
-      '지역화폐(사랑상품권) 활성화 및 전통시장 연계 할인 행사 지원 확대',
+      '지역화폐 오프라인 발행창구 개설 및 전통시장 연계 할인 행사 지원 확대',
       '골목상권 상생 협의체 구성 지원',
     ],
     effect: '전통시장 이용객 증가, 소상공인 폐업률 감소, 지역 내 소비 순환 활성화'
@@ -3252,6 +3487,124 @@ const p10Data = [
     if (e.key === 'ArrowRight' && curIdx < total - 1) { curIdx++; renderModal(curIdx); }
   });
   window.openPledge10 = openModal;
+})();
+
+/* ── 핵심 공약 슬라이더 dots ── */
+(function() {
+  const row = document.querySelector('.pledge-row');
+  const dotsWrap = document.querySelector('.pledge-dots');
+  if (!row || !dotsWrap) return;
+
+  const cards = Array.from(row.querySelectorAll('.pledge-card'));
+  const dots = cards.map((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'pledge-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => {
+      const cardW = cards[0].offsetWidth + 16;
+      row.scrollTo({ left: cardW * i, behavior: 'smooth' });
+    });
+    dotsWrap.appendChild(d);
+    return d;
+  });
+
+  row.addEventListener('scroll', () => {
+    const cardW = cards[0].offsetWidth + 16;
+    const idx = Math.min(Math.round(row.scrollLeft / cardW), dots.length - 1);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }, { passive: true });
+})();
+
+/* ── 공약 제안 탭 (모바일) ── */
+(function() {
+  if (window.innerWidth > 768) return;
+  const tabs = document.querySelectorAll('.proposal-tab');
+  const panelBest = document.getElementById('panelBest');
+  const panelLive = document.getElementById('panelLive');
+  panelLive.style.display = 'none';
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const isBest = tab.dataset.tab === 'best';
+      panelBest.style.display = isBest ? '' : 'none';
+      panelLive.style.display = isBest ? 'none' : '';
+    });
+  });
+})();
+
+/* ── 유튜브 슬라이더 dots ── */
+(function() {
+  const row = document.querySelector('.yt-grid');
+  const dotsWrap = document.querySelector('.yt-dots');
+  if (!row || !dotsWrap) return;
+
+  const items = Array.from(row.querySelectorAll('.yt-item'));
+  const dots = items.map((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'yt-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => {
+      const itemW = items[0].offsetWidth + 14;
+      row.scrollTo({ left: itemW * i, behavior: 'smooth' });
+    });
+    dotsWrap.appendChild(d);
+    return d;
+  });
+
+  row.addEventListener('scroll', () => {
+    const itemW = items[0].offsetWidth + 14;
+    const idx = Math.min(Math.round(row.scrollLeft / itemW), dots.length - 1);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }, { passive: true });
+})();
+
+/* ── 핀포인트 공약 슬라이더 dots ── */
+(function() {
+  const row = document.querySelector('.pinpoint-row');
+  const dotsWrap = document.querySelector('.pinpoint-dots');
+  if (!row || !dotsWrap) return;
+
+  const cards = Array.from(row.querySelectorAll('.pinpoint-card'));
+  const dots = cards.map((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'pinpoint-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => {
+      const cardW = cards[0].offsetWidth + 14;
+      row.scrollTo({ left: cardW * i, behavior: 'smooth' });
+    });
+    dotsWrap.appendChild(d);
+    return d;
+  });
+
+  row.addEventListener('scroll', () => {
+    const cardW = cards[0].offsetWidth + 14;
+    const idx = Math.min(Math.round(row.scrollLeft / cardW), dots.length - 1);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }, { passive: true });
+})();
+
+/* ── 10대 공약 슬라이더 dots ── */
+(function() {
+  const row = document.querySelector('.pledge10-row');
+  const dotsWrap = document.querySelector('.pledge10-dots');
+  if (!row || !dotsWrap) return;
+
+  const cards = Array.from(row.querySelectorAll('.pledge10-card'));
+  const dots = cards.map((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'pledge10-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => {
+      const cardW = cards[0].offsetWidth + 14;
+      row.scrollTo({ left: cardW * i, behavior: 'smooth' });
+    });
+    dotsWrap.appendChild(d);
+    return d;
+  });
+
+  row.addEventListener('scroll', () => {
+    const cardW = cards[0].offsetWidth + 14;
+    const idx = Math.min(Math.round(row.scrollLeft / cardW), dots.length - 1);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }, { passive: true });
 })();
 </script>
 
