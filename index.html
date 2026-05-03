@@ -1712,24 +1712,25 @@
   /* ── 10대 공약 ── */
   .pledge10-row {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
-  @media (max-width: 768px) { .pledge10-row { grid-template-columns: 1fr; } }
+  @media (max-width: 1024px) { .pledge10-row { grid-template-columns: repeat(2, 1fr); } }
 
   .pledge10-card {
     background: linear-gradient(155deg, #ffffff 0%, #fafaf8 100%);
     border-radius: var(--radius);
     border-left: 4px solid var(--orange);
-    padding: 24px 22px 20px;
+    padding: 14px 16px;
     box-shadow:
       0 0 0 1px rgba(0,0,0,0.05),
       0 2px 4px rgba(0,0,0,0.04),
       0 8px 18px rgba(0,0,0,0.05);
     cursor: pointer;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
     position: relative;
     overflow: hidden;
     transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1);
@@ -1827,34 +1828,41 @@
     }
   }
 
-  .pledge10-header {
+  .pledge10-left {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 6px 10px;
-    margin-bottom: 4px;
+    gap: 3px;
+    flex-shrink: 0;
+    width: 34px;
+  }
+  .pledge10-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
   }
   .pledge10-num {
-    font-size: 24px;
+    font-size: 11px;
     font-weight: 900;
-    color: rgba(255,82,0,0.22);
-    letter-spacing: -.04em;
+    color: rgba(255,82,0,0.35);
+    letter-spacing: .02em;
     flex-shrink: 0;
     line-height: 1;
   }
   .pledge10-icon {
-    font-size: 24px;
+    font-size: 22px;
     line-height: 1;
     flex-shrink: 0;
   }
   .pledge10-title {
-    width: 100%;
-    text-align: center;
-    font-size: clamp(13px, 1.5vw, 16px);
+    width: auto;
+    text-align: left;
+    font-size: clamp(11px, 1.1vw, 13px);
     font-weight: 800;
     letter-spacing: -.02em;
-    line-height: 1.4;
+    line-height: 1.35;
   }
   .pledge10-tag {
     font-size: 10px;
@@ -1865,15 +1873,7 @@
     padding: 3px 10px;
     border-radius: 40px;
     width: fit-content;
-    align-self: center;
-  }
-  .pledge10-hint {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--orange);
-    letter-spacing: .04em;
-    margin-top: 4px;
-    align-self: center;
+    align-self: flex-start;
   }
 
   /* 10대 공약 모달 */
@@ -2244,94 +2244,104 @@
   </div>
   <div class="pledge10-row">
     <div class="pledge10-card reveal reveal-d1" data-p10="0">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">01</div>
         <div class="pledge10-icon">🔦</div>
-        <div class="pledge10-title">우리 동네 안심 골목길 프로젝트</div>
       </div>
-      <span class="pledge10-tag">생활안전·CCTV·조명</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">우리 동네 안심 골목길 프로젝트</div>
+        <span class="pledge10-tag">생활안전·CCTV·조명</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d2" data-p10="1">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">02</div>
         <div class="pledge10-icon">🚶</div>
-        <div class="pledge10-title">걷기 좋은 성북, 보행환경 개선</div>
       </div>
-      <span class="pledge10-tag">보행·교통·어린이보호구역</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">걷기 좋은 성북, 보행환경 개선</div>
+        <span class="pledge10-tag">보행·교통·어린이보호구역</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d3" data-p10="2">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">03</div>
         <div class="pledge10-icon">👶</div>
-        <div class="pledge10-title">아이 키우기 좋은 성북, 공보육·돌봄 강화</div>
       </div>
-      <span class="pledge10-tag">보육·돌봄·맞벌이</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">아이 키우기 좋은 성북, 공보육·돌봄 강화</div>
+        <span class="pledge10-tag">보육·돌봄·맞벌이</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d4" data-p10="3">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">04</div>
         <div class="pledge10-icon">🧓</div>
-        <div class="pledge10-title">어르신이 건강하고 활기찬 성북</div>
       </div>
-      <span class="pledge10-tag">노인복지·경로당·치매예방</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">어르신이 건강하고 활기찬 성북</div>
+        <span class="pledge10-tag">노인복지·경로당·치매예방</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d1" data-p10="4">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">05</div>
         <div class="pledge10-icon">🏘️</div>
-        <div class="pledge10-title">낡은 동네에 새 숨결, 주거환경·도시재생</div>
       </div>
-      <span class="pledge10-tag">노후주택·빈집·골목정비</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">낡은 동네에 새 숨결, 주거환경·도시재생</div>
+        <span class="pledge10-tag">노후주택·빈집·골목정비</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d2" data-p10="5">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">06</div>
         <div class="pledge10-icon">🏪</div>
-        <div class="pledge10-title">전통시장 살리고, 소상공인 지키는 성북</div>
       </div>
-      <span class="pledge10-tag">전통시장·소상공인·지역상권</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">전통시장 살리고, 소상공인 지키는 성북</div>
+        <span class="pledge10-tag">전통시장·소상공인·지역상권</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d3" data-p10="6">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">07</div>
         <div class="pledge10-icon">🌳</div>
-        <div class="pledge10-title">집 앞에서 쉬는 공원, 녹지 늘리는 성북</div>
       </div>
-      <span class="pledge10-tag">공원·녹지·산책로</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">집 앞에서 쉬는 공원, 녹지 늘리는 성북</div>
+        <span class="pledge10-tag">공원·녹지·산책로</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d4" data-p10="7">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">08</div>
         <div class="pledge10-icon">📚</div>
-        <div class="pledge10-title">청소년이 머물 곳 있는 성북</div>
       </div>
-      <span class="pledge10-tag">청소년·활동공간·진로</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">청소년이 머물 곳 있는 성북</div>
+        <span class="pledge10-tag">청소년·활동공간·진로</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d1" data-p10="8">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">09</div>
         <div class="pledge10-icon">♿</div>
-        <div class="pledge10-title">누구나 불편 없이 다니는 성북</div>
       </div>
-      <span class="pledge10-tag">장애인·교통약자·무장애</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">누구나 불편 없이 다니는 성북</div>
+        <span class="pledge10-tag">장애인·교통약자·무장애</span>
+      </div>
     </div>
     <div class="pledge10-card reveal reveal-d2" data-p10="9">
-      <div class="pledge10-header">
+      <div class="pledge10-left">
         <div class="pledge10-num">10</div>
         <div class="pledge10-icon">🗳️</div>
-        <div class="pledge10-title">주민이 참여하고, 구의회가 투명한 성북</div>
       </div>
-      <span class="pledge10-tag">주민참여·투명행정·소통</span>
-      <span class="pledge10-hint">자세히 보기 →</span>
+      <div class="pledge10-right">
+        <div class="pledge10-title">주민이 참여하고, 구의회가 투명한 성북</div>
+        <span class="pledge10-tag">주민참여·투명행정·소통</span>
+      </div>
     </div>
   </div>
   <div class="pledge10-dots"></div>
