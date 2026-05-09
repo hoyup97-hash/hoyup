@@ -754,6 +754,14 @@ body {
   letter-spacing: 0.02em;
 }
 .math-label strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+.math-footnote {
+  font-size: clamp(0.65rem, 1.4vw, 0.75rem);
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-top: 0.6rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
 .math-result {
   margin-top: 0.5rem;
   padding: 2rem 2rem;
@@ -1703,7 +1711,7 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
       <div class="stat-compare-item stat-compare-item--ours">
         <div class="stat-compare-mascot">🐯</div>
         <div class="stat-compare-school">고려대</div>
-        <div class="stat-compare-num">12.4%</div>
+        <div class="stat-compare-num">11.5%</div>
         <div class="stat-compare-label">서울 15개 대학 중 <strong>최하위</strong></div>
       </div>
       <div class="stat-compare-divider">vs</div>
@@ -1994,6 +2002,7 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
         <div class="math-content">
           <div class="math-num">약 5,000+</div>
           <div class="math-label">안암·보문·동선동 일대에 거주하는<br><strong>고려대 재학생 추산 인원</strong></div>
+          <div class="math-footnote">재학생 28,662명 중 내국인 기숙사 수용 2,163명. 나머지 26,499명 중 5명 중 1명만 안암 근처에 자취한다고 가정해도 5,000명 이상</div>
         </div>
       </div>
     </div>
@@ -2002,7 +2011,8 @@ footer { background: #111; padding: 60px 40px 40px; border-top: 1px solid rgba(2
       <div class="math-result-inner">
         <div class="math-result-label">당선 가능성</div>
         <div class="math-result-text">
-          3인 선거구는 3등,<br>5인 선거구는 5등만 하면 됩니다.<br>
+          안암동이 포함된 선거구는 5인 선거구 확정.<br>
+          <strong>5등</strong>만 하면 됩니다.<br><br>
           이제 <em>우리가 직접 들어갈 차례</em>입니다.<br>
           이호엽을 찍으면 이호엽이 됩니다.
         </div>
