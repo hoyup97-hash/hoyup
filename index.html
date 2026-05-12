@@ -3238,8 +3238,13 @@ function renderList(container, cache) {
       if (liked.includes(id)) return;
       liked.push(id);
       localStorage.setItem('likedProposals', JSON.stringify(liked));
-      await updateDoc(doc(db, 'proposals', id), { likes: increment(1) });
-      loadProposals();
+      [bestCache, liveCache].forEach(cache => {
+        const item = cache.find(p => p.id === id);
+        if (item) item.likes = (item.likes || 0) + 1;
+      });
+      renderList(bestListEl, bestCache);
+      renderList(liveListEl, liveCache);
+      updateDoc(doc(db, 'proposals', id), { likes: increment(1) });
     });
   });
 
@@ -3289,13 +3294,15 @@ document.getElementById('proposalSendBtn').addEventListener('click', async () =>
 
   try {
     const pwHash = await hashPw(pw);
-    await addDoc(collection(db, 'proposals'), {
+    const ref = await addDoc(collection(db, 'proposals'), {
       title, nickname: nick, body, location: loc,
       pwHash, likes: 0, createdAt: serverTimestamp()
     });
+    liveCache.unshift({ id: ref.id, title, nickname: nick, body, location: loc, pwHash, likes: 0, createdAt: { toMillis: () => Date.now() } });
+    if (liveCache.length > 5) liveCache.pop();
+    renderList(liveListEl, liveCache);
     ['pTitle','pNick','pBody','pLocation','pPw'].forEach(id => document.getElementById(id).value = '');
     closeModal();
-    loadProposals();
   } catch(e) {
     alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
   } finally {
@@ -3333,8 +3340,11 @@ document.getElementById('pdDeleteBtn').addEventListener('click', async () => {
     return;
   }
   await deleteDoc(doc(db, 'proposals', currentDetailId));
+  bestCache = bestCache.filter(p => p.id !== currentDetailId);
+  liveCache = liveCache.filter(p => p.id !== currentDetailId);
+  renderList(bestListEl, bestCache);
+  renderList(liveListEl, liveCache);
   closeDetail();
-  loadProposals();
 });
 
 document.addEventListener('keydown', e => {
@@ -3355,25 +3365,24 @@ async function loadProposals() {
   renderList(liveListEl, liveCache);
 }
 
-// ── 더미 정리 & 시드 (1회) ──
+// ── 더미 정리 & 시드 (최초 1회만) ──
 async function migrateData() {
-  // 기존 더미 삭제
+  if (localStorage.getItem('migrated_v1')) return;
   const dummySnap = await getDocs(query(collection(db, 'proposals'), where('pwHash', '==', 'dummy')));
   await Promise.all(dummySnap.docs.map(d => deleteDoc(doc(db, 'proposals', d.id))));
-
-  // 시드 항목이 이미 있으면 스킵
   const seedSnap = await getDocs(query(collection(db, 'proposals'), where('pwHash', '==', 'seed_v1'), limit(1)));
-  if (!seedSnap.empty) return;
-
-  await addDoc(collection(db, 'proposals'), {
-    title: '성북01마을버스 배차 해결해주세요',
-    nickname: '한신한진주민',
-    body: '출퇴근 시간대 배차 간격이 너무 길어서 불편합니다. 특히 아침 8시~9시, 저녁 6시~7시 배차를 늘려주세요.',
-    location: '돈암동',
-    likes: 3,
-    pwHash: 'seed_v1',
-    createdAt: new Date(Date.now() - 30 * 24 * 3600 * 1000)
-  });
+  if (seedSnap.empty) {
+    await addDoc(collection(db, 'proposals'), {
+      title: '성북01마을버스 배차 해결해주세요',
+      nickname: '한신한진주민',
+      body: '출퇴근 시간대 배차 간격이 너무 길어서 불편합니다. 특히 아침 8시~9시, 저녁 6시~7시 배차를 늘려주세요.',
+      location: '돈암동',
+      likes: 3,
+      pwHash: 'seed_v1',
+      createdAt: new Date(Date.now() - 30 * 24 * 3600 * 1000)
+    });
+  }
+  localStorage.setItem('migrated_v1', '1');
 }
 
 // 초기 로드
