@@ -757,6 +757,28 @@
     transition: transform .4s ease;
   }
   .gallery-slot:hover img { transform: scale(1.03); }
+  .gallery-slot iframe {
+    width: 100%; height: 100%;
+    border: none; display: block;
+    pointer-events: none;
+  }
+  /* 일정카드 이미지 모달 */
+  .imgmodal {
+    display: none; position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,0.88); align-items: center; justify-content: center;
+  }
+  .imgmodal.open { display: flex; }
+  .imgmodal img {
+    max-width: 92vw; max-height: 92vh;
+    border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,.5);
+  }
+  .imgmodal-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.15); border: none;
+    color: white; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
 
   .gallery-empty-msg {
     display: none;
@@ -1639,6 +1661,18 @@
     background: var(--bg2);
     color: var(--gray);
   }
+  .loc-badge.error {
+    background: #FFF3CD;
+    color: #7D5A00;
+  }
+  .loc-badge.error::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #F0A500;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
   .loc-updated {
     font-size: 11px;
     color: var(--gray);
@@ -1651,6 +1685,28 @@
     margin-top: 12px;
     border-radius: 0;
     background: var(--bg2);
+  }
+  #locMap.stale {
+    opacity: 0.45;
+    filter: grayscale(40%);
+  }
+  .loc-map-wrap {
+    position: relative;
+  }
+  #locMapLabel {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 99px;
+    pointer-events: none;
+    white-space: nowrap;
   }
   .loc-offline-panel {
     display: flex;
@@ -2214,7 +2270,7 @@
       <span class="pp-more">자세히 보기 →</span>
     </div>
     <div class="pinpoint-card reveal reveal-d2" data-pp="1">
-      <div class="pinpoint-icon">🗑️</div>
+      <div class="pinpoint-icon">🥡</div>
       <div class="pinpoint-title">0.6리터 음식물봉투 도입</div>
       <div class="pinpoint-desc">1인 가구엔 1리터 봉투가 너무 큽니다. 송파구가 전국 최초 도입 — 성북구도 조례로 추진합니다</div>
       <span class="pinpoint-badge">1인 가구</span>
@@ -2492,10 +2548,13 @@
   </div>
   <div class="card reveal" style="padding:0;overflow:hidden;">
     <div class="loc-status-bar">
-      <div class="loc-badge offline" id="locBadge">현재 유세 중이 아닙니다</div>
+      <div class="loc-badge error" id="locBadge">⚠️ 시스템 점검 중</div>
       <div class="loc-updated" id="locUpdated"></div>
     </div>
-    <div id="locMap" style="display:none;"></div>
+    <div class="loc-map-wrap">
+      <div id="locMap" style="display:none;"></div>
+      <div id="locMapLabel" style="display:none;">마지막 위치</div>
+    </div>
     <div class="loc-offline-panel" id="locOffline">
       <div class="loc-offline-icon">📍</div>
       <div>선거운동 기간 중 위치가 표시됩니다</div>
@@ -2582,35 +2641,34 @@
     <div class="gallery-carousel">
       <div class="gallery-track-wrap">
         <div class="gallery-track" id="galleryTrack">
-          <div class="gallery-slot" onclick="window.open('https://blog.naver.com/hyl005/224214276012','_blank')">
-            <picture>
-              <source srcset="./assets/images/activity1.webp" type="image/webp">
-              <img src="./assets/images/activity1.jpg" alt="활동사진 1" onerror="this.parentElement.classList.add('empty')">
-            </picture>
-            <div class="gallery-empty-msg">activity1.jpg</div>
+          <!-- 일정카드: 매일 assets/images/schedule_card.png 파일 교체 -->
+          <div class="gallery-slot" id="scheduleCardSlot" style="cursor:zoom-in;">
+            <img src="./assets/images/schedule_card.png" alt="오늘의 일정" onerror="this.parentElement.classList.add('empty')">
+            <div class="gallery-empty-msg">schedule_card.png</div>
           </div>
-          <div class="gallery-slot" onclick="window.open('https://blog.naver.com/hyl005/224189663924','_blank')">
-            <picture>
-              <source srcset="./assets/images/activity2.webp" type="image/webp">
-              <img src="./assets/images/activity2.jpg" alt="활동사진 2" onerror="this.parentElement.classList.add('empty')">
-            </picture>
-            <div class="gallery-empty-msg">activity2.jpg</div>
+          <!-- 릴스: 아래에서 위 순서대로 추가 (최신이 앞에) -->
+          <div class="gallery-slot" onclick="window.open('https://www.instagram.com/reel/DXjxWXsj1Lc/','_blank')">
+            <iframe src="https://www.instagram.com/reel/DXjxWXsj1Lc/embed/" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
           </div>
-          <div class="gallery-slot" onclick="window.open('https://blog.naver.com/hyl005/224214276012','_blank')">
-            <picture>
-              <source srcset="./assets/images/activity3.webp" type="image/webp">
-              <img src="./assets/images/activity3.jpg" alt="활동사진 3" onerror="this.parentElement.classList.add('empty')">
-            </picture>
-            <div class="gallery-empty-msg">activity3.jpg</div>
+          <div class="gallery-slot" onclick="window.open('https://www.instagram.com/reel/DYMNoyYtwQu/','_blank')">
+            <iframe src="https://www.instagram.com/reel/DYMNoyYtwQu/embed/" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+          </div>
+          <div class="gallery-slot" onclick="window.open('https://www.instagram.com/reel/DX0OuXfTNVF/','_blank')">
+            <iframe src="https://www.instagram.com/reel/DX0OuXfTNVF/embed/" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+          </div>
+          <div class="gallery-slot" onclick="window.open('https://www.instagram.com/reel/DXWCEiEkXtg/','_blank')">
+            <iframe src="https://www.instagram.com/reel/DXWCEiEkXtg/embed/" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
           </div>
         </div>
       </div>
       <button class="gallery-btn prev" id="galleryPrev">&#8592;</button>
       <button class="gallery-btn next" id="galleryNext">&#8594;</button>
-      <div class="gallery-counter" id="galleryCounter">1 / 3</div>
+      <div class="gallery-counter" id="galleryCounter">1 / 5</div>
     </div>
     <div class="gallery-dots" id="galleryDots">
       <button class="gallery-dot active"></button>
+      <button class="gallery-dot"></button>
+      <button class="gallery-dot"></button>
       <button class="gallery-dot"></button>
       <button class="gallery-dot"></button>
     </div>
@@ -2918,6 +2976,32 @@ function sharePage() {
 </script>
 
 <!-- Coming Soon Modal -->
+<div id="imgModal" class="imgmodal">
+  <button class="imgmodal-close" id="imgModalClose">✕</button>
+  <img id="imgModalImg" src="" alt="일정카드">
+</div>
+<script>
+(function() {
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('imgModalImg');
+  const closeBtn = document.getElementById('imgModalClose');
+  const slot = document.getElementById('scheduleCardSlot');
+  if (!slot || !modal || !modalImg || !closeBtn) return;
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  slot.addEventListener('click', () => {
+    modalImg.src = slot.querySelector('img').src;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
+</script>
+
 <div id="comingSoonModal" class="csm-overlay">
   <div class="csm-box">
     <div class="csm-icon">🎬</div>
@@ -3522,6 +3606,18 @@ const p10Data = [
     const idx = Math.min(Math.round(row.scrollLeft / cardW), dots.length - 1);
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }, { passive: true });
+
+  function autoScroll() {
+    const cardW = cards[0].offsetWidth + 16;
+    const maxScroll = row.scrollWidth - row.clientWidth;
+    const next = row.scrollLeft + cardW;
+    row.scrollTo({ left: next >= maxScroll - 5 ? 0 : next, behavior: 'smooth' });
+  }
+  let timer = setInterval(autoScroll, 4000);
+  row.addEventListener('mouseenter', () => clearInterval(timer));
+  row.addEventListener('mouseleave', () => { clearInterval(timer); timer = setInterval(autoScroll, 4000); });
+  row.addEventListener('touchstart', () => clearInterval(timer), { passive: true });
+  row.addEventListener('touchend', () => { clearInterval(timer); timer = setInterval(autoScroll, 4000); }, { passive: true });
 })();
 
 /* ── 공약 제안 탭 (모바일) ── */
@@ -3565,6 +3661,18 @@ const p10Data = [
     const idx = Math.min(Math.round(row.scrollLeft / itemW), dots.length - 1);
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }, { passive: true });
+
+  function autoScroll() {
+    const itemW = items[0].offsetWidth + 14;
+    const maxScroll = row.scrollWidth - row.clientWidth;
+    const next = row.scrollLeft + itemW;
+    row.scrollTo({ left: next >= maxScroll - 5 ? 0 : next, behavior: 'smooth' });
+  }
+  let timer = setInterval(autoScroll, 4000);
+  row.addEventListener('mouseenter', () => clearInterval(timer));
+  row.addEventListener('mouseleave', () => { clearInterval(timer); timer = setInterval(autoScroll, 4000); });
+  row.addEventListener('touchstart', () => clearInterval(timer), { passive: true });
+  row.addEventListener('touchend', () => { clearInterval(timer); timer = setInterval(autoScroll, 4000); }, { passive: true });
 })();
 
 /* ── 핀포인트 공약 슬라이더 dots ── */
@@ -3590,6 +3698,18 @@ const p10Data = [
     const idx = Math.min(Math.round(row.scrollLeft / cardW), dots.length - 1);
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }, { passive: true });
+
+  function autoScroll() {
+    const cardW = cards[0].offsetWidth + 14;
+    const maxScroll = row.scrollWidth - row.clientWidth;
+    const next = row.scrollLeft + cardW;
+    row.scrollTo({ left: next >= maxScroll - 5 ? 0 : next, behavior: 'smooth' });
+  }
+  let timer = setInterval(autoScroll, 3500);
+  row.addEventListener('mouseenter', () => clearInterval(timer));
+  row.addEventListener('mouseleave', () => { clearInterval(timer); timer = setInterval(autoScroll, 3500); });
+  row.addEventListener('touchstart', () => clearInterval(timer), { passive: true });
+  row.addEventListener('touchend', () => { clearInterval(timer); timer = setInterval(autoScroll, 3500); }, { passive: true });
 })();
 
 /* ── 10대 공약 슬라이더 dots ── */
@@ -3615,6 +3735,18 @@ const p10Data = [
     const idx = Math.min(Math.round(row.scrollLeft / cardW), dots.length - 1);
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }, { passive: true });
+
+  function autoScroll() {
+    const cardW = cards[0].offsetWidth + 14;
+    const maxScroll = row.scrollWidth - row.clientWidth;
+    const next = row.scrollLeft + cardW;
+    row.scrollTo({ left: next >= maxScroll - 5 ? 0 : next, behavior: 'smooth' });
+  }
+  let timer = setInterval(autoScroll, 3500);
+  row.addEventListener('mouseenter', () => clearInterval(timer));
+  row.addEventListener('mouseleave', () => { clearInterval(timer); timer = setInterval(autoScroll, 3500); });
+  row.addEventListener('touchstart', () => clearInterval(timer), { passive: true });
+  row.addEventListener('touchend', () => { clearInterval(timer); timer = setInterval(autoScroll, 3500); }, { passive: true });
 })();
 </script>
 
@@ -3624,8 +3756,7 @@ const p10Data = [
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
 (function () {
-  const STALE_MS   = 30 * 60 * 1000;
-  const REFRESH_MS = 120 * 1000;
+  const STALE_MS = 5 * 60 * 1000;
 
   const LOC_CONFIG = {
     apiKey:            "AIzaSyBJn_tUM3jb5LM2z2GJtIUhlGx8AIf37Z0",
@@ -3636,7 +3767,6 @@ const p10Data = [
     appId:             "1:278731270685:web:fa33656fbc1d0173d934f4"
   };
 
-  // 앱 이름 충돌 방지 (modular SDK 와 별개로 'loc' 이름으로 초기화)
   const locApp = firebase.apps.find(a => a.name === 'loc')
     || firebase.initializeApp(LOC_CONFIG, 'loc');
   const db = firebase.firestore(locApp);
@@ -3644,88 +3774,135 @@ const p10Data = [
   const elBadge   = document.getElementById('locBadge');
   const elUpdated = document.getElementById('locUpdated');
   const elMap     = document.getElementById('locMap');
+  const elLabel   = document.getElementById('locMapLabel');
   const elOffline = document.getElementById('locOffline');
   const elCaption = document.getElementById('locCaption');
 
-  let leafletMap = null;
-  let marker     = null;
+  let leafletMap  = null;
+  let marker      = null;
+  let unsubscribe = null;
+
+  const liveIcon = L.divIcon({
+    className: '',
+    html: '<div style="width:36px;height:36px;background:#F26B1D;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);"></div>',
+    iconSize: [36, 36], iconAnchor: [18, 36]
+  });
+  const staleIcon = L.divIcon({
+    className: '',
+    html: '<div style="width:36px;height:36px;background:#aaa;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.2);"></div>',
+    iconSize: [36, 36], iconAnchor: [18, 36]
+  });
 
   function timeAgoKo(ms) {
     const sec = Math.floor(ms / 1000);
-    if (sec < 60)  return sec + '초 전 업데이트';
+    if (sec < 60)  return sec + '초 전';
     const min = Math.floor(sec / 60);
-    if (min < 60)  return min + '분 전 업데이트';
-    return Math.floor(min / 60) + '시간 전 업데이트';
+    if (min < 60)  return min + '분 전';
+    return Math.floor(min / 60) + '시간 전';
   }
 
-  function showOffline() {
-    elBadge.className     = 'loc-badge offline';
-    elBadge.textContent   = '현재 유세 중이 아닙니다';
+  function initMap(lat, lng) {
+    if (leafletMap) return;
+    leafletMap = L.map('locMap', { zoomControl: true, scrollWheelZoom: false })
+      .setView([lat, lng], 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19
+    }).addTo(leafletMap);
+  }
+
+  function showOffline(lastData) {
+    elBadge.className     = 'loc-badge error';
+    elBadge.textContent   = '⚠️ 시스템 점검 중';
     elUpdated.textContent = '';
-    elMap.style.display     = 'none';
-    elOffline.style.display = '';
-    elCaption.textContent   = '선거운동 기간 중 실시간 위치가 표시됩니다';
+
+    if (lastData) {
+      elOffline.style.display = 'none';
+      elMap.style.display     = '';
+      elMap.classList.add('stale');
+      elLabel.style.display   = '';
+      elCaption.innerHTML     = `${timeAgoKo(Date.now() - lastData.ts)}<br>지금은 시스템 점검 중입니다`;
+
+      initMap(lastData.lat, lastData.lng);
+      if (!marker) {
+        marker = L.marker([lastData.lat, lastData.lng], { icon: staleIcon })
+          .addTo(leafletMap)
+          .bindPopup('<b>마지막 유세 위치</b><br>현재는 점검 중입니다')
+          .openPopup();
+      } else {
+        marker.setLatLng([lastData.lat, lastData.lng]);
+        marker.setIcon(staleIcon);
+        marker.getPopup().setContent('<b>마지막 유세 위치</b><br>현재는 점검 중입니다');
+        leafletMap.setView([lastData.lat, lastData.lng], leafletMap.getZoom());
+      }
+      setTimeout(() => leafletMap.invalidateSize(), 150);
+    } else {
+      elMap.style.display     = 'none';
+      elLabel.style.display   = 'none';
+      elOffline.style.display = '';
+      elCaption.textContent   = '선거운동 기간 중 실시간 위치가 표시됩니다';
+    }
   }
 
   function showLive(lat, lng, ts) {
     elBadge.className     = 'loc-badge live';
     elBadge.textContent   = '이호엽 후보가 현재 유세 중입니다';
-    elUpdated.textContent = timeAgoKo(Date.now() - ts);
+    elUpdated.textContent = timeAgoKo(Date.now() - ts) + ' 업데이트';
     elOffline.style.display = 'none';
     elMap.style.display     = '';
-    elCaption.textContent   = '2분마다 자동 갱신됩니다';
+    elMap.classList.remove('stale');
+    elLabel.style.display   = 'none';
+    elCaption.textContent   = '위치가 바뀔 때 자동으로 갱신됩니다';
 
-    if (!leafletMap) {
-      leafletMap = L.map('locMap', { zoomControl: true, scrollWheelZoom: false })
-        .setView([lat, lng], 16);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19
-      }).addTo(leafletMap);
-      const icon = L.divIcon({
-        className: '',
-        html: '<div style="width:36px;height:36px;background:#F26B1D;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);"></div>',
-        iconSize: [36, 36],
-        iconAnchor: [18, 36]
-      });
-      marker = L.marker([lat, lng], { icon })
+    initMap(lat, lng);
+    if (!marker) {
+      marker = L.marker([lat, lng], { icon: liveIcon })
         .addTo(leafletMap)
         .bindPopup('<b>이호엽 후보</b><br>현재 이 위치에서 유세 중입니다')
         .openPopup();
     } else {
       marker.setLatLng([lat, lng]);
+      marker.setIcon(liveIcon);
+      marker.getPopup().setContent('<b>이호엽 후보</b><br>현재 이 위치에서 유세 중입니다');
       leafletMap.setView([lat, lng], leafletMap.getZoom());
     }
     setTimeout(() => leafletMap.invalidateSize(), 150);
   }
 
-  async function fetchLocation() {
-    try {
-      const snap = await db.collection('locations')
-        .orderBy('recorded_at', 'desc')
-        .limit(1)
-        .get();
-
-      if (snap.empty) { showOffline(); return; }
-
-      const data = snap.docs[0].data();
-      const ts   = data.recorded_at?.toMillis
-        ? data.recorded_at.toMillis()
-        : Number(data.recorded_at);
-
-      if (!data.lat || !data.lng || (Date.now() - ts) > STALE_MS) {
-        showOffline();
-      } else {
-        showLive(data.lat, data.lng, ts);
-      }
-    } catch (e) {
-      console.warn('[location] Firestore error:', e);
-      showOffline();
+  function handleSnapshot(snap) {
+    if (snap.empty) { showOffline(null); return; }
+    const data = snap.docs[0].data();
+    const ts   = data.recorded_at?.toMillis
+      ? data.recorded_at.toMillis()
+      : Number(data.recorded_at);
+    const hasCoords = data.lat && data.lng;
+    if (!hasCoords || (Date.now() - ts) > STALE_MS) {
+      showOffline(hasCoords ? { lat: data.lat, lng: data.lng, ts } : null);
+    } else {
+      showLive(data.lat, data.lng, ts);
     }
   }
 
-  fetchLocation();
-  setInterval(fetchLocation, REFRESH_MS);
+  function startListener() {
+    if (unsubscribe) return;
+    unsubscribe = db.collection('locations')
+      .orderBy('recorded_at', 'desc')
+      .limit(1)
+      .onSnapshot(handleSnapshot, (e) => {
+        console.warn('[location] Firestore error:', e);
+        showOffline(null);
+      });
+  }
+
+  function stopListener() {
+    if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stopListener() : startListener();
+  });
+
+  startListener();
 })();
 </script>
 </body>
