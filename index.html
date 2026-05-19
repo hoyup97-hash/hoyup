@@ -1463,6 +1463,51 @@
   .apt-name { font-size: 12px; font-weight: 700; letter-spacing: -.01em; line-height: 1.35; }
   .apt-arrow { font-size: 11px; color: #ccc; transition: color .2s; margin-top: 2px; }
 
+  /* Apartment YouTube modal */
+  .apt-yt-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,.85); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  .apt-yt-overlay.open { display: flex; }
+  .apt-yt-modal {
+    width: 100%; max-width: 800px;
+    background: #111; border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,.6);
+    animation: csmIn .25s cubic-bezier(.34,1.56,.64,1);
+  }
+  .apt-yt-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .apt-yt-title {
+    font-size: 14px; font-weight: 800; color: white; letter-spacing: -.01em;
+  }
+  .apt-yt-close {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,.5); padding: 4px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; transition: color .2s, background .2s;
+  }
+  .apt-yt-close:hover { color: white; background: rgba(255,255,255,.1); }
+  .apt-yt-frame-wrap {
+    position: relative; padding-bottom: 56.25%; height: 0;
+  }
+  .apt-yt-frame-wrap iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    border: none;
+  }
+
+  .apt-card[data-yt] {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .apt-card[data-yt] .apt-arrow { color: var(--orange); }
+
   .apt-no-result {
     display: none;
     grid-column: 1 / -1;
@@ -2438,9 +2483,9 @@
     <span id="aptCount"></span>
   </div>
   <div class="apt-grid" id="aptGrid">
-    <div class="apt-card apt-card-soon reveal reveal-d1">
-      <div class="apt-name">안암 래미안</div>
-      <div class="apt-arrow">공개 예정</div>
+    <div class="apt-card reveal reveal-d1" data-yt="swwrjGKurdM" data-apt-name="안암 래미안 아파트">
+      <div class="apt-name">안암 래미안 아파트</div>
+      <div class="apt-arrow">▶ 영상 확인하기</div>
     </div>
     <div class="apt-card apt-card-soon reveal reveal-d2">
       <div class="apt-name">안암 대광</div>
@@ -3912,6 +3957,53 @@ const p10Data = [
   });
 
   startListener();
+})();
+</script>
+
+<!-- 아파트별 공약 유튜브 모달 -->
+<div class="apt-yt-overlay" id="aptYtOverlay">
+  <div class="apt-yt-modal">
+    <div class="apt-yt-header">
+      <div class="apt-yt-title" id="aptYtTitle"></div>
+      <button class="apt-yt-close" id="aptYtClose" aria-label="닫기">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 5l12 12M17 5L5 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="apt-yt-frame-wrap">
+      <iframe id="aptYtFrame" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const overlay = document.getElementById('aptYtOverlay');
+  const frame   = document.getElementById('aptYtFrame');
+  const title   = document.getElementById('aptYtTitle');
+  const closeBtn = document.getElementById('aptYtClose');
+
+  function openAptYt(ytId, aptName) {
+    title.textContent = aptName + ' 공약 영상';
+    frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0';
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAptYt() {
+    overlay.classList.remove('open');
+    frame.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.apt-card[data-yt]').forEach(card => {
+    card.addEventListener('click', () => {
+      openAptYt(card.dataset.yt, card.dataset.aptName);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeAptYt);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeAptYt(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAptYt(); });
 })();
 </script>
 </body>
