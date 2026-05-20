@@ -20,7 +20,7 @@
 - 테마 컬러: 학교별로 다름
   - 고려대: #981E32 (크림슨)
   - 성신여대: #6A3FA0 (보라/수정)
-  - 한성대: #FF5200 (오렌지, 기본값)
+  - 한성대: #049EDB (HSU Sky Blue, 주 포인트) / #0A4DA1 (HSU Blue) / #032E6E (HSU Dark Blue) / #626466 (HSU Grey)
 - 공통 스타일: `/assets/style.css` CSS 변수로 오버라이드
 - 새 페이지는 `_template_university.html`을 복사해서 시작할 것
 
