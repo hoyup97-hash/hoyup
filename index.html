@@ -2523,7 +2523,11 @@
       <div class="apt-name">한신한진 아파트</div>
       <div class="apt-arrow">▶ 영상 확인하기</div>
     </div>
-    <div class="apt-card reveal reveal-d3" data-yt="kBfxlvEWf-g" data-apt-name="브라운스톤돈암">
+    <div class="apt-card reveal reveal-d3" data-yt="a3DTDNd-8GI" data-apt-name="한신휴플러스 아파트">
+      <div class="apt-name">한신휴플러스 아파트</div>
+      <div class="apt-arrow">▶ 영상 확인하기</div>
+    </div>
+    <div class="apt-card reveal reveal-d4" data-yt="kBfxlvEWf-g" data-apt-name="브라운스톤돈암">
       <div class="apt-name">브라운스톤돈암</div>
       <div class="apt-arrow">▶ 영상 확인하기</div>
     </div>
@@ -2593,7 +2597,7 @@
   </div>
   <div class="card reveal" style="padding:0;overflow:hidden;">
     <div class="loc-status-bar">
-      <div class="loc-badge error" id="locBadge">⚠️ 시스템 점검 중</div>
+      <div class="loc-badge offline" id="locBadge">📍 성북구</div>
       <div class="loc-updated" id="locUpdated"></div>
     </div>
     <div class="loc-map-wrap">
@@ -2604,7 +2608,7 @@
       <div class="loc-offline-icon">📍</div>
       <div>선거운동 기간 중 위치가 표시됩니다</div>
     </div>
-    <div class="loc-caption" id="locCaption">선거운동 기간 중 실시간 위치가 표시됩니다</div>
+    <div class="loc-caption" id="locCaption">현재 성북구에 위치하고 있습니다</div>
   </div>
 
   <!-- 공약 제안 -->
@@ -3865,37 +3869,35 @@ const p10Data = [
     }).addTo(leafletMap);
   }
 
-  function showOffline(lastData) {
-    elBadge.className     = 'loc-badge error';
-    elBadge.textContent   = '⚠️ 시스템 점검 중';
+  function showOffline() {
+    const SEONGBUK_LAT = 37.5894;
+    const SEONGBUK_LNG = 127.0167;
+    const SEONGBUK_ZOOM = 13;
+
+    elBadge.className     = 'loc-badge offline';
+    elBadge.textContent   = '📍 성북구';
     elUpdated.textContent = '';
+    elOffline.style.display = 'none';
+    elMap.style.display     = '';
+    elMap.classList.remove('stale');
+    elLabel.style.display   = 'none';
+    elCaption.textContent   = '현재 성북구에 위치하고 있습니다';
 
-    if (lastData) {
-      elOffline.style.display = 'none';
-      elMap.style.display     = '';
-      elMap.classList.add('stale');
-      elLabel.style.display   = '';
-      elCaption.innerHTML     = `${timeAgoKo(Date.now() - lastData.ts)}<br>지금은 시스템 점검 중입니다`;
+    initMap(SEONGBUK_LAT, SEONGBUK_LNG);
+    leafletMap.setView([SEONGBUK_LAT, SEONGBUK_LNG], SEONGBUK_ZOOM);
 
-      initMap(lastData.lat, lastData.lng);
-      if (!marker) {
-        marker = L.marker([lastData.lat, lastData.lng], { icon: staleIcon })
-          .addTo(leafletMap)
-          .bindPopup('<b>마지막 유세 위치</b><br>현재는 점검 중입니다')
-          .openPopup();
-      } else {
-        marker.setLatLng([lastData.lat, lastData.lng]);
-        marker.setIcon(staleIcon);
-        marker.getPopup().setContent('<b>마지막 유세 위치</b><br>현재는 점검 중입니다');
-        leafletMap.setView([lastData.lat, lastData.lng], leafletMap.getZoom());
-      }
-      setTimeout(() => leafletMap.invalidateSize(), 150);
+    if (!marker) {
+      marker = L.marker([SEONGBUK_LAT, SEONGBUK_LNG], { icon: staleIcon })
+        .addTo(leafletMap)
+        .bindPopup('<b>이호엽 후보</b><br>현재 성북구에 위치하고 있습니다')
+        .openPopup();
     } else {
-      elMap.style.display     = 'none';
-      elLabel.style.display   = 'none';
-      elOffline.style.display = '';
-      elCaption.textContent   = '선거운동 기간 중 실시간 위치가 표시됩니다';
+      marker.setLatLng([SEONGBUK_LAT, SEONGBUK_LNG]);
+      marker.setIcon(staleIcon);
+      marker.getPopup().setContent('<b>이호엽 후보</b><br>현재 성북구에 위치하고 있습니다');
+      leafletMap.setView([SEONGBUK_LAT, SEONGBUK_LNG], SEONGBUK_ZOOM);
     }
+    setTimeout(() => leafletMap.invalidateSize(), 150);
   }
 
   function showLive(lat, lng, ts) {
@@ -3924,14 +3926,14 @@ const p10Data = [
   }
 
   function handleSnapshot(snap) {
-    if (snap.empty) { showOffline(null); return; }
+    if (snap.empty) { showOffline(); return; }
     const data = snap.docs[0].data();
     const ts   = data.recorded_at?.toMillis
       ? data.recorded_at.toMillis()
       : Number(data.recorded_at);
     const hasCoords = data.lat && data.lng;
     if (!hasCoords || (Date.now() - ts) > STALE_MS) {
-      showOffline(hasCoords ? { lat: data.lat, lng: data.lng, ts } : null);
+      showOffline();
     } else {
       showLive(data.lat, data.lng, ts);
     }
@@ -3944,7 +3946,7 @@ const p10Data = [
       .limit(1)
       .onSnapshot(handleSnapshot, (e) => {
         console.warn('[location] Firestore error:', e);
-        showOffline(null);
+        showOffline();
       });
   }
 
