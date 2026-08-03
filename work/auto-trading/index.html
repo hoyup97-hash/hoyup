@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>가상자산 자동매매 시스템 — 이호엽</title>
+  <meta name="description" content="Python·Pine Script·거래소 API로 매매 로직을 직접 설계하고, 백테스트와 실전의 괴리를 실측으로 검증해 장기 시계열 전략으로 재편·운용 중인 자동매매 시스템.">
+  <link rel="canonical" href="https://hoyup.kr/work/auto-trading/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="이호엽">
+  <meta property="og:title" content="가상자산 자동매매 시스템 — 이호엽">
+  <meta property="og:description" content="Python과 API로 직접 설계한 매매 로직을 실전 운용 중.">
+  <meta property="og:url" content="https://hoyup.kr/work/auto-trading/">
+  <meta property="og:image" content="https://hoyup.kr/assets/img/og.png">
+  <meta property="og:locale" content="ko_KR">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <!-- 스크롤 리빌 no-js 폴백 (4.6) -->
+  <script>document.documentElement.classList.add("js-anim");</script>
+  <style>
+    .prj-hero { background: var(--dark-bg); color: var(--dark-ink); padding: calc(var(--header-h) + 56px) 0 56px; }
+    .prj-hero__eyebrow { margin: 0 0 12px; font-size: 13px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .prj-hero h1 { margin: 0 0 16px; color: var(--dark-ink); }
+    .prj-hero__lead { margin: 0; max-width: 46em; font-size: 19px; color: var(--dark-sub); }
+    .prj-body { background: var(--bg); }
+    .prj-block { max-width: 760px; margin: 0 auto; }
+    .prj-step { padding: 40px 0; border-top: 1px solid var(--line); }
+    .prj-step:first-of-type { border-top: 0; }
+    .prj-step__no { display: inline-block; margin: 0 0 8px; font-size: 13px; font-weight: 800; letter-spacing: 0.14em; color: var(--accent-text); font-variant-numeric: tabular-nums; }
+    .prj-step h2 { margin: 0 0 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- 얇은 헤더 (3.10) -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="../../">
+        <span class="site-header__name">← 메인으로</span>
+      </a>
+      <a class="btn btn--primary site-header__cta" href="mailto:hoyup97@gmail.com">이메일</a>
+    </div>
+  </header>
+
+  <!-- 히어로 -->
+  <header class="prj-hero">
+    <div class="container">
+      <p class="prj-hero__eyebrow reveal">PROJECT</p>
+      <h1 class="reveal">가상자산 자동매매 시스템</h1>
+      <p class="prj-hero__lead reveal">Python과 API로 직접 설계한 매매 로직을 실전 운용 중. 백테스트에서 끝내지 않고, 실전에서 드러나는 괴리를 실측으로 확인하며 전략을 재편했습니다.</p>
+    </div>
+  </header>
+
+  <main class="prj-body">
+    <div class="container">
+      <div class="prj-block">
+
+        <section class="prj-step">
+          <span class="prj-step__no reveal">STEP 01</span>
+          <h2 class="reveal">로직 설계</h2>
+          <p class="reveal">Python, Pine Script, 거래소 API를 사용해 매매 로직을 직접 설계했습니다. 진입·청산 규칙과 리스크 관리 기준을 코드로 구현하고, 거래소 API에 연결해 자동으로 주문이 실행되도록 구성했습니다.</p>
+        </section>
+
+        <section class="prj-step">
+          <span class="prj-step__no reveal">STEP 02</span>
+          <h2 class="reveal">백테스트와 실전의 괴리 검증</h2>
+          <p class="reveal">백테스트 성과가 실전에서 그대로 재현되지 않는 원인을 실측으로 확인했습니다. 체결 가격이 예상과 벌어지는 슬리피지, 신호 발생과 주문 사이의 시간차, 과거 데이터에 과최적화된 오버피팅을 실제 운용 데이터로 검증하며 전략의 한계를 파악했습니다.</p>
+        </section>
+
+        <section class="prj-step">
+          <span class="prj-step__no reveal">STEP 03</span>
+          <h2 class="reveal">재편과 운용</h2>
+          <p class="reveal">잦은 거래가 슬리피지와 수수료로 성과를 갉아먹는다는 점을 확인하고, 거래 횟수를 줄인 장기 시계열 전략으로 재편했습니다. 현재도 실전에서 운용하며 데이터를 축적하고 있습니다.</p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="contact" style="padding:64px 0;">
+    <div class="container">
+      <p class="contact__lead">이 프로젝트에 대해 더 이야기 나누고 싶다면.</p>
+      <div class="contact__actions">
+        <a class="btn btn--primary" href="mailto:hoyup97@gmail.com">이메일 보내기</a>
+        <a class="btn btn--ghost-dark" href="../../">← 메인으로</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* 스크롤 리빌 (4.6) — .reveal 블록을 섹션 진입 시 페이드업, 형제 스태거, 1회. */
+    (function () {
+      var reduce = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var els = document.querySelectorAll(".reveal");
+      if (!els.length) return;
+      if (reduce || !("IntersectionObserver" in window)) {
+        els.forEach(function (el) { el.classList.add("is-in"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      var groups = [], counts = [];
+      els.forEach(function (el) {
+        var sec = el.closest("section") || el.closest(".prj-hero") ||
+          el.closest("footer") || el.parentNode;
+        var gi = groups.indexOf(sec);
+        if (gi === -1) { groups.push(sec); counts.push(0); gi = groups.length - 1; }
+        var n = counts[gi]++;
+        el.style.transitionDelay = Math.min(n * 80, 320) + "ms";
+        io.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,7 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /archive/
 
 User-agent: Yeti
 Allow: /
+Disallow: /archive/
 
 Sitemap: https://hoyup.kr/sitemap.xml

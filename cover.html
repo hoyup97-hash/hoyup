@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>이호엽 — 공사 중입니다</title>
+  <meta name="description" content="이호엽의 포트폴리오를 다시 짓고 있습니다. 데이터로 판단하고 현장에서 검증하는 사람. 연락은 메일로 주세요.">
+  <link rel="canonical" href="https://hoyup.kr/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="이호엽">
+  <meta property="og:title" content="이호엽 — 공사 중입니다">
+  <meta property="og:description" content="외주를 안 맡기고 직접 짓고 있어서 조금 걸립니다.">
+  <meta property="og:url" content="https://hoyup.kr/">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "이호엽",
+    "alternateName": "Hoyeop Lee",
+    "url": "https://hoyup.kr/",
+    "email": "mailto:hoyup97@gmail.com"
+  }
+  </script>
+
+  <link rel="stylesheet" href="assets/fonts/pretendardvariable-dynamic-subset.css">
+  <style>
+    :root {
+      --ink: #FFFFFF;
+      --sub: #B7BABF;
+      --dim: #8C9298;   /* 반투명 패널 위에서 4.5:1 확보 (#6E747A는 3.6:1로 미달) */
+      --accent: #4FB3CC;
+      --bg: #0F1214;
+      --panel: rgba(255, 255, 255, 0.045);
+      --edge: rgba(255, 255, 255, 0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+                   system-ui, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      overflow-x: hidden;
+    }
+
+    /* ── 배경: 지어지는 중인 무언가를 암시하는 블러 레이어.
+       실제 콘텐츠가 아니라 추상 도형이라 노출되는 정보가 없다. ── */
+    .veil {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .veil__glow {
+      position: absolute;
+      top: -25%;
+      right: -12%;
+      width: 62%;
+      height: 85%;
+      background: radial-gradient(
+        50% 50% at 50% 50%,
+        rgba(79, 179, 204, 0.20),
+        rgba(14, 81, 99, 0.09) 55%,
+        transparent 72%
+      );
+    }
+
+    /* 골조처럼 보이는 흐릿한 블록들 — 사이트가 조립되는 중이라는 은유 */
+    .veil__frame {
+      position: absolute;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.055);
+      filter: blur(7px);
+      animation: breathe 7s ease-in-out infinite;
+    }
+
+    .veil__frame:nth-child(2) { top: 17%; left: 7%;  width: 210px; height: 92px;  animation-delay: 0s; }
+    .veil__frame:nth-child(3) { top: 63%; left: 12%; width: 148px; height: 148px; animation-delay: 1.1s; }
+    .veil__frame:nth-child(4) { top: 24%; right: 9%; width: 168px; height: 200px; animation-delay: 2.3s; }
+    .veil__frame:nth-child(5) { top: 71%; right: 15%; width: 224px; height: 76px; animation-delay: 3.4s; }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.5; transform: translateY(0); }
+      50%      { opacity: 0.9; transform: translateY(-9px); }
+    }
+
+    /* ── 카드 ── */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 560px;
+      padding: clamp(30px, 6vw, 52px);
+      background: var(--panel);
+      border: 1px solid var(--edge);
+      border-radius: 22px;
+      backdrop-filter: blur(22px) saturate(115%);
+      -webkit-backdrop-filter: blur(22px) saturate(115%);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 22px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.9s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.35; transform: scale(0.78); }
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: clamp(30px, 7vw, 46px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .joke {
+      margin-bottom: 8px;
+      font-size: clamp(15px, 3.6vw, 17px);
+      color: var(--sub);
+    }
+
+    .joke b {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .aside {
+      margin-bottom: 30px;
+      font-size: 14px;
+      color: var(--dim);
+    }
+
+    .rule {
+      height: 1px;
+      margin-bottom: 26px;
+      background: var(--edge);
+    }
+
+    .who {
+      margin-bottom: 4px;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .who span {
+      margin-left: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--dim);
+    }
+
+    .what {
+      margin-bottom: 26px;
+      font-size: 14.5px;
+      color: var(--sub);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .btn--main {
+      background: var(--accent);
+      color: #06232B;
+    }
+
+    .btn--main:hover { background: #6AC4DA; transform: translateY(-1px); }
+
+    .btn--ghost {
+      border: 1px solid var(--edge);
+      color: var(--ink);
+    }
+
+    .btn--ghost:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-1px); }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .veil__frame, .dot { animation: none; }
+      .btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="veil" aria-hidden="true">
+    <div class="veil__glow"></div>
+    <div class="veil__frame"></div>
+    <div class="veil__frame"></div>
+    <div class="veil__frame"></div>
+    <div class="veil__frame"></div>
+  </div>
+
+  <main class="card">
+    <p class="eyebrow"><span class="dot"></span>UNDER CONSTRUCTION</p>
+
+    <h1>공사 중입니다</h1>
+
+    <p class="joke">외주를 안 맡기고 <b>직접 짓고 있어서</b> 조금 걸립니다.</p>
+    <p class="aside">기초 공사는 끝났고, 지금은 내부 마감 중입니다.</p>
+
+    <div class="rule"></div>
+
+    <p class="who">이호엽 <span>Hoyeop Lee</span></p>
+    <p class="what">데이터로 판단하고, 현장에서 검증합니다.<br>완성되면 여기에 그동안 해온 일을 정리해 두겠습니다.</p>
+
+    <div class="actions">
+      <a class="btn btn--main" href="mailto:hoyup97@gmail.com">메일 보내기</a>
+      <a class="btn btn--ghost" href="mailto:hoyup97@gmail.com?subject=%EC%99%84%EC%84%B1%20%EC%86%8C%EC%8B%9D%20%EC%95%8C%EB%A0%A4%EC%A3%BC%EC%84%B8%EC%9A%94">열리면 알려주세요</a>
+    </div>
+  </main>
+
+</body>
+</html>
